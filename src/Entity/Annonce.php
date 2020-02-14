@@ -37,10 +37,10 @@ class Annonce implements FilableInterface
      */
     private $datePublication;
 
-    // /**
-    //  * @ORM\Column(type="boolean")
-    //  */
-    // private $active;
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $active;
 
     /**
      * @ORM\Column(type="integer")
