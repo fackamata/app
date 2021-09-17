@@ -56,7 +56,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\OneToMany(targetEntity=Annonce::class, mappedBy="user")
      */
-    private $annonce;
+    private $annonces;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -70,7 +70,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __construct()
     {
-        $this->annonce = new ArrayCollection();
+        $this->annonces = new ArrayCollection();
         $this->conseil = new ArrayCollection();
     }
 
@@ -198,15 +198,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @return Collection|Annonce[]
      */
-    public function getAnnonce(): Collection
+    public function getAnnonces(): Collection
     {
-        return $this->annonce;
+        return $this->annonces;
     }
 
     public function addAnnonce(Annonce $annonce): self
     {
-        if (!$this->annonce->contains($annonce)) {
-            $this->annonce[] = $annonce;
+        if (!$this->annonces->contains($annonce)) {
+            $this->annonces[] = $annonce;
             $annonce->setUser($this);
         }
 
@@ -215,7 +215,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function removeAnnonce(Annonce $annonce): self
     {
-        if ($this->annonce->removeElement($annonce)) {
+        if ($this->annonces->removeElement($annonce)) {
             // set the owning side to null (unless already changed)
             if ($annonce->getUser() === $this) {
                 $annonce->setUser(null);

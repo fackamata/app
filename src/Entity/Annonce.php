@@ -62,8 +62,8 @@ class Annonce
 
     public function __construct()
     {
-            $this->photo = new ArrayCollection();
-        }
+        $this->photo = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {

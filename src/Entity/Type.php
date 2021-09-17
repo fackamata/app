@@ -27,11 +27,11 @@ class Type
     /**
      * @ORM\OneToMany(targetEntity=Annonce::class, mappedBy="type")
      */
-    private $annonce;
+    private $annonces;
 
     public function __construct()
     {
-        $this->annonce = new ArrayCollection();
+        $this->annonces = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -54,15 +54,15 @@ class Type
     /**
      * @return Collection|Annonce[]
      */
-    public function getAnnonce(): Collection
+    public function getAnnonces(): Collection
     {
-        return $this->annonce;
+        return $this->annonces;
     }
 
     public function addAnnonce(Annonce $annonce): self
     {
-        if (!$this->annonce->contains($annonce)) {
-            $this->annonce[] = $annonce;
+        if (!$this->annonces->contains($annonce)) {
+            $this->annonces[] = $annonce;
             $annonce->setType($this);
         }
 
@@ -71,7 +71,7 @@ class Type
 
     public function removeAnnonce(Annonce $annonce): self
     {
-        if ($this->annonce->removeElement($annonce)) {
+        if ($this->annonces->removeElement($annonce)) {
             // set the owning side to null (unless already changed)
             if ($annonce->getType() === $this) {
                 $annonce->setType(null);
