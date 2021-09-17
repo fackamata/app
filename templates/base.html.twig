@@ -2,18 +2,189 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" href="{{asset("css/style.css")}}">
         <title>{% block title %}Welcome!{% endblock %}</title>
         {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
         {% block stylesheets %}
             {#{{ encore_entry_link_tags('app') }}#}
-        {% endblock %}
+        {% endblock %}        
+    </head>
 
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div><img class="me-5" id="logoHeader_Samm" src=" {{asset("img/logo_proj.png")}} " alt="logo"> </div>
+              <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+              
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link"  href="./afficher_annonces.php">Annonces</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="./afficher_conseils.php">Conseil & Tutos</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="./a_propos.php">À propos</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="./contact.php">Contact</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="./se_connecter.php">Se connecter/ S'inscrire</a>
+                  </li>
+                  
+                </ul>
+                <!-- <form class="d-flex" action="afficher_annonces.php" method="post" enctype="multipart/form-data"> -->
+                <form class="d-flex" >
+                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                  <button class="btn btn-outline-success" name="search" type="submit">Rechercher</button>
+                </form>
+              </div>
+            </div>
+          </nav>
+
+        {% block body %}{% endblock %}
+
+        <footer class="text-center text-lg-start bg-light text-muted">
+            <!-- Section: Social style/media -->
+            <section
+              class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+              <!-- Left -->
+              <div class="me-5 d-none d-lg-block">
+                <span>Retrouvez nous sur nos résaux sociaux : </span>
+              </div>
+              <!-- Left -->
+          
+              <!-- Right -->
+              <div>
+                <a href="http://www.facebook.fr" class="me-4 text-reset">
+                  <img class="LogoResaux_Samm" src=" {{asset("img/logo-facebook.png")}}" alt="logo fb">
+                </a>
+                <a href="http://www.twitter.fr" class="me-4 text-reset">
+                <img class="LogoResaux_Samm" src=" {{asset("img/logo-twitter.png")}}" alt="logo twiter">
+                </a>
+                <a href="http://www.instagram.fr" class="me-4 text-reset">
+                <img class="LogoResaux_Samm" src="{{asset("img/logo-instagram.png")}}" alt="logo instagram">
+                </a>
+                <a href="http://www.pinterest.fr" class="me-4 text-reset">
+                <img class="LogoResaux_Samm" src="{{asset("img/logo-pinterest.png")}}" alt="logo pinterest">
+                </a>
+              </div>
+              <!-- Right -->
+            </section>
+            <!-- Section: Social style/media -->
+          
+            <!-- Section: Links  -->
+            <section class="">
+              <div class="container text-center text-md-start mt-5">
+                <!-- Grid row -->
+                <div class="row mt-3">
+                  <!-- Grid column -->
+                  <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                    <!-- Content -->
+                    <h6 class="text-uppercase fw-bold mb-4">
+                      <i class="fas fa-gem me-3"></i>Tous au jardin
+                    </h6>
+                    <p>
+                      Retrouvez ici le plan du site, notre but vous mettre en relation
+                      pour un monde meilleur.
+                    </p>
+                  </div>
+                  <!-- Grid column -->
+          
+                  <!-- Grid column -->
+                  <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                    <!-- Links -->
+                    <h6 class="text-uppercase fw-bold mb-4">
+                      Plan du site
+                    </h6>
+                    <p>
+                      <a href="./afficher_annonces.php" class="text-reset">Accueil</a>
+                    </p>
+                    <p>
+                      <a href="./afficher_annonces.php" class="text-reset">Annonces</a>
+                    </p>
+                    <p>
+                      <a href="./afficher_conseils.php" class="text-reset">Conseil/Tuto</a>
+                    </p>
+                    <p>
+                      <a href="./a_propos.php" class="text-reset">À propos</a>
+                    </p>
+                    <p>
+                      <a href="./contact.php" class="text-reset">Contact</a>
+                    </p>
+                  </div>
+                  <!-- Grid column -->
+          
+                  <!-- Grid column -->
+                  <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                    <!-- Links -->
+                    <h6 class="text-uppercase fw-bold mb-4">
+                      Liens Utiles
+                    </h6>
+                    <p>
+                      <a href="./notre_histoire.php" class="text-reset">Notre histoire</a>
+                    </p>
+                    <p>
+                      <a href="./team.php" class="text-reset">Notre equipe</a>
+                    </p>
+                    <p>
+                      <a href="./faq.php" class="text-reset">FAQ</a>
+                    </p>
+                    <p>
+                      <a href="./aide.php" class="text-reset">Aide</a>
+                    </p>
+                  </div>
+                  <!-- Grid column -->
+          
+                  <!-- Grid column -->
+                  <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                    <!-- Links -->
+                    <h6 class="text-uppercase fw-bold mb-4">
+                      Contact
+                    </h6>
+                    <p><i class="fas fa-home me-3"></i> 15 avenue emile zola, Annemasse</p>
+                    <p>
+                      <i class="fas fa-envelope me-3"></i>
+                      info@example.com
+                    </p>
+                    <p><i class="fas fa-phone me-3"></i> + 01 234 567 88</p>
+                    <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p>
+                  </div>
+                  <!-- Grid column -->
+                </div>
+                <!-- Grid row -->
+              </div>
+            </section>
+            <!-- Section: Links  -->
+          
+            <!-- Copyright -->
+            <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+              © 2021 Copyright:
+              <a class="text-reset fw-bold" href="">SAMM Developpement</a>
+            </div>
+            <!-- Copyright -->
+          </footer>   
+
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+        <script>
+            $(function(){
+                $('select').select2();
+                
+            });
+        </script>
         {% block javascripts %}
             {#{{ encore_entry_script_tags('app') }}#}
         {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
     </body>
 </html>

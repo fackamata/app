@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Ruda&display=swap');
+:root {
+   --notrevert: #69AF07;
+   --notrebrown: #483B33;
+   --notreMarronClair: #9F8447;
+   --notreLightBackground: #F6F3EC;
+}
+
+ul a {
+   color: var(--notreMarronClair)!important;
+}
+
+ul a:hover {
+   color: var(--notrevert)!important;
+   transform: scale(1.1);
+}
+
+#logoHeader_Samm {
+   width: 5vw;
+   height: 8vh;
+}
+
+.LogoForm_Samm {
+   text-align: center;
+}
+
+h1:hover {
+   transform: scale(1.1);
+}
+
+h1 {
+   margin-top: 1rem;
+   font-family: 'Ruda', sans-serif;
+   text-align: center;
+   color: var(--notrevert);
+}
+
+* {
+   font-family: 'Ruda', sans-serif;
+}
+
+.btn-vert {
+   margin-top: 1rem;
+   background-color: var(--notrevert);
+   width: 70%;
+   height: 3rem;
+   position: relative;
+   top: 1.5rem;
+}
+
+.btn-vert-connexion_Samm {
+   margin-top: 1rem;
+   background-color: var(--notrevert);
+   width: 45%;
+   height: 3rem;
+   position: relative;
+   top: 1.5rem;
+   color: white;
+}
+
+.btn-vert-creation_Samm {
+   margin-top: 1rem;
+   background-color: white!important;
+   width: 45%;
+   height: 3rem;
+   position: relative;
+   top: 1.5rem;
+   border: solid var(--notrevert);
+   color: var(--notrevert);
+   text-decoration: none;
+}
+
+.btn-vert-creation_Samm a:hover {
+   color: white;
+}
+
+.btn-vert-creation_Samm:hover {
+   background-color: var(--notrevert)!important;
+}
+/* .btn-outline {
+   background-color: var(--notrevert);
+} */
+
+.LogoResaux_Samm {
+   width: 45px;
+   height: 45px;
+}
+
+footer {
+   padding-top: 4rem;
+}
+
+a {
+   text-decoration: none;
+}
