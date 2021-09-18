@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Interfaces\FilableInterface;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -15,8 +16,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ORM\Table(name="`user`")
  * @UniqueEntity(fields={"username"}, message="There is already an account with this username")
  */
-class User implements UserInterface, PasswordAuthenticatedUserInterface
+class User implements UserInterface, PasswordAuthenticatedUserInterface, FilableInterface
 {
+    public const FILE_DIR = '/upload/user';
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -269,4 +271,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getFileDirectory(): string
+    {
+        return self::FILE_DIR;
+    }
 }
