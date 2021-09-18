@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Interfaces\FilableInterface;
 use App\Repository\ConseilRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -10,8 +11,9 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=ConseilRepository::class)
  */
-class Conseil
+class Conseil implements FilableInterface
 {
+    public const FILE_DIR = '/upload/conseil';
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -49,9 +51,18 @@ class Conseil
      */
     private $avis;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $photo;
+
     public function __construct()
     {
         $this->avis = new ArrayCollection();
+        /* date de publication rentrer en automatique à la date du jour */
+        $this->datePublication = new \DateTime();
+        /* on initialise le nombre de vue à  0*/
+        $this->nombreVue = 0;
     }
 
     public function getId(): ?int
@@ -149,4 +160,20 @@ class Conseil
         return $this;
     }
 
+    public function getPhoto(): ?string
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto(?string $photo): self
+    {
+        $this->photo = $photo;
+
+        return $this;
+    }
+    
+    public function getFileDirectory(): string
+    {
+        return self::FILE_DIR;
+    }
 }

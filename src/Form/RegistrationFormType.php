@@ -28,6 +28,7 @@ class RegistrationFormType extends AbstractType
             ->add('mail')
             ->add('file', FileType::class,[ 
                 'mapped' => false,
+                'required' => false,
                 'label' => 'Avatar',
             ])
             ->add('agreeTerms', CheckboxType::class, [

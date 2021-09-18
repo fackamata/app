@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Interfaces\FilableInterface;
 use App\Repository\AnnonceRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -10,8 +11,10 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=AnnonceRepository::class)
  */
-class Annonce
+class Annonce implements FilableInterface
 {
+    public const FILE_DIR = '/upload/annonce';
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -182,5 +185,10 @@ class Annonce
         $this->user = $user;
 
         return $this;
+    }
+
+    public function getFileDirectory(): string
+    {
+        return self::FILE_DIR;
     }
 }

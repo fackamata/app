@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Conseil{% endblock %}
+
+{% block body %}
+    <h1>Create new Conseil</h1>
+
+    {{ include('conseil/_form.html.twig') }}
+
+    <a href="{{ path('conseil_index') }}" class="btn btn-info">back to list</a>
+{% endblock %}

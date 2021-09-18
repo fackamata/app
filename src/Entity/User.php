@@ -84,6 +84,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Filable
         return $this->id;
     }
 
+    public function __toString()
+    {
+        return $this->getUsername();
+    }
+
     /**
      * @deprecated since Symfony 5.3, use getUserIdentifier instead
      */

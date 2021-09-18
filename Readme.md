@@ -43,7 +43,44 @@ on ajoute ensuite les champs que l'on veut pour le formulaire d'enregistrement d
 ```
 symfony console make:form
 ```
+## Enregistrement des images
 
+on ajoute dans les entitées voulu :
+
+```
+class User implements FilableInterface
+{
+    public const FILE_DIR = '/upload/user';
+```
+
+## récupération de l'user
+
+pour pouvoir récupérer l'username de l'user, on ajoute a l'entité user :
+
+```
+public function __toString()
+    {
+        return $this->getUsername();
+    }
+```
+
+## Automatisation de la date
+
+pour enregistrer automatiquement la date de publication,
+
+on rajoute dans l'entité    
+
+public function __construct()
+    {
+        $this->date = new \DateTime();
+    }
+
+```
+public function getFileDirectory(): string
+{
+    return self::FILE_DIR;
+}
+```
 ### création des controller avec : 
 ```
 symfony console make:controller
