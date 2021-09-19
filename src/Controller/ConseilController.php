@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Annonce;
 use App\Entity\Conseil;
 use App\Form\ConseilType;
 use App\Repository\ConseilRepository;
@@ -12,10 +13,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-#[Route('/conseil')]
+#[Route('/conseil', name: 'conseil_')]
 class ConseilController extends AbstractController
 {
-    #[Route('/', name: 'conseil_index', methods: ['GET'])]
+    #[Route('/', name: 'index', methods: ['GET'])]
     public function index(ConseilRepository $conseilRepository): Response
     {
         return $this->render('conseil/index.html.twig', [
@@ -23,18 +24,18 @@ class ConseilController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'conseil_new', methods: ['GET', 'POST'])]
+    #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
     public function new(Request $request, FileService $fileService): Response
     {
         $conseil = new Conseil();
-        /* on récupère l'id de l'utilisateur */
-        $userId = $this->getUser()->getId();
+        /* on récupère l'entité user */
+        $user = $this->getUser();
         $form = $this->createForm(ConseilType::class, $conseil);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /* on set l'user du conseil avec l'id de l'user récupèrer plus haut */
-            $conseil->setUser($userId);
+            /* on set l'user de l'annonce avec l'user récupèrer plus haut */
+            $conseil->setUser($user);
 
             //getData retourne l'entitée Conseil
             /** @var Conseil $conseil */
@@ -58,7 +59,7 @@ class ConseilController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'conseil_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'show', methods: ['GET'])]
     public function show(Conseil $conseil): Response
     {
         return $this->render('conseil/show.html.twig', [
@@ -66,13 +67,23 @@ class ConseilController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'conseil_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Conseil $conseil): Response
+    #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, Conseil $conseil, FileService $fileService): Response
     {
         $form = $this->createForm(ConseilType::class, $conseil);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var Conseil $conseil */
+            $conseil = $form->getData();
+
+            /** @var UploadedFile $file */
+            $file = $form->get('file')->getData();
+
+            if ($file) {
+                $fileService->upload($file, $conseil, 'photo');
+            }
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('conseil_index', [], Response::HTTP_SEE_OTHER);
@@ -84,10 +95,13 @@ class ConseilController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'conseil_delete', methods: ['POST'])]
-    public function delete(Request $request, Conseil $conseil): Response
+    #[Route('/{id}', name: 'delete', methods: ['POST'])]
+    public function delete(Request $request, Conseil $conseil, FileService $fileService): Response
     {
         if ($this->isCsrfTokenValid('delete'.$conseil->getId(), $request->request->get('_token'))) {
+            //remove the image file
+            $fileService->remove($conseil, 'photo');
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($conseil);
             $entityManager->flush();

@@ -25,7 +25,11 @@
                 <td>{{ conseil.description }}</td>
                 <td>{{ conseil.datePublication ? conseil.datePublication|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ conseil.nombreVue }}</td>
-                <td>{{ conseil.photo }}</td>
+                <td>
+                    {% if conseil.photo %}
+                         <img src="{{ conseil.photo }}" alt="{{ conseil.titre }}" class="img-fluid" />
+                    {% endif %}
+                </td>
                 <td>
                     <a href="{{ path('conseil_show', {'id': conseil.id}) }}">show</a>
                     <a href="{{ path('conseil_edit', {'id': conseil.id}) }}">edit</a>

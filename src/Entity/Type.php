@@ -34,6 +34,11 @@ class Type
         $this->annonces = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->getNom();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

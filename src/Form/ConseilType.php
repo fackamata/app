@@ -20,9 +20,8 @@ class ConseilType extends AbstractType
             ->add('file', FileType::class,[ 
                 'mapped' => false,
                 'required' => false,
-                'label' => 'Avatar',
+                'label' => 'Photo',
             ])
-            ->add('user')
         ;
     }
 

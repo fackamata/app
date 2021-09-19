@@ -48,9 +48,17 @@ symfony console make:form
 on ajoute dans les entitées voulu :
 
 ```
+use App\Interfaces\FilableInterface;
+
 class User implements FilableInterface
 {
     public const FILE_DIR = '/upload/user';
+...
+
+public function getFileDirectory(): string
+{
+    return self::FILE_DIR;
+}
 ```
 
 ## récupération de l'user
@@ -64,23 +72,31 @@ public function __toString()
     }
 ```
 
+## récupération des types
+
+pour pouvoir récupérer le nom des différent type, on ajoute a l'entité type :
+
+```
+public function __toString()
+    {
+        return $this->getNom();
+    }
+```
+
 ## Automatisation de la date
 
 pour enregistrer automatiquement la date de publication,
 
 on rajoute dans l'entité    
 
+```
 public function __construct()
     {
         $this->date = new \DateTime();
     }
 
 ```
-public function getFileDirectory(): string
-{
-    return self::FILE_DIR;
-}
-```
+
 ### création des controller avec : 
 ```
 symfony console make:controller

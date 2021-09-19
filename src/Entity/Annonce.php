@@ -54,18 +54,23 @@ class Annonce implements FilableInterface
     private $type;
 
     /**
-     * @ORM\OneToMany(targetEntity=Photo::class, mappedBy="annonce")
-     */
-    private $photo;
-
-    /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="annonce")
      */
     private $user;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $photo;
+
     public function __construct()
     {
-        $this->photo = new ArrayCollection();
+        /* date de publication rentrer en automatique à la date du jour */
+        $this->datePublication = new \DateTime();
+        /* on initialise le nombre de vue à  0*/
+        $this->nombreVue = 0;
+        /* on initialise l'active à true*/
+        $this->active = true;
     }
 
     public function getId(): ?int
@@ -145,36 +150,6 @@ class Annonce implements FilableInterface
         return $this;
     }
 
-    /**
-     * @return Collection|Photo[]
-     */
-    public function getPhoto(): Collection
-    {
-        return $this->photo;
-    }
-
-    public function addPhoto(Photo $photo): self
-    {
-        if (!$this->photo->contains($photo)) {
-            $this->photo[] = $photo;
-            $photo->setAnnonce($this);
-        }
-
-        return $this;
-    }
-
-    public function removePhoto(Photo $photo): self
-    {
-        if ($this->photo->removeElement($photo)) {
-            // set the owning side to null (unless already changed)
-            if ($photo->getAnnonce() === $this) {
-                $photo->setAnnonce(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getUser(): ?User
     {
         return $this->user;
@@ -190,5 +165,17 @@ class Annonce implements FilableInterface
     public function getFileDirectory(): string
     {
         return self::FILE_DIR;
+    }
+
+    public function getPhoto(): ?string
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto(?string $photo): self
+    {
+        $this->photo = $photo;
+
+        return $this;
     }
 }

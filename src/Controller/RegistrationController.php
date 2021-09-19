@@ -51,5 +51,16 @@ class RegistrationController extends AbstractController
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
+
+        
     }
+
+    #[Route('/accept-cookie', name:'accept_cookie')]
+        public function acceptCookie(Request $request) : Response
+        {
+            $session = $request->getSession();
+            $session->set('acceptCookie', true);
+    
+            return $this->json(['error' => false]);
+        }
 }

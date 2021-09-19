@@ -29,7 +29,9 @@
             </tr>
             <tr>
                 <th>Photo</th>
-                <td>{{ conseil.photo }}</td>
+                {% if conseil.photo %}
+                <img src="{{ conseil.photo }}" alt="{{ conseil.titre }}" class="img-fluid" />
+                {% endif %}
             </tr>
         </tbody>
     </table>

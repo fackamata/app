@@ -64,6 +64,7 @@ class Conseil implements FilableInterface
         /* on initialise le nombre de vue à  0*/
         $this->nombreVue = 0;
     }
+    
 
     public function getId(): ?int
     {

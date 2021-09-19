@@ -51,7 +51,7 @@ class AuthAuthenticator extends AbstractLoginFormAuthenticator
         }
 
         // on redirige vers la 'home' si l'user c'est bien autentifier
-        return new RedirectResponse($this->urlGenerator->generate('home'));
+        return new RedirectResponse($this->urlGenerator->generate('annonces'));
     }
 
     protected function getLoginUrl(Request $request): string
