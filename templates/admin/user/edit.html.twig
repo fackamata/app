@@ -22,9 +22,7 @@
                 {{form_row(form.mail)}}
             </div>
             <div class="row">
-                <div class="col-6">
-                    {{form_row(form.plainPassword)}}
-                </div>
+                
                 
                 <div class="col-6">
                     {{form_row(form.file)}}
@@ -34,6 +32,4 @@
         
       {{ form_end(form)}} 
 
-
-    <a class= "btn btn-info my-2" href="{{ path('app_compte', {'id': user.id}) }}">mon compte</a>
 {% endblock %}
