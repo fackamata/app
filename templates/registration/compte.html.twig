@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Compte{% endblock %}
+
+{% block body %}
+
+<div >
+    <h1>{{ user.nom|capitalize }} {{ user.prenom|capitalize }}</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>pseudo</th>
+                <th>nom</th>
+                <th>prenom</th>
+                <th>e-mail</th>
+                <th></th>
+            </tr>
+        </thead>
+            <tbody>
+                    <tr>
+                        <td>{{user.username}}</td>
+                        <td>{{user.nom}}</td>
+                        <td>{{user.prenom}}</td>
+                        <td>{{user.mail}}</td>
+                        <td>
+                            {% if user.photo %}
+                            <img src="{{user.photo}}" id="imgTable_Samm" alt="{{ user.nom }}">
+                            {% else %}
+                                <img src="{{asset("img/avatar-neutre.png")}}" class="img-fluid w-25" alt="pas de photo">
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="{{ path('app_edit', {'id': user.id}) }}" class="btn btn-info"> edit</a>
+                        </td>                        
+                    </tr>
+            </tbody>        
+    </table>
+</div>
+
+<a href="">Mes annonces</a>
+<a href="">Mes conseils</a>
+<a href="">Modifier mes informations</a>
+   
+{% endblock %}

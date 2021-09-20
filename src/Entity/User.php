@@ -133,6 +133,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Filable
         return $this;
     }
 
+    public function addRoles(string $role): self
+    {
+        $this->roles[]=$role;
+        $this->roles = array_unique($this->roles);
+
+        return $this;
+    }
+
+
     /**
      * @see PasswordAuthenticatedUserInterface
      */

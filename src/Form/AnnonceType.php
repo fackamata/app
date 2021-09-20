@@ -17,6 +17,7 @@ class AnnonceType extends AbstractType
             ->add('titre')
             ->add('description')
             ->add('type')
+            ->add('active')
             ->add('file', FileType::class,[ 
                 'mapped' => false,
                 'required' => false,

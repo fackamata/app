@@ -4,8 +4,10 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use App\Form\UserType;
 use App\Service\FileService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -55,12 +57,70 @@ class RegistrationController extends AbstractController
         
     }
 
-    #[Route('/accept-cookie', name:'accept_cookie')]
-        public function acceptCookie(Request $request) : Response
-        {
-            $session = $request->getSession();
-            $session->set('acceptCookie', true);
-    
-            return $this->json(['error' => false]);
+    #[Route('/register/{id}', name: 'app_compte')]
+    public function compte(User $user): Response
+    {
+        return $this->render('registration/compte.html.twig', [
+            'user' => $user,
+        ]);
+    }
+
+    #[Route('/register/{id}/edit', name: 'app_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, UserPasswordEncoderInterface $passwordEncoder, User $user, FileService $fileService): Response
+    {
+        $form = $this->createForm(UserType::class, $user);
+        $previousImage = $user->getPhoto();
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            // encode the plain password
+            $user->setPassword(
+                $passwordEncoder->encodePassword(
+                    $user,
+                    $form->get('plainPassword')->getData()
+                )
+            );
+
+
+             //getData retourne l'entitée User
+            /** @var User $user */
+            $user = $form->getData();
+
+            /** @var UploadedFile $file */
+            $file = $form->get('file')->getData();
+            
+            if ($file != null) {
+                $fileService->upload($file, $user, 'photo');
+               
+            }
+            $this->getDoctrine()->getManager()->flush();
+            $newImage = $user->getPhoto();
+
+           /*  if ($previousImage != $newImage && $previousImage != null) {
+                $root = $parameterBag->get('kernel.project_dir');
+                $racine = $root  . '/public';
+                $completePath = $racine . $previousImage;
+                unlink($completePath);
+            } */
+
+            
+
+            return $this->redirectToRoute('admin_user_index', [], Response::HTTP_SEE_OTHER);
         }
+
+        return $this->renderForm('admin/user/edit.html.twig', [
+            'user' => $user,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/accept-cookie', name:'accept_cookie')]
+    public function acceptCookie(Request $request) : Response
+    {
+        $session = $request->getSession();
+        $session->set('acceptCookie', true);
+
+        return $this->json(['error' => false]);
+    }
 }

@@ -21,14 +21,14 @@
             </tr>
             <tr>
                 <th>DatePublication</th>
-                <td>{{ conseil.datePublication ? conseil.datePublication|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ conseil.datePublication ? conseil.datePublication|date('d-m-Y') : '' }}</td>
             </tr>
             <tr>
                 <th>NombreVue</th>
                 <td>{{ conseil.nombreVue }}</td>
             </tr>
             <tr>
-                <th>Photo</th>
+                {# <th>Photo</th> #}
                 {% if conseil.photo %}
                 <img src="{{ conseil.photo }}" alt="{{ conseil.titre }}" class="img-fluid" />
                 {% endif %}
@@ -36,9 +36,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('conseil_index') }}">back to list</a>
+    <a class="btn btn-info mb-2" href="{{ path('conseil_index') }}">back to list</a>
 
-    <a href="{{ path('conseil_edit', {'id': conseil.id}) }}">edit</a>
+    <a class="btn btn-warning mb-2" href="{{ path('conseil_edit', {'id': conseil.id}) }}">edit</a>
 
     {{ include('conseil/_delete_form.html.twig') }}
 {% endblock %}

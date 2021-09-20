@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-#[Route('/annonce')]
+#[Route('/')]
 class AnnonceController extends AbstractController
 {
     #[Route('/', name: 'annonce_index', methods: ['GET'])]
@@ -24,7 +24,7 @@ class AnnonceController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'annonce_new', methods: ['GET', 'POST'])]
+    #[Route('annonce/new', name: 'annonce_new', methods: ['GET', 'POST'])]
     public function new(Request $request, FileService $fileService): Response
     {
         $annonce = new Annonce();
@@ -64,7 +64,7 @@ class AnnonceController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'annonce_show', methods: ['GET'])]
+    #[Route('annonce/{id}', name: 'annonce_show', methods: ['GET'])]
     public function show(Annonce $annonce): Response
     {
         return $this->render('annonce/show.html.twig', [
@@ -72,7 +72,7 @@ class AnnonceController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'annonce_edit', methods: ['GET', 'POST'])]
+    #[Route('annonce/{id}/edit', name: 'annonce_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Annonce $annonce, FileService $fileService): Response
     {
         $form = $this->createForm(AnnonceType::class, $annonce);
@@ -81,10 +81,10 @@ class AnnonceController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
              /** @var Annonce $annonce */
              $annonce = $form->getData();
-
+            
              /** @var UploadedFile $file */
              $file = $form->get('file')->getData();
- 
+             
              if ($file) {
                  $fileService->upload($file, $annonce, 'photo');
              }
@@ -100,7 +100,7 @@ class AnnonceController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'annonce_delete', methods: ['POST'])]
+    #[Route('annonce/{id}', name: 'annonce_delete', methods: ['POST'])]
     public function delete(Request $request, Annonce $annonce, FileService $fileService): Response
     {
         if ($this->isCsrfTokenValid('delete'.$annonce->getId(), $request->request->get('_token'))) {
