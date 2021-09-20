@@ -2,6 +2,17 @@
 
 {% block title %}Aide{% endblock %}
 
+{% block stylesheets %}
+<link rel="stylesheet" href="{{asset("css/dashboard.css")}}">
+
+{% endblock %}
+
 {% block body %}
+
+<aside class="leftPanel">
+    <a href="{{ path('admin_user_index') }}">Utilisateurs</a>
+    <a href="{{ path('admin_annonce_index') }}">Annonces</a>
+    <a href="{{ path('admin_conseil_index') }}">Conseils</a>
+</aside>
 
 {% endblock %}
