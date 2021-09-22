@@ -55,6 +55,13 @@ class InfoController extends AbstractController
             'controller_name' => 'InfoController',
         ]);
     }
+    #[Route('/cgu', name: 'cgu')]
+    public function cgu(): Response
+    {
+        return $this->render('info/cgu.html.twig', [
+            'controller_name' => 'InfoController',
+        ]);
+    }
 }
 
     

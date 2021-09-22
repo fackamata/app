@@ -6,6 +6,7 @@ use App\Entity\Annonce;
 use App\Entity\Conseil;
 use App\Form\ConseilType;
 use App\Repository\ConseilRepository;
+use App\Service\CounterService;
 use App\Service\FileService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,6 +17,8 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 #[Route('/conseil', name: 'conseil_')]
 class ConseilController extends AbstractController
 {
+    private $username = "";
+
     #[Route('/', name: 'index', methods: ['GET'])]
     public function index(ConseilRepository $conseilRepository): Response
     {
@@ -60,10 +63,29 @@ class ConseilController extends AbstractController
     }
 
     #[Route('/{id}', name: 'show', methods: ['GET'])]
-    public function show(Conseil $conseil): Response
+    public function show(Conseil $conseil, CounterService $counterService): Response
     {
+        $user = $this->getUser();
+
+        if($user === null || $user->getUsername() != $conseil->getUser()->getUsername()){
+            
+            $nbView = $counterService->countView($conseil->getNombreVue());
+            $conseil->setNombreVue($nbView);
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($conseil);
+            $entityManager->flush();
+        }
+
+        if ($user != null) {
+            $user = $this->getUser()->getId();
+            // on récupère l'username de la personne loguer
+            $this->username = $this->getUser()->getUsername();
+        }
+
         return $this->render('conseil/show.html.twig', [
             'conseil' => $conseil,
+            'username' => $this->username
         ]);
     }
 

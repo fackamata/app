@@ -20,7 +20,7 @@ class UserType extends AbstractType
         $builder
             ->add('username')
             /* ->add('roles') */
-            ->add('plainPassword', RepeatedType::class, [
+            /* ->add('plainPassword', RepeatedType::class, [
                 'mapped' => false,
                 'type' => PasswordType::class,
                 'invalid_message' => 'The password fields must match.',
@@ -40,7 +40,7 @@ class UserType extends AbstractType
                         ]),
                     ],],
                 'second_options' => ['label' => 'Repeat Password'],
-            ])
+            ]) */
             ->add('nom')
             ->add('prenom')
             ->add('mail')
@@ -49,7 +49,7 @@ class UserType extends AbstractType
                 'required' => false,
                 'label' => 'Avatar',
             ])
-            /* ->add('submit', SubmitType::class) */
+            ->add('submit', SubmitType::class)
         ;
     }
 

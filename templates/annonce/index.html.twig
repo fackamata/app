@@ -1,49 +1,41 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Annonce index{% endblock %}
+{% block title %}Annonce index
+{% endblock %}
 
 {% block body %}
-    <h1>Annonce</h1>
+	<h1>Annonce</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Titre</th>
-                <th>Description</th>
-                <th>DatePublication</th>
-                <th>Active</th>
-                <th>NombreVue</th>
-                <th>Photo</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for annonce in annonces %}
-            <tr>
-                <td>{{ annonce.id }}</td>
-                <td>{{ annonce.titre }}</td>
-                <td>{{ annonce.description }}</td>
-                <td>{{ annonce.datePublication ? annonce.datePublication|date('d-m-Y H:i') : '' }}</td>
-                <td>{{ annonce.active ? 'Yes' : 'No' }}</td>
-                <td>{{ annonce.nombreVue }}</td>
-                <td>
-                    {% if annonce.photo %}
-                        <img src="{{ annonce.photo }}" alt="{{ annonce.titre }}" class="img-fluid" />
-                    {% endif %}
-                </td>
-                <td>
-                    <a class="btn btn-success" href="{{ path('annonce_show', {'id': annonce.id}) }}">show</a>
-                    <a class="btn btn-warning" href="{{ path('annonce_edit', {'id': annonce.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+	<div class="d-flex flex-wrap ">
 
-    <a class="btn btn-info" href="{{ path('annonce_new') }}">Create new</a>
+		{% for annonce in annonces %}
+
+			<div class="card m-2" style="width: 18rem;">
+				{% if annonce.photo %}
+					<img src="{{ annonce.photo }}" class="card-img-top" alt="{{ annonce.titre }}" class="img-fluid"/>
+				{% endif %}
+				<div class="card-body">
+					<h5 class="card-title">{{ annonce.titre }}</h5>
+					<div class="card-text">
+						<div class="d-flex justify-content-between">
+							<p>{{ annonce.user }}</p>
+							<p>{{ annonce.nombreVue }} vues</p>
+						</div>
+					</div>
+					<a class="btn btn-info" href="{{ path('annonce_show', {'id': annonce.id}) }}">show</a>
+				</div>
+			</div>
+
+		{% else %}
+			<div>
+				<p>no records found</p>
+			</div>
+		{% endfor %}
+
+
+	</div>
+	{% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN') %}
+		<a class="btn btn-info" href="{{ path('annonce_new') }}">Create new</a>
+	{% endif %}
+
 {% endblock %}

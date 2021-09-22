@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello Admin!{% endblock %}
+
+{% block body %}
+
+<a href="{{path('admin_user')}}">Utilisateur</a>
+<a href="{{path('admin_annonce')}}">Annonce</a>
+<a href="{{path('admin_conseil')}}">Conseil</a>
+<a href="{{path('admin_avis')}}">Avis</a>
+
+{% endblock %}

@@ -124,3 +124,9 @@ Permet d'avoir des formulaire bootstrap dans l'ensemble de l'application
 ### Role
 
 dans /config/packages/security.yaml
+
+### compteur de vue
+
+création d'une fonction pour compter le nombre de vue sur une annonce ou un conseil
+
+utilisation double, donc on créer un fonction public dans le dossier Service

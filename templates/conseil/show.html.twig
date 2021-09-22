@@ -37,8 +37,15 @@
     </table>
 
     <a class="btn btn-info mb-2" href="{{ path('conseil_index') }}">back to list</a>
+    <a class="btn btn-info mb-2" href="{{ path('avis_new') }}">faire un commentaire</a>
 
-    <a class="btn btn-warning mb-2" href="{{ path('conseil_edit', {'id': conseil.id}) }}">edit</a>
+    {% if username == conseil.user or is_granted('ROLE_ADMIN') %}
+        <a class="btn btn-warning mb-2" href="{{ path('conseil_edit', {'id': conseil.id}) }}">edit</a>
 
-    {{ include('conseil/_delete_form.html.twig') }}
+        {{ include('conseil/_delete_form.html.twig') }}
+    {% endif %}
+
+
+
+    
 {% endblock %}

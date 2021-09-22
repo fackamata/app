@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Form\UserType;
+use App\Repository\UserRepository;
 use App\Service\FileService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -112,6 +113,16 @@ class RegistrationController extends AbstractController
         return $this->renderForm('admin/user/edit.html.twig', [
             'user' => $user,
             'form' => $form,
+        ]);
+    }
+
+    #[Route('/register/annonce/{idUser}', name:'app_annonce')]
+    public function annonce(Request $request, UserRepository $userRepository) : Response
+    {
+        $user = $this->getUser()->getId();
+        
+        return $this->render('annonce/index.html.twig', [
+            'annonces' => $userRepository->findByUserId($user),
         ]);
     }
 
