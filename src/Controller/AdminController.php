@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\AnnonceRepository;
+use App\Repository\AvisRepository;
 use App\Repository\ConseilRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -40,10 +41,10 @@ class AdminController extends AbstractController
         ]);
     }
     #[Route('/admin/avis', name: 'admin_avis')]
-    public function avis(): Response
+    public function avis(AvisRepository $avisRepository): Response
     {
         return $this->render('admin/avis/index.html.twig', [
-            'controller_name' => 'AdminController',
+            'avis' => $avisRepository->findAll(),
         ]);
     }
 }

@@ -42,6 +42,11 @@ class Avis
      */
     private $conseil;
 
+    public function __construct()
+    {
+        $this->datePublication = new \DateTime();
+    }
+
   
     public function getId(): ?int
     {

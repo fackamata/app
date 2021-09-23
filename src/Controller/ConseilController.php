@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Annonce;
+use App\Entity\Avis;
 use App\Entity\Conseil;
 use App\Form\ConseilType;
 use App\Repository\ConseilRepository;
@@ -62,10 +63,11 @@ class ConseilController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'show', methods: ['GET'])]
-    public function show(Conseil $conseil, CounterService $counterService): Response
+    #[Route('/show/{id}', name: 'show', methods: ['GET'])]
+    public function show(Conseil $conseil ,CounterService $counterService): Response
     {
         $user = $this->getUser();
+        $avi = $conseil->getAvis();
 
         if($user === null || $user->getUsername() != $conseil->getUser()->getUsername()){
             
@@ -85,6 +87,7 @@ class ConseilController extends AbstractController
 
         return $this->render('conseil/show.html.twig', [
             'conseil' => $conseil,
+            'avis' => $avi,
             'username' => $this->username
         ]);
     }

@@ -44,6 +44,11 @@ class Note
         return $this->numero;
     }
 
+    public function __toString()
+    {
+        return $this->getNumero();
+    }
+
     public function setNumero(int $numero): self
     {
         $this->numero = $numero;

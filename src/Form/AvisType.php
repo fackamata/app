@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Avis;
-use App\Entity\Note;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -14,10 +13,9 @@ class AvisType extends AbstractType
     {
         $builder
             ->add('text')
-            ->add('datePublication')
-            /* ->add('note') */
-            ->add('user')
-            ->add('conseil')
+            ->add('note')
+            // ->add('user')
+            // ->add('conseil')
         ;
     }
 

@@ -36,8 +36,17 @@
         </tbody>
     </table>
 
+
+    <div>
+        <h2>commentaire</h2>
+        {% for avi in avis %}
+            <div>avis : {{avi.text}}</div>
+            <div>note : {{avi.note}}</div>
+        {% endfor %}
+    </div>
+
     <a class="btn btn-info mb-2" href="{{ path('conseil_index') }}">back to list</a>
-    <a class="btn btn-info mb-2" href="{{ path('avis_new') }}">faire un commentaire</a>
+    <a class="btn btn-info mb-2" href="{{ path('avis_new', {'id' : conseil.id}) }}">faire un commentaire</a>
 
     {% if username == conseil.user or is_granted('ROLE_ADMIN') %}
         <a class="btn btn-warning mb-2" href="{{ path('conseil_edit', {'id': conseil.id}) }}">edit</a>
