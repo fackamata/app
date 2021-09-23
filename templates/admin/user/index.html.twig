@@ -3,9 +3,10 @@
 {% block title %}Utilisateurs{% endblock %}
 
 {% block body %}
+<div>
     <h1>Liste des utilisateurs</h1>
 
-    <table class="table">
+    <table class="table" id="myTable">
         <thead>
             <tr>
                 <th>Id</th>
@@ -48,4 +49,5 @@
     </table>
 
     <a href="{{ path('admin_user_new') }}">Create new</a>
+</div>
 {% endblock %}
