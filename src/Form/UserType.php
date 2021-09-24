@@ -20,7 +20,7 @@ class UserType extends AbstractType
         $builder
             ->add('username')
             /* ->add('roles') */
-            /* ->add('plainPassword', RepeatedType::class, [
+            /*->add('plainPassword', RepeatedType::class, [
                 'mapped' => false,
                 'type' => PasswordType::class,
                 'invalid_message' => 'The password fields must match.',

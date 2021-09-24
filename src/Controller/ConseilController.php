@@ -68,8 +68,10 @@ class ConseilController extends AbstractController
     {
         $user = $this->getUser();
         $avi = $conseil->getAvis();
+        $role = $this->getUser()->getRoles();
 
-        if($user === null || $user->getUsername() != $conseil->getUser()->getUsername()){
+        if($user === null || $user->getUsername() != $conseil->getUser()->getUsername() 
+        && in_array("ROLE_ADMIN", $role) != true){
             
             $nbView = $counterService->countView($conseil->getNombreVue());
             $conseil->setNombreVue($nbView);

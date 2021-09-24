@@ -19,6 +19,25 @@ class ConseilRepository extends ServiceEntityRepository
         parent::__construct($registry, Conseil::class);
     }
 
+    public function findByUser($value)
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.user = :val') // :val => contre les injections SQL
+            ->setParameter('val',   $value)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+   /*  public function findByUserId($value)
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.id LIKE :val') // :val : contre les injections SQL
+            ->setParameter('val', '%'.$value.'%')
+            ->getQuery()
+            ->getResult()
+        ;
+    } */
+
     // /**
     //  * @return Conseil[] Returns an array of Conseil objects
     //  */

@@ -1,5 +1,25 @@
 # Readme
 
+## clone repository
+
+- pour cloner le répertoire :
+```
+git clone https://github.com/fackamata/terrainSymfony.git
+```
+
+- pour installer toutes les dépendances :
+```
+composer install
+```
+
+- configurer son fichier .env : user et password. Pour que doctrine puisse avoir accès à la base de données
+
+- pour créer la base de donnée par rapport aux entitées :
+
+```
+bin/console doctrine:schema:update --force 
+```
+
 ## Autentification et User
 
 ### création de l'user avec :  

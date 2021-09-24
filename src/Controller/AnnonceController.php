@@ -80,9 +80,14 @@ class AnnonceController extends AbstractController
     public function show(Annonce $annonce, CounterService $counterService): Response
     {
         $user = $this->getUser();
+        // on récupère les roles de l'utilisateur 
+        $role = $this->getUser()->getRoles();
 
-        if($user === null || $user->getUsername() != $annonce->getUser()->getUsername()){
-            
+        /* on incrémente les vues si personne n'est loguer 
+        ou si l'utilisateur connecté n'est pas celui qui à posté l'Annonce  
+        et si l'utilisateur n'est pas admin */
+
+        if($user === null || $user->getUsername() != $annonce->getUser()->getUsername() && in_array("ROLE_ADMIN", $role) != true){
             $nbView = $counterService->countView($annonce->getNombreVue());
             $annonce->setNombreVue($nbView);
 

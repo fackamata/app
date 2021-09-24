@@ -2,9 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Conseil;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Form\UserType;
+use App\Repository\AnnonceRepository;
+use App\Repository\ConseilRepository;
 use App\Repository\UserRepository;
 use App\Service\FileService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -69,7 +72,7 @@ class RegistrationController extends AbstractController
     #[Route('/register/{id}/edit', name: 'app_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, UserPasswordEncoderInterface $passwordEncoder, User $user, FileService $fileService): Response
     {
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(RegistrationFormType::class, $user);
         $previousImage = $user->getPhoto();
         $form->handleRequest($request);
 
@@ -97,32 +100,33 @@ class RegistrationController extends AbstractController
             }
             $this->getDoctrine()->getManager()->flush();
             $newImage = $user->getPhoto();
+           
 
-           /*  if ($previousImage != $newImage && $previousImage != null) {
-                $root = $parameterBag->get('kernel.project_dir');
-                $racine = $root  . '/public';
-                $completePath = $racine . $previousImage;
-                unlink($completePath);
-            } */
-
-            
-
-            return $this->redirectToRoute('admin_user_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_compte', ['id'=> $user->getId()], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('admin/user/edit.html.twig', [
+        return $this->renderForm('registration/edit.html.twig', [
             'user' => $user,
             'form' => $form,
         ]);
     }
 
-    #[Route('/register/annonce/{idUser}', name:'app_annonce')]
-    public function annonce(Request $request, UserRepository $userRepository) : Response
+    #[Route('/register/annonce/{id}', name:'app_annonce')]
+    public function annonce(AnnonceRepository $annonceRepository) : Response
     {
-        $user = $this->getUser()->getId();
+        $user = $this->getUser();
         
         return $this->render('annonce/index.html.twig', [
-            'annonces' => $userRepository->findByUserId($user),
+            'annonces' => $annonceRepository->findByUser($user),
+        ]);
+    }
+    #[Route('/register/conseil/{id}', name:'app_conseil')]
+    public function conseil(ConseilRepository $conseilRepository, Conseil $conseil) : Response
+    {
+        $user = $this->getUser();
+        
+        return $this->render('conseil/index.html.twig', [
+            'conseils' => $conseilRepository->findByUser($user),
         ]);
     }
 

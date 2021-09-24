@@ -19,11 +19,11 @@ class AnnonceRepository extends ServiceEntityRepository
         parent::__construct($registry, Annonce::class);
     }
 
-    public function findByUserId($value)
+    public function findByUser($value)
     {
         return $this->createQueryBuilder('a')
-            ->andWhere('a.id LIKE :val') // :val : contre les injections SQL
-            ->setParameter('val', '%'.$value.'%')
+            ->andWhere('a.user = :val') // :val => contre les injections SQL
+            ->setParameter('val',   $value)
             ->getQuery()
             ->getResult()
         ;
