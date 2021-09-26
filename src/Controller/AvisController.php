@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/avis')]
 class AvisController extends AbstractController
 {
-    #[Route('/', name: 'avis_index', methods: ['GET'])]
+    #[Route('/avis', name: 'avis_index', methods: ['GET'])]
     public function index(AvisRepository $avisRepository): Response
     {
 
@@ -24,7 +24,7 @@ class AvisController extends AbstractController
         ]);
     }
 
-    #[Route('/new/{id}', name: 'avis_new', methods: ['GET', 'POST'])]
+    #[Route('/avis/new/{id}', name: 'avis_new', methods: ['GET', 'POST'])]
     public function new(Request $request, $id, Conseil $conseil, Avis $avi): Response
     {
         $avi = new Avis();
@@ -43,7 +43,7 @@ class AvisController extends AbstractController
             $entityManager->persist($avi);
             $entityManager->flush();
 
-            return $this->redirectToRoute('avis_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('conseil_show', ['id' => $id], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('avis/new.html.twig', [
@@ -52,7 +52,7 @@ class AvisController extends AbstractController
         ]);
     }
 
-    #[Route('/show/{id}', name: 'avis_show', methods: ['GET'])]
+    #[Route('/avis/show/{id}', name: 'avis_show', methods: ['GET'])]
     public function show(Avis $avi): Response
     {
         return $this->render('avis/show.html.twig', [
@@ -60,7 +60,7 @@ class AvisController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'avis_edit', methods: ['GET', 'POST'])]
+    #[Route('/avis/{id}/edit', name: 'avis_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Avis $avi): Response
     {
         $form = $this->createForm(AvisType::class, $avi);
@@ -78,7 +78,7 @@ class AvisController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'avis_delete', methods: ['POST'])]
+    #[Route('/avis/{id}', name: 'avis_delete', methods: ['POST'])]
     public function delete(Request $request, Avis $avi): Response
     {
         if ($this->isCsrfTokenValid('delete'.$avi->getId(), $request->request->get('_token'))) {

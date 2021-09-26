@@ -3,44 +3,23 @@
 {% block title %}Annonce{% endblock %}
 
 {% block body %}
-    <h1>Annonce</h1>
+    <h1>{{ annonce.titre }}</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ annonce.id }}</td>
-            </tr>
-            <tr>
-                <th>Titre</th>
-                <td>{{ annonce.titre }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ annonce.description }}</td>
-            </tr>
-            <tr>
-                <th>DatePublication</th>
-                <td>{{ annonce.datePublication ? annonce.datePublication|date('d-m-Y') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Active</th>
-                <td>{{ annonce.active ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
-                <th>NombreVue</th>
-                <td>{{ annonce.nombreVue }}</td>
-            </tr>
-            <tr>
-                <th>Photo</th>
-                {% if annonce.photo %}
-                    <img src="{{ annonce.photo }}" alt="{{ annonce.titre }}" class="img-fluid" />
-                {% endif %}
-            </tr>
-        </tbody>
-    </table>
+    <main class="d-flex flex-column justify-content-center">
+        {% if annonce.photo %}
+            <img src="{{ annonce.photo }}" alt="{{ annonce.titre }}" class="rounded mx-auto d-block h-50" />
+        {% endif %}
+        {#  on filtre annonce.description avec un raw pour nettoyer les balises HTML #}
+        <div class="text-center my-4">{{ annonce.description|raw }}</div>
 
-    <a class="btn btn-info mb-2" href="{{ path('annonce_index') }}">back to list</a>
+        <div class="d-flex justify-content-around">
+            <p>Date de publication : {{ annonce.datePublication ? annonce.datePublication|date('l j Y ') : '' }}</p>
+            <p>Publié par : {{ annonce.user }}</p>
+            <p>Nombre de vue : {{ annonce.nombreVue }}</p>
+        </div>
+    </main>
+            
+    <a class="btn btn-info " href="javascript:history.back()">retour</a>
     {% if username == annonce.user or is_granted('ROLE_ADMIN') %}
         <a class="btn btn-warning" href="{{ path('annonce_edit', {'id': annonce.id}) }}">edit</a>
 

@@ -31,8 +31,10 @@
         </div>
     {% endfor %}  
 
+    
 
 </div>
+<a class="btn btn-info" href="javascript:history.back()">retour</a>
     {% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN') %}
 		<a class="btn btn-info" href="{{ path('conseil_new') }}">Create new</a>
 	{% endif %}

@@ -79,6 +79,7 @@ class AnnonceController extends AbstractController
     #[Route('annonce/{id}', name: 'annonce_show', methods: ['GET'])]
     public function show(Annonce $annonce, CounterService $counterService): Response
     {
+        
         $user = $this->getUser();
         // on récupère les roles de l'utilisateur 
         $role = $this->getUser()->getRoles();
@@ -115,6 +116,7 @@ class AnnonceController extends AbstractController
     #[Route('annonce/{id}/edit', name: 'annonce_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Annonce $annonce, FileService $fileService): Response
     {
+        
         $form = $this->createForm(AnnonceType::class, $annonce);
         $form->handleRequest($request);
 

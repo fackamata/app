@@ -8,7 +8,8 @@
         {{ include('conseil/_form.html.twig', {'button_label': 'Update'}) }}
     
         <div class="d-flex ">
-            <a class="btn btn-info me-2" href="{{ path('conseil_index') }}">back to list</a>
+            <a class="btn btn-info " href="javascript:history.back()">retour</a>
+
         
             {{ include('conseil/_delete_form.html.twig') }}
         </div>

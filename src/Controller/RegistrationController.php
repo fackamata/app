@@ -2,14 +2,18 @@
 
 namespace App\Controller;
 
+use App\Entity\Annonce;
+use App\Entity\Avis;
 use App\Entity\Conseil;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Form\UserType;
 use App\Repository\AnnonceRepository;
+use App\Repository\AvisRepository;
 use App\Repository\ConseilRepository;
 use App\Repository\UserRepository;
 use App\Service\FileService;
+use App\Service\UserService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -62,10 +66,16 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/register/{id}', name: 'app_compte')]
-    public function compte(User $user): Response
+    public function compte(User $user, UserService $userService): Response
     {
+        $nbAnnonce = $userService->countAnnonce($user);
+        $nbConseil = $userService->countConseil($user);
+        $nbAvis = $userService->countConseil($user);
         return $this->render('registration/compte.html.twig', [
             'user' => $user,
+            'nbAnnonce' => $nbAnnonce,
+            'nbConseil' => $nbConseil,
+            'nbAvis' => $nbAvis,
         ]);
     }
 
@@ -112,21 +122,28 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/register/annonce/{id}', name:'app_annonce')]
-    public function annonce(AnnonceRepository $annonceRepository) : Response
+    public function annonce( UserService $userService) : Response
     {
-        $user = $this->getUser();
-        
+        $userAnnonce = $userService->findAnnonceByUser( $this->getUser());
+
         return $this->render('annonce/index.html.twig', [
-            'annonces' => $annonceRepository->findByUser($user),
+            'annonces' => $userAnnonce,
         ]);
     }
     #[Route('/register/conseil/{id}', name:'app_conseil')]
-    public function conseil(ConseilRepository $conseilRepository, Conseil $conseil) : Response
+    public function conseil( UserService $userService) : Response
     {
-        $user = $this->getUser();
-        
+        $userConseil = $userService->findAnnonceByUser( $this->getUser());
         return $this->render('conseil/index.html.twig', [
-            'conseils' => $conseilRepository->findByUser($user),
+            'conseils' => $userConseil,
+        ]);
+    }
+    #[Route('/register/avis/{id}', name:'app_avis')]
+    public function avis( UserService $userService) : Response
+    {
+        $userAvis= $userService->findAnnonceByUser( $this->getUser());
+        return $this->render('avis/index.html.twig', [
+            'avis' => $userAvis,
         ]);
     }
 

@@ -8,5 +8,11 @@
 
     {{ include('annonce/_form.html.twig') }}
     
-    <a class="btn btn-info mt-2" href="{{ path('annonce_index') }}">back to list</a>
+    <a class="btn btn-info " href="javascript:history.back()">retour</a>
+
 {% endblock %}
+
+{# {% block javascripts %}
+    <script src="https://cdn.tiny.cloud/1/mmtelnjo7hq8l63uso5nqk221f0r1rumvtukus48ibaqs46v/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>tinymce.init({selector:'textarea', name:'annonce_description'});</script>
+{% endblock %} #}

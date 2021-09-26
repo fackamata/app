@@ -1,13 +1,18 @@
-{% extends 'admin/admin.html.twig' %}
+{% extends 'registration/base.registration.html.twig' %}
 
-{% block title %}Annonce index{% endblock %}
+{% block title %}Annonce index
+{% endblock %}
+
+{% block body %}
+
 
 {% block body %}
     <h1>Annonce</h1>
 
-    <table class="table" id="myTable">
+    <table class="table">
         <thead>
             <tr>
+                <th>Id</th>
                 <th>Titre</th>
                 <th>Description</th>
                 <th>DatePublication</th>
@@ -21,8 +26,9 @@
         <tbody>
         {% for annonce in annonces %}
             <tr>
+                <td>{{ annonce.id }}</td>
                 <td>{{ annonce.titre }}</td>
-                <td>{{ annonce.description | slice(0,30)}}...</td>
+                <td>{{ annonce.description }}</td>
                 <td>{{ annonce.datePublication ? annonce.datePublication|date('d-m-Y H:i') : '' }}</td>
                 <td>{{ annonce.active ? 'Yes' : 'No' }}</td>
                 <td>{{ annonce.nombreVue }}</td>
@@ -34,9 +40,9 @@
                 </td>
                 <td>
                     <a class="btn btn-success" href="{{ path('annonce_show', {'id': annonce.id}) }}">show</a>
-                    
-                    <a class="btn btn-warning" href="{{ path('annonce_edit', {'id': annonce.id}) }}">edit</a>
-                    
+                    {% if username == annonce.user or is_granted('ROLE_ADMIN') %}
+                        <a class="btn btn-warning" href="{{ path('annonce_edit', {'id': annonce.id}) }}">edit</a>
+                    {% endif %}
                     
                 </td>
             </tr>
@@ -50,3 +56,5 @@
 
     <a class="btn btn-info" href="{{ path('annonce_new') }}">Create new</a>
 {% endblock %}
+
+

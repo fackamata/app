@@ -45,11 +45,12 @@
         {% endfor %}
     </div>
 
-    <a class="btn btn-info mb-2" href="{{ path('conseil_index') }}">back to list</a>
-    <a class="btn btn-info mb-2" href="{{ path('avis_new', {'id' : conseil.id}) }}">faire un commentaire</a>
+    <a class="btn btn-info" href="javascript:history.back()">retour</a>
+
+    <a class="btn btn-info" href="{{ path('avis_new', {'id' : conseil.id}) }}">faire un commentaire</a>
 
     {% if username == conseil.user or is_granted('ROLE_ADMIN') %}
-        <a class="btn btn-warning mb-2" href="{{ path('conseil_edit', {'id': conseil.id}) }}">edit</a>
+        <a class="btn btn-warning" href="{{ path('conseil_edit', {'id': conseil.id}) }}">edit</a>
 
         {{ include('conseil/_delete_form.html.twig') }}
     {% endif %}

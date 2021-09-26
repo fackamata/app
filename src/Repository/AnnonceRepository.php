@@ -19,7 +19,10 @@ class AnnonceRepository extends ServiceEntityRepository
         parent::__construct($registry, Annonce::class);
     }
 
-    public function findByUser($value)
+    /**
+    * @return Annonce[] Returns an array of Annonce objects by user
+    */
+    public function findByUser($value): array
     {
         return $this->createQueryBuilder('a')
             ->andWhere('a.user = :val') // :val => contre les injections SQL
@@ -28,6 +31,7 @@ class AnnonceRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
 
     // /**
     //  * @return Annonce[] Returns an array of Annonce objects

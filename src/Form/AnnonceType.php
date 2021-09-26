@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Annonce;
-use App\Entity\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;

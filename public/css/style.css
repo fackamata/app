@@ -15,6 +15,10 @@ ul a:hover {
    transform: scale(1.1);
 }
 
+nav{
+   margin-bottom: 1rem;
+}
+
 #logoHeader_Samm {
    width: 5vw;
    height: 8vh;
@@ -29,7 +33,6 @@ h1:hover {
 }
 
 h1 {
-   margin-top: 1rem;
    font-family: 'Ruda', sans-serif;
    text-align: center;
    color: var(--notrevert);
@@ -39,46 +42,9 @@ h1 {
    font-family: 'Ruda', sans-serif;
 }
 
-.btn-vert {
-   margin-top: 1rem;
-   background-color: var(--notrevert);
-   width: 70%;
-   height: 3rem;
-   position: relative;
-   top: 1.5rem;
-}
-
-.btn-vert-connexion_Samm {
-   margin-top: 1rem;
-   background-color: var(--notrevert);
-   width: 45%;
-   height: 3rem;
-   position: relative;
-   top: 1.5rem;
-   color: white;
-}
-
-.btn-vert-creation_Samm {
-   margin-top: 1rem;
-   background-color: white!important;
-   width: 45%;
-   height: 3rem;
-   position: relative;
-   top: 1.5rem;
-   border: solid var(--notrevert);
-   color: var(--notrevert);
-   text-decoration: none;
-}
-
-.btn-vert-creation_Samm a:hover {
-   color: white;
-}
-
+/* 
 .btn-vert-creation_Samm:hover {
    background-color: var(--notrevert)!important;
-}
-/* .btn-outline {
-   background-color: var(--notrevert);
 } */
 
 .LogoResaux_Samm {
@@ -86,8 +52,13 @@ h1 {
    height: 45px;
 }
 
+#imgLogin{
+   width: 30vh;
+   height: auto;
+}
+
 footer {
-   padding-top: 4rem;
+   padding-top: 1rem;
 }
 
 a {
@@ -103,3 +74,19 @@ a {
    padding: 10px;
 }
 
+.form-SAMM{
+   width : 50vw; 
+   height: auto;
+   margin: auto;
+} 
+
+
+.btn-vert-connexion_Samm {
+   background-color: var(--notrevert);
+   color: var(--notreLightBackground);
+}
+.btn-vert-connexion_Samm:hover{
+   background-color: var(--notrevert);
+   color: var(--notrebrown);
+   transform: scale(1.1);
+}
