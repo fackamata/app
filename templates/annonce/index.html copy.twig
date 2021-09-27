@@ -8,7 +8,6 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Titre</th>
                 <th>Description</th>
                 <th>DatePublication</th>
@@ -22,7 +21,6 @@
         <tbody>
         {% for annonce in annonces %}
             <tr>
-                <td>{{ annonce.id }}</td>
                 <td>{{ annonce.titre }}</td>
                 <td>{{ annonce.description }}</td>
                 <td>{{ annonce.datePublication ? annonce.datePublication|date('d-m-Y H:i') : '' }}</td>
@@ -35,16 +33,16 @@
                     {% endif %}
                 </td>
                 <td>
-                    <a class="btn btn-success" href="{{ path('annonce_show', {'id': annonce.id}) }}">show</a>
+                    <a class="btn btn-success" href="{{ path('annonce_show', {'id': annonce.id}) }}">Détail</a>
                     {% if username == annonce.user or is_granted('ROLE_ADMIN') %}
-                        <a class="btn btn-warning" href="{{ path('annonce_edit', {'id': annonce.id}) }}">edit</a>
+                        <a class="btn btn-warning" href="{{ path('annonce_edit', {'id': annonce.id}) }}">Modifier</a>
                     {% endif %}
                     
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="7">no records found</td>
+                <td colspan="7">Aucunne annonce</td>
             </tr>
         {% endfor %}
         </tbody>

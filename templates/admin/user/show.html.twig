@@ -1,18 +1,16 @@
 {% extends 'admin/admin.html.twig' %}
 
-{% block title %}User{% endblock %}
+{% block title %}Utilisateurs{% endblock %}
 
 {% block body %}
-    <h1>User</h1>
+    <h1>Utilisateurs</h1>
 
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ user.id }}</td>
             </tr>
             <tr>
-                <th>Username</th>
+                <th>Pseudo</th>
                 <td>{{ user.username }}</td>
             </tr>
             <tr>
@@ -32,7 +30,7 @@
                 <td>{{ user.prenom }}</td>
             </tr>
             <tr>
-                <th>Mail</th>
+                <th>E-mail</th>
                 <td>{{ user.mail }}</td>
             </tr>
             <tr>
@@ -46,10 +44,10 @@
         </tbody>
     </table>
 
-    <a class="btn btn-info" href="javascript:history.back()">retour</a>
+    <a class="btn btn-info" href="javascript:history.back()">Retour</a>
 
 
-    <a href="{{ path('admin_user_edit', {'id': user.id}) }}">edit</a>
+    <a href="{{ path('admin_user_edit', {'id': user.id}) }}">Modifier</a>
 
     {{ include('/admin/user/_delete_form.html.twig') }}
 {% endblock %}

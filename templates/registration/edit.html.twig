@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit User{% endblock %}
+{% block title %}Modification données utilisateur{% endblock %}
 
 {% block body %}
-    <h1>Edit User</h1>
+    <h1>Modification données utilisateur</h1>
 
     {{ form_start(form)}} {# <form action="" method"> #}
         <div class="row">
@@ -35,5 +35,5 @@
       {{ form_end(form)}} 
 
 
-    <a class= "btn btn-info my-2" href="{{ path('app_compte', {'id': user.id}) }}">mon compte</a>
+    <a class= "btn btn-info my-2" href="{{ path('app_compte', {'id': user.id}) }}">Mon compte</a>
 {% endblock %}

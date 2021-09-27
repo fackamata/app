@@ -1,14 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Avis index{% endblock %}
+{% block title %}Liste des commentaires{% endblock %}
 
 {% block body %}
-    <h1>Avis index</h1>
+    <h1>Liste des commentaires</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Text</th>
                 <th>DatePublication</th>
                 <th>actions</th>
@@ -17,17 +16,16 @@
         <tbody>
         {% for avi in avis %}
             <tr>
-                <td>{{ avi.id }}</td>
                 <td>{{ avi.text }}</td>
                 <td>{{ avi.datePublication ? avi.datePublication|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a class="btn btn-success" href="{{ path('avis_show', {'id': avi.id}) }}">show</a>
-                    <a class="btn btn-warning" href="{{ path('avis_edit', {'id': avi.id}) }}">edit</a>
+                    <a class="btn btn-success" href="{{ path('avis_show', {'id': avi.id}) }}">Détail</a>
+                    <a class="btn btn-warning" href="{{ path('avis_edit', {'id': avi.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td colspan="4">Aucun commentaire</td>
             </tr>
         {% endfor %}
         </tbody>

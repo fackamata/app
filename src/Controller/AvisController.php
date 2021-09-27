@@ -78,7 +78,7 @@ class AvisController extends AbstractController
         ]);
     }
 
-    #[Route('/avis/{id}', name: 'avis_delete', methods: ['POST'])]
+    #[Route('/avis/{id}', name: 'avis_delete', methods: ['POST', 'GET'])]
     public function delete(Request $request, Avis $avi): Response
     {
         if ($this->isCsrfTokenValid('delete'.$avi->getId(), $request->request->get('_token'))) {
@@ -87,6 +87,6 @@ class AvisController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('avis_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('conseil_index', [], Response::HTTP_SEE_OTHER);
     }
 }

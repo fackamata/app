@@ -12,7 +12,6 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Titre</th>
                 <th>Description</th>
                 <th>DatePublication</th>
@@ -26,7 +25,6 @@
         <tbody>
         {% for annonce in annonces %}
             <tr>
-                <td>{{ annonce.id }}</td>
                 <td>{{ annonce.titre }}</td>
                 <td>{{ annonce.description }}</td>
                 <td>{{ annonce.datePublication ? annonce.datePublication|date('d-m-Y H:i') : '' }}</td>

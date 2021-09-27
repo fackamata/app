@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}Connectez vous !{% endblock %}
 
 {% block body %}
 
@@ -11,14 +11,14 @@
 
     {% if app.user %}
     <div class="mb-3">
-        Vous êtes déjà connecté en tant que {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+        Vous êtes déjà connecté en tant que {{ app.user.username }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
     </div>
     {% endif %}
     <div class='form-SAMM'>  
-        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-        <label for="inputUsername">Username</label>
+        <h1 class="h3 mb-3 font-weight-normal">Connectez-vous</h1>
+        <label for="inputUsername">Votre pseudo : </label>
         <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" autocomplete="username" required autofocus>
-        <label for="inputPassword">Password</label>
+        <label for="inputPassword">Votre mot de passe : </label>
         <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
 
         <input type="hidden" name="_csrf_token"
@@ -27,7 +27,7 @@
 
         <div class="d-flex justify-content-center my-3">
             <button class="btn btn-vert-connexion_Samm me-3" type="submit">
-                Sign in
+                Connexion
             </button>
             <a class="btn btn-vert-connexion_Samm" href="{{path("app_register")}}">
                 Créer un compte

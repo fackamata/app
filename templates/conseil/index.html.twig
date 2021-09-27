@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Conseil index{% endblock %}
+{% block title %}Les conseils{% endblock %}
 
 {% block body %}
-    <h1>Conseil index</h1>
+    <h1>Les conseils</h1>
     <div class="d-flex flex-wrap ">
 
 
@@ -21,13 +21,13 @@
                 <p>{{ conseil.nombreVue }} vues</p>
             </div>
         </div>
-          <a class="btn btn-info" href="{{ path('conseil_show', {'id': conseil.id}) }}">show</a>
+          <a class="btn btn-info" href="{{ path('conseil_show', {'id': conseil.id}) }}">Détail</a>
         </div>
       </div>
     
     {% else %}
         <div>
-            <p>no records found</p>
+            <p>Aucun conseil</p>
         </div>
     {% endfor %}  
 
@@ -36,7 +36,7 @@
 </div>
 <a class="btn btn-info" href="javascript:history.back()">retour</a>
     {% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN') %}
-		<a class="btn btn-info" href="{{ path('conseil_new') }}">Create new</a>
+		<a class="btn btn-info" href="{{ path('conseil_new') }}">Créer un conseil</a>
 	{% endif %}
 
 {% endblock %}

@@ -1,15 +1,14 @@
 {% extends 'admin/admin.html.twig' %}
 
 
-{% block title %}Conseil index{% endblock %}
+{% block title %}Liste des conseils{% endblock %}
 
 {% block body %}
-    <h1>Conseil index</h1>
+    <h1>Liste des conseils</h1>
 
     <table class="table" id="myTable">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Titre</th>
                 <th>Description</th>
                 <th>DatePublication</th>
@@ -32,17 +31,16 @@
                     {% endif %}
                 </td>
                 <td>
-                    <a class="btn btn-success" href="{{ path('conseil_show', {'id': conseil.id}) }}">show</a>
-                    <a class="btn btn-warning" href="{{ path('conseil_edit', {'id': conseil.id}) }}">edit</a>
+                    <a class="btn btn-success" href="{{ path('conseil_show', {'id': conseil.id}) }}">Détail</a>
+                    <a class="btn btn-warning" href="{{ path('conseil_edit', {'id': conseil.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="7">no records found</td>
+                <td colspan="7">Aucun conseil</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a class="btn btn-info" href="{{ path('conseil_new') }}">Create new</a>
 {% endblock %}

@@ -1,14 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Conseil{% endblock %}
+{% block title %}Modifier conseil{% endblock %}
 
 {% block body %}
-    <h1>Edit Conseil</h1>
+    <h1>Modifier conseil</h1>
 
         {{ include('conseil/_form.html.twig', {'button_label': 'Update'}) }}
     
         <div class="d-flex ">
-            <a class="btn btn-info " href="javascript:history.back()">retour</a>
+            <a class="btn btn-info " href="javascript:history.back()">Retour</a>
 
         
             {{ include('conseil/_delete_form.html.twig') }}

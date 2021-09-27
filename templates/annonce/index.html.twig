@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Annonce index
+{% block title %}Liste des annonces
 {% endblock %}
 
 {% block body %}
-	<h1>Annonce</h1>
+	<h1>Les annonces</h1>
 
 	<div class="d-flex flex-wrap ">
 
@@ -22,21 +22,21 @@
 							<p>{{ annonce.nombreVue }} vues</p>
 						</div>
 					</div>
-					<a class="btn btn-info" href="{{ path('annonce_show', {'id': annonce.id}) }}">show</a>
+					<a class="btn btn-info" href="{{ path('annonce_show', {'id': annonce.id}) }}">Détail</a>
 				</div>
 			</div>
 
 		{% else %}
 			<div>
-				<p>no records found</p>
+				<p>Aucunne annonce</p>
 			</div>
 		{% endfor %}
 
 
 	</div>
-	<a class="btn btn-info " href="javascript:history.back()">retour</a>
+	<a class="btn btn-info " href="javascript:history.back()">Retour</a>
 	{% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN') %}
-		<a class="btn btn-info" href="{{ path('annonce_new') }}">Create new</a>
+		<a class="btn btn-info" href="{{ path('annonce_new') }}">Créer une annonce</a>
 	{% endif %}
 
 {% endblock %}

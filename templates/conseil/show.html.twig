@@ -8,10 +8,6 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ conseil.id }}</td>
-            </tr>
-            <tr>
                 <th>Titre</th>
                 <td>{{ conseil.titre }}</td>
             </tr>
@@ -28,6 +24,10 @@
                 <td>{{ conseil.nombreVue }}</td>
             </tr>
             <tr>
+                <th>Publié par :</th>
+                <td>{{ conseil.user }}</td>
+            </tr>
+            <tr>
                 {# <th>Photo</th> #}
                 {% if conseil.photo %}
                 <img src="{{ conseil.photo }}" alt="{{ conseil.titre }}" class="img-fluid" />
@@ -42,15 +42,19 @@
         {% for avi in avis %}
             <div>avis : {{avi.text}}</div>
             <div>note : {{avi.note}}</div>
+            {% if username == avi.user or is_granted('ROLE_ADMIN') %}
+                <!-- <a href="{{path('avis_delete',{'id': avi.id}) }}" class="btn btn-danger">X</a> -->
+                {{ include('avis/_delete_form.html.twig', {'button_label': 'X'}) }}
+            {% endif %}
         {% endfor %}
     </div>
 
     <a class="btn btn-info" href="javascript:history.back()">retour</a>
 
-    <a class="btn btn-info" href="{{ path('avis_new', {'id' : conseil.id}) }}">faire un commentaire</a>
+    <a class="btn btn-info" href="{{ path('avis_new', {'id' : conseil.id}) }}">Faire un commentaire</a>
 
     {% if username == conseil.user or is_granted('ROLE_ADMIN') %}
-        <a class="btn btn-warning" href="{{ path('conseil_edit', {'id': conseil.id}) }}">edit</a>
+        <a class="btn btn-warning" href="{{ path('conseil_edit', {'id': conseil.id}) }}">Modifier</a>
 
         {{ include('conseil/_delete_form.html.twig') }}
     {% endif %}

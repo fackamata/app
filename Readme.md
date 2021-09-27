@@ -145,8 +145,16 @@ Permet d'avoir des formulaire bootstrap dans l'ensemble de l'application
 
 dans /config/packages/security.yaml
 
+## Optimisation
+
 ### compteur de vue
 
 création d'une fonction pour compter le nombre de vue sur une annonce ou un conseil
 
 utilisation double, donc on créer un fonction public dans le dossier Service
+
+### User service
+
+fonction findByUser : pour trouver les annonces, avis, conseil en fonction de l'utilisateur connecté
+
+fonction count : pour retourner le nombre d'annonces, avis, conseil de chaque utilisateur connecté

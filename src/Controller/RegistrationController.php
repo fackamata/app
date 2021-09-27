@@ -141,7 +141,7 @@ class RegistrationController extends AbstractController
     #[Route('/register/avis/{id}', name:'app_avis')]
     public function avis( UserService $userService) : Response
     {
-        $userAvis= $userService->findAnnonceByUser( $this->getUser());
+        $userAvis= $userService->findAvisByUser( $this->getUser());
         return $this->render('avis/index.html.twig', [
             'avis' => $userAvis,
         ]);

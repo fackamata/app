@@ -9,7 +9,6 @@
     <table class="table" id="myTable">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Username</th>
                 <th>Roles</th>
                 <!-- <th>Password</th> -->
@@ -23,7 +22,6 @@
         <tbody>
         {% for user in users %}
             <tr>
-                <td>{{ user.id }}</td>
                 <td>{{ user.username }}</td>
                 <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
                <!--  <td>{{ user.password }}</td> -->
@@ -36,18 +34,18 @@
                     {% endif %}
                 </td>
                 <td>
-                    <a href="{{ path('admin_user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('admin_user_edit', {'id': user.id}) }}">edit</a>
+                    <a href="{{ path('admin_user_show', {'id': user.id}) }}">Détail</a>
+                    <a href="{{ path('admin_user_edit', {'id': user.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="9">no records found</td>
+                <td colspan="9">Aucun utilisateur</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('admin_user_new') }}">Create new</a>
+    <a href="{{ path('admin_user_new') }}">Créer un nouveau utilisateur</a>
 </div>
 {% endblock %}

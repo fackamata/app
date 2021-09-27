@@ -1,6 +1,6 @@
 {% extends 'admin/admin.html.twig' %}
 
-{% block title %}Annonce index{% endblock %}
+{% block title %}Liste des annonces{% endblock %}
 
 {% block body %}
     <h1>Annonce</h1>
@@ -33,20 +33,18 @@
                     {% endif %}
                 </td>
                 <td>
-                    <a class="btn btn-success" href="{{ path('annonce_show', {'id': annonce.id}) }}">show</a>
+                    <a class="btn btn-success" href="{{ path('annonce_show', {'id': annonce.id}) }}">Détail</a>
                     
-                    <a class="btn btn-warning" href="{{ path('annonce_edit', {'id': annonce.id}) }}">edit</a>
+                    <a class="btn btn-warning" href="{{ path('annonce_edit', {'id': annonce.id}) }}">Modifier</a>
                     
                     
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="7">no records found</td>
+                <td colspan="7">Aucunne annonce</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-    <a class="btn btn-info" href="{{ path('annonce_new') }}">Create new</a>
 {% endblock %}
