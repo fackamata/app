@@ -19,12 +19,17 @@
         </div>
     </main>
             
-    <a class="btn btn-info " href="javascript:history.back()">Retour</a>
-    {% if username == annonce.user or is_granted('ROLE_ADMIN') %}
-        <a class="btn btn-warning" href="{{ path('annonce_edit', {'id': annonce.id}) }}">Modifier</a>
-
-        {{ include('annonce/_delete_form.html.twig') }}
-    {% endif %}
+    <div class='d-flex justify-content-around'>
+        <a class="btn btn-outline-info " href="javascript:history.back()">Retour</a>
+        {% if username == annonce.user or is_granted('ROLE_ADMIN') %}
+            <a class="btn btn-outline-warning" href="{{ path('annonce_edit', {'id': annonce.id}) }}">Modifier</a>
+    
+            <form method="post" action="{{ path('annonce_delete', {'id': annonce.id}) }}" onsubmit="return confirm('Etes-vous sûre de vouloir supprimer cette annonce ?');">
+                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ annonce.id) }}">
+                <button class="btn btn-outline-danger">Delete</button>
+            </form>
+        {% endif %}
+    </div>
     
 
     

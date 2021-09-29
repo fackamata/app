@@ -4,24 +4,31 @@
 
 {% block body %}
     <h1>Commentaire</h1>
+    <div class="form-SAMM">
+        <a class="btn btn-outline-info " href="javascript:history.back()">Retour</a>
+    
+    
+        <form method="post" action="{{ path('avis_delete', {'id': avi.id}) }}" onsubmit="return confirm('Etes-vous sûre de vouloir supprimer ce commentaire ?');">
+            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ avi.id) }}">
+            <button class="btn">{{ button_label|default('Delete') }}</button>
+        </form>
+    
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Texte</th>
+                    <td>{{ avi.text }}</td>
+                </tr>
+                <tr>
+                    <th>DatePublication</th>
+                    <td>{{ avi.datePublication ? avi.datePublication|date('d/m/Y') : '' }}</td>
+                </tr>
+            </tbody>
+        </table>
+    
+    
+    
+        <a class="btn btn-vert-connexion_Samm" href="{{ path('avis_edit', {'id': avi.id}) }}">Modifier</a>
+    </div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Texte</th>
-                <td>{{ avi.text }}</td>
-            </tr>
-            <tr>
-                <th>DatePublication</th>
-                <td>{{ avi.datePublication ? avi.datePublication|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a class="btn btn-info " href="javascript:history.back()">Retour</a>
-
-
-    <a href="{{ path('avis_edit', {'id': avi.id}) }}">Modifier</a>
-
-    {{ include('avis/_delete_form.html.twig') }}
 {% endblock %}

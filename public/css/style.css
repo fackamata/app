@@ -80,13 +80,62 @@ a {
    margin: auto;
 } 
 
+.comment{
+   border: 1px solid var(--notrevert);
+   border-radius: 5px;
+   margin: 5px 0;
+}
 
 .btn-vert-connexion_Samm {
    background-color: var(--notrevert);
    color: var(--notreLightBackground);
 }
+
 .btn-vert-connexion_Samm:hover{
    background-color: var(--notrevert);
    color: var(--notrebrown);
    transform: scale(1.1);
+}
+
+.btn-marron_Samm {
+   background-color: var(--notreMarronClair);
+   color: var(--notreLightBackground);
+}
+.btn-marron_Samm:hover{
+   background-color: var(--notreMarronClair);
+   color: var(--notrevert);
+   transform: scale(1.1);
+}
+
+
+.btn-vert-creation_Samm {
+   background-color: white!important;
+   border: solid var(--notrevert);
+   color: var(--notrebrown);
+   text-decoration: none;
+}
+
+.card:hover{
+   transform: scale(1.1);
+}
+
+.btn-vert-creation_Samm:hover {
+   color: var(--notreLightBackground);
+}
+
+.btn-vert-creation_Samm:hover {
+   background-color: var(--notrevert)!important;
+}
+
+aside{
+   width: 20vw;
+}
+
+@media screen and (max-width: 900px){
+   
+   .form-SAMM{
+      width : 95vw; 
+      height: auto;
+      margin: auto;
+   } 
 }

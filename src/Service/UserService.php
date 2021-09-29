@@ -23,6 +23,39 @@ class UserService extends Command
         parent::__construct();
     }
 
+    public function countAllAnnonce(): int
+    {
+        $em = $this->entityManager;
+        $repo = $em->getRepository(Annonce::class);
+        $result = $repo->findAll();
+
+        return count($result);
+    }
+    public function countAllConseil(): int
+    {
+        $em = $this->entityManager;
+        $repo = $em->getRepository(Conseil::class);
+        $result = $repo->findAll();
+
+        return count($result);
+    }
+    public function countAllUser(): int
+    {
+        $em = $this->entityManager;
+        $repo = $em->getRepository(User::class);
+        $result = $repo->findAll();
+
+        return count($result);
+    }
+    public function countAllAvis(): int
+    {
+        $em = $this->entityManager;
+        $repo = $em->getRepository(Avis::class);
+        $result = $repo->findAll();
+
+        return count($result);
+    }
+
     public function findAnnonceByUser(User $user): array
     {
         $em = $this->entityManager;

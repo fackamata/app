@@ -6,9 +6,14 @@
 
     <h1>Créer une nouvelle annonce</h1>
 
-    {{ include('annonce/_form.html.twig') }}
-    
-    <a class="btn btn-info " href="javascript:history.back()">Retour</a>
+    {# {{ include('annonce/_form.html.twig') }} #}
+    <div class="form-SAMM">
+        <div class="d-flex mb-2">
+            <a class="btn btn-outline-info me-2" href="javascript:history.back()">Retour</a>
+        </div>  
+        {{form(form)}}
+    </div>
+
 
 {% endblock %}
 

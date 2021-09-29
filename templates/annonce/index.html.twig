@@ -5,6 +5,10 @@
 
 {% block body %}
 	<h1>Les annonces</h1>
+	<a class="btn btn-outline-info " href="javascript:history.back()">Retour</a>
+	{% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN') %}
+		<a class="btn btn-outline-success" href="{{ path('annonce_new') }}">Créer une annonce</a>
+	{% endif %}
 
 	<div class="d-flex flex-wrap ">
 
@@ -22,7 +26,7 @@
 							<p>{{ annonce.nombreVue }} vues</p>
 						</div>
 					</div>
-					<a class="btn btn-info" href="{{ path('annonce_show', {'id': annonce.id}) }}">Détail</a>
+					<a class="btn btn-vert-creation_Samm " href="{{ path('annonce_show', {'id': annonce.id}) }}">Détail</a>
 				</div>
 			</div>
 
@@ -34,9 +38,6 @@
 
 
 	</div>
-	<a class="btn btn-info " href="javascript:history.back()">Retour</a>
-	{% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN') %}
-		<a class="btn btn-info" href="{{ path('annonce_new') }}">Créer une annonce</a>
-	{% endif %}
+	
 
 {% endblock %}

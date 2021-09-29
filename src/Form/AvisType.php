@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Avis;
 use Symfony\Component\DomCrawler\Field\TextareaFormField;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,8 +16,9 @@ class AvisType extends AbstractType
         $builder
             ->add('text')
             ->add('note')
-            // ->add('user')
-            // ->add('conseil')
+            ->add('enregistrer', SubmitType::class, [
+                'attr' => ['class' => 'btn-vert-connexion_Samm ']
+            ])
         ;
     }
 

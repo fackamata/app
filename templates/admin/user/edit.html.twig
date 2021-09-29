@@ -4,32 +4,34 @@
 
 {% block body %}
     <h1>Modification données utilisateur</h1>
-
-    {{ form_start(form)}} {# <form action="" method"> #}
-        <div class="row">
-            <div class="col-6">               
-                {{form_row(form.username)}} {# le nom du champs #}                   
-            </div>
-            <div class="col-6">
-                {# on peut préciser le label, les attribut (data-nb:, class:, ) ... #}
-                {{form_row(form.prenom, {label: "Prénom",id:"idPrenom", attr: {class: 'classPrenom'} } ) }}
-            </div>
-            <div class="col-6">
-                {# on peut préciser le label, les attribut (data-nb:, class:, ) ... #}
-                {{form_row(form.nom, {label: "Nom"} ) }}
-            </div>
-            <div class="col-6">
-                {{form_row(form.mail)}}
-            </div>
+<div >
+    
+        {{ form_start(form)}} {# <form action="" method"> #}
             <div class="row">
-                
-                
-                <div class="col-6">
-                    {{form_row(form.file)}}
+                <div class="col-md-6">               
+                    {{form_row(form.username)}} {# le nom du champs #}                   
+                </div>
+                <div class="col-md-6">
+                    {# on peut préciser le label, les attribut (data-nb:, class:, ) ... #}
+                    {{form_row(form.prenom, {label: "Prénom",id:"idPrenom", attr: {class: 'classPrenom'} } ) }}
+                </div>
+                <div class="col-md-6">
+                    {# on peut préciser le label, les attribut (data-nb:, class:, ) ... #}
+                    {{form_row(form.nom, {label: "Nom"} ) }}
+                </div>
+                <div class="col-md-6">
+                    {{form_row(form.mail)}}
+                </div>
+                <div class="row">
+                    
+                    
+                    <div class="col-md-6">
+                        {{form_row(form.file)}}
+                    </div>
                 </div>
             </div>
-        </div>
-        
-      {{ form_end(form)}} 
+            
+          {{ form_end(form)}} 
 
+</p>    
 {% endblock %}

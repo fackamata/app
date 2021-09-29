@@ -4,32 +4,33 @@
 
 {% block body %}
     <h1>Liste des commentaires</h1>
-
-    <table class="table" id="myTable">
-        <thead>
-            <tr>
-                <th>Text</th>
-                <th>DatePublication</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for avi in avis %}
-            <tr>
-                <td>{{ avi.text }}</td>
-                {# <td>{{ avi.conseils }}</td> #}
-                <td>{{ avi.datePublication ? avi.datePublication|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a class="btn btn-success" href="{{ path('avis_show', {'id': avi.id}) }}">Détail</a>
-                    <a class="btn btn-warning" href="{{ path('avis_edit', {'id': avi.id}) }}">Modifier</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">Aucun commentaire</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="table-responsive">
+        <table class="table table-hover" id="myTable">
+            <thead>
+                <tr>
+                    <th>Text</th>
+                    <th>DatePublication</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for avi in avis %}
+                <tr>
+                    <td>{{ avi.text | slice(0,30)}}...</td>
+                    {# <td>{{ avi.conseils }}</td> #}
+                    <td>{{ avi.datePublication ? avi.datePublication|date('Y/m/d') : '' }}</td>
+                    <td>
+                        <a class="btn btn-outline-success" href="{{ path('avis_show', {'id': avi.id}) }}">Détail</a>
+                        <a class="btn btn-outline-warning" href="{{ path('avis_edit', {'id': avi.id}) }}">Modifier</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">Aucun commentaire</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
 {% endblock %}

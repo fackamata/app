@@ -70,7 +70,7 @@ class RegistrationController extends AbstractController
     {
         $nbAnnonce = $userService->countAnnonce($user);
         $nbConseil = $userService->countConseil($user);
-        $nbAvis = $userService->countConseil($user);
+        $nbAvis = $userService->countAvis($user);
         return $this->render('registration/compte.html.twig', [
             'user' => $user,
             'nbAnnonce' => $nbAnnonce,

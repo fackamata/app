@@ -87,6 +87,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Filable
     public function __toString()
     {
         return $this->getUsername();
+        return $this->getRoles();
     }
 
     /**
@@ -125,6 +126,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Filable
 
         return array_unique($roles);
     }
+
 
     public function setRoles(array $roles): self
     {

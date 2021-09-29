@@ -3,9 +3,10 @@
 namespace App\Form;
 
 use App\Entity\Conseil;
-use Symfony\Component\DomCrawler\Field\TextareaFormField;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,13 +16,16 @@ class ConseilType extends AbstractType
     {
         $builder
             ->add('titre')
-            ->add('description', TextareaFormField::class)
+            ->add('description', TextareaType::class)
             // ->add('datePublication')
             // ->add('nombreVue')
             ->add('file', FileType::class,[ 
                 'mapped' => false,
                 'required' => false,
                 'label' => 'Photo',
+            ])
+            ->add('enregistrer', SubmitType::class, [
+                'attr' => ['class' => 'btn-vert-connexion_Samm ']
             ])
         ;
     }

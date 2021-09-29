@@ -5,8 +5,11 @@
 {% block body %}
     <h1>Créer un nouveau conseil</h1>
 
-    {{ include('conseil/_form.html.twig') }}
-
-    <a class="btn btn-info " href="javascript:history.back()">Retour</a>
+    <div class="form-SAMM">
+        <div class="d-flex mb-2">
+            <a class="btn btn-outline-info me-2" href="javascript:history.back()">Retour</a>
+        </div>  
+        {{form(form)}}
+    </div>
 
 {% endblock %}

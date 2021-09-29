@@ -3,63 +3,52 @@
 {% block title %}Conseil{% endblock %}
 
 {% block body %}
-    <h1>Conseil</h1>
+    <h1>{{ conseil.titre }}</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Titre</th>
-                <td>{{ conseil.titre }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ conseil.description }}</td>
-            </tr>
-            <tr>
-                <th>DatePublication</th>
-                <td>{{ conseil.datePublication ? conseil.datePublication|date('d-m-Y') : '' }}</td>
-            </tr>
-            <tr>
-                <th>NombreVue</th>
-                <td>{{ conseil.nombreVue }}</td>
-            </tr>
-            <tr>
-                <th>Publié par :</th>
-                <td>{{ conseil.user }}</td>
-            </tr>
-            <tr>
-                {# <th>Photo</th> #}
-                {% if conseil.photo %}
-                <img src="{{ conseil.photo }}" alt="{{ conseil.titre }}" class="img-fluid" />
-                {% endif %}
-            </tr>
-        </tbody>
-    </table>
+    <main class="d-flex flex-column justify-content-center">
+        {% if conseil.photo %}
+            <img src="{{ conseil.photo }}" alt="{{ conseil.titre }}" class="rounded mx-auto d-block h-50" />
+        {% endif %}
+        {#  on filtre conseil.description avec un raw pour nettoyer les balises HTML #}
+        <div class="text-center my-4">{{ conseil.description|raw }}</div>
 
+        <div class="d-flex justify-content-around">
+            <p>Date de publication : {{ conseil.datePublication ? conseil.datePublication|date('l j Y ') : '' }}</p>
+            <p>Publié par : {{ conseil.user }}</p>
+            <p>Nombre de vue : {{ conseil.nombreVue }}</p>
+        </div>
 
-    <div>
-        <h2>commentaire</h2>
-        {% for avi in avis %}
-            <div>avis : {{avi.text}}</div>
-            <div>note : {{avi.note}}</div>
-            {% if username == avi.user or is_granted('ROLE_ADMIN') %}
-                <!-- <a href="{{path('avis_delete',{'id': avi.id}) }}" class="btn btn-danger">X</a> -->
-                {{ include('avis/_delete_form.html.twig', {'button_label': 'X'}) }}
+        <div class='d-flex justify-content-around'>
+            <a class="btn btn-outline-info " href="javascript:history.back()">Retour</a>
+            {% if username == conseil.user or is_granted('ROLE_ADMIN') %}
+                <a class="btn btn-outline-warning" href="{{ path('conseil_edit', {'id': conseil.id}) }}">Modifier</a>
+        
+                <form method="post" action="{{ path('conseil_delete', {'id': conseil.id}) }}" onsubmit="return confirm('Etes-vous sûre de vouloir supprimer cette conseil ?');">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ conseil.id) }}">
+                    <button class="btn btn-outline-danger">Delete</button>
+                </form>
             {% endif %}
+        </div>
+
+    <div class="form-SAMM d-flex flex-column align-content-center">
+        {% for avi in avis %}
+            <div class="comment p-2">
+                <div class="mb-2">{{avi.text}}</div>
+                <div class="d-flex justify-content-between">
+                    <div>publié par : {{avi.user}}</div>
+                    <div>note : {{avi.note}}</div>
+                    {% if username == avi.user or is_granted('ROLE_ADMIN') %}
+                    <form method="post" action="{{ path('avis_delete', {'id': avi.id}) }}" onsubmit="return confirm('Etes-vous sûre de vouloir supprimer ce commentaire ?');">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ avi.id) }}">
+                        <button class="btn btn-outline-danger">X</button>
+                    </form>
+                    {% endif %}
+                </div>
+            </div>
         {% endfor %}
     </div>
 
-    <a class="btn btn-info" href="javascript:history.back()">retour</a>
-
-    <a class="btn btn-info" href="{{ path('avis_new', {'id' : conseil.id}) }}">Faire un commentaire</a>
-
-    {% if username == conseil.user or is_granted('ROLE_ADMIN') %}
-        <a class="btn btn-warning" href="{{ path('conseil_edit', {'id': conseil.id}) }}">Modifier</a>
-
-        {{ include('conseil/_delete_form.html.twig') }}
-    {% endif %}
-
-
+</main>
 
     
 {% endblock %}

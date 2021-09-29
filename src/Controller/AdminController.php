@@ -6,6 +6,7 @@ use App\Repository\AnnonceRepository;
 use App\Repository\AvisRepository;
 use App\Repository\ConseilRepository;
 use App\Repository\UserRepository;
+use App\Service\UserService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,10 +14,17 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminController extends AbstractController
 {
     #[Route('/admin', name: 'admin_index')]
-    public function index(): Response
+    public function index(UserService $userService, UserRepository $userRepository): Response
     {
+        $nbAnnonce = $userService->countAllAnnonce();
+        $nbConseil = $userService->countAllConseil();
+        $nbAvis = $userService->countAllAvis();
+        $nbUser = $userService->countAllUser();
         return $this->render('admin/admin.html.twig', [
-            'controller_name' => 'AdminController',
+            'annonce' => $nbAnnonce,
+            'conseil' => $nbConseil,
+            'avis' => $nbAvis,
+            'user' => $nbUser,
         ]);
     }
     #[Route('/admin/user', name: 'admin_user')]
