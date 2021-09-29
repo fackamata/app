@@ -10,14 +10,14 @@
             <img src="{{ annonce.photo }}" alt="{{ annonce.titre }}" class="rounded mx-auto d-block h-50" />
         {% endif %}
         {#  on filtre annonce.description avec un raw pour nettoyer les balises HTML #}
-        <div class="text-center my-4">{{ annonce.description|raw }}</div>
+        <div class="text-center mx-3 mx-md-5">{{ annonce.description|raw }}</div>
 
         <div class="d-flex justify-content-around">
             <p>Date de publication : {{ annonce.datePublication ? annonce.datePublication|date('l j Y ') : '' }}</p>
             <p>Publié par : {{ annonce.user }}</p>
             <p>Nombre de vue : {{ annonce.nombreVue }}</p>
         </div>
-    </main>
+    
             
     <div class='d-flex justify-content-around'>
         <a class="btn btn-outline-info " href="javascript:history.back()">Retour</a>
@@ -30,7 +30,7 @@
             </form>
         {% endif %}
     </div>
-    
+    </main>
 
     
 {% endblock %}

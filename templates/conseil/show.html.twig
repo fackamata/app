@@ -10,7 +10,7 @@
             <img src="{{ conseil.photo }}" alt="{{ conseil.titre }}" class="rounded mx-auto d-block h-50" />
         {% endif %}
         {#  on filtre conseil.description avec un raw pour nettoyer les balises HTML #}
-        <div class="text-center my-4">{{ conseil.description|raw }}</div>
+        <div class=" text-center mx-3 mx-md-5">{{ conseil.description|raw }}</div>
 
         <div class="d-flex justify-content-around">
             <p>Date de publication : {{ conseil.datePublication ? conseil.datePublication|date('l j Y ') : '' }}</p>

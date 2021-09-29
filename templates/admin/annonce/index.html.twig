@@ -11,9 +11,8 @@
                 <tr>
                     <th>Titre</th>
                     <th>Description</th>
-                    <th>DatePublication</th>
-                    <th>Active</th>
-                    <th>NombreVue</th>
+                    <th class="d-none d-md-table-cell">DatePublication</th>
+                    <th class="d-none d-sm-table-cell">NombreVue</th>
                     <th>User</th>
                     <th>actions</th>
                 </tr>
@@ -23,9 +22,8 @@
                 <tr>
                     <td>{{ annonce.titre }}</td>
                     <td>{{ annonce.description | slice(0,30)}}...</td>
-                    <td>{{ annonce.datePublication ? annonce.datePublication|date('d/m/Y') : '' }}</td>
-                    <td>{{ annonce.active ? 'Yes' : 'No' }}</td>
-                    <td>{{ annonce.nombreVue }}</td>
+                    <td class="d-none d-md-table-cell">{{ annonce.datePublication ? annonce.datePublication|date('d/m/Y') : '' }}</td>
+                    <td class="d-none d-sm-table-cell">{{ annonce.nombreVue }}</td>
                     <td>{{ annonce.user }}</td>
                     <td>
                         <a class="btn btn-outline-success" href="{{ path('annonce_show', {'id': annonce.id}) }}">Détail</a>

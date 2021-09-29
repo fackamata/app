@@ -10,9 +10,9 @@
             <thead>
                 <tr>
                     <th>Titre</th>
-                    <th>Description</th>
-                    <th>DatePublication</th>
-                    <th>NombreVue</th>
+                    <th class="d-none d-sm-table-cell">Description</th>
+                    <th class="d-none d-md-table-cell">DatePublication</th>
+                    <th class="d-none d-sm-table-cell">NombreVue</th>
                     <th>actions</th>
                 </tr>
             </thead>
@@ -20,9 +20,9 @@
             {% for conseil in conseils %}
                 <tr>
                     <td>{{ conseil.titre }}</td>
-                    <td>{{ conseil.description }}</td>
-                    <td>{{ conseil.datePublication ? conseil.datePublication|date('d/m/Y') : '' }}</td>
-                    <td>{{ conseil.nombreVue }}</td>
+                    <td class="d-none d-sm-table-cell">{{ conseil.description| slice(0,30)}}...</td>
+                    <td class="d-none d-md-table-cell">{{ conseil.datePublication ? conseil.datePublication|date('d/m/Y') : '' }}</td>
+                    <td class="d-none d-sm-table-cell">{{ conseil.nombreVue }}</td>
                     <td>
                         <a class="btn btn-outline-success" href="{{ path('conseil_show', {'id': conseil.id}) }}">Détail</a>
                         <a class="btn btn-outline-warning" href="{{ path('conseil_edit', {'id': conseil.id}) }}">Modifier</a>

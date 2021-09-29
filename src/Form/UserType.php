@@ -27,7 +27,9 @@ class UserType extends AbstractType
                 'required' => false,
                 'label' => 'Avatar',
             ])
-            ->add('submit', SubmitType::class)
+            ->add('enregistrer', SubmitType::class, [
+                'attr' => ['class' => 'btn-vert-connexion_Samm ']
+            ])
         ;
     }
 
