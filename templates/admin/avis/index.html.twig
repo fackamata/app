@@ -8,8 +8,8 @@
         <table class="table table-hover" id="myTable">
             <thead>
                 <tr>
-                    <th>Text</th>
-                    <th>DatePublication</th>
+                    <th>Commentaire</th>
+                    <th>Publié le</th>
                     <th>actions</th>
                 </tr>
             </thead>
@@ -18,7 +18,7 @@
                 <tr>
                     <td>{{ avi.text | slice(0,30)}}...</td>
                     {# <td>{{ avi.conseils }}</td> #}
-                    <td>{{ avi.datePublication ? avi.datePublication|date('Y/m/d') : '' }}</td>
+                    <td>{{ avi.datePublication ? avi.datePublication|date('d/m/Y') : '' }}</td>
                     <td>
                         <a class="btn btn-outline-success" href="{{ path('avis_show', {'id': avi.id}) }}">Détail</a>
                         <a class="btn btn-outline-warning" href="{{ path('avis_edit', {'id': avi.id}) }}">Modifier</a>

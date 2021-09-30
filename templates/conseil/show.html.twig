@@ -7,13 +7,15 @@
 
     <main class="d-flex flex-column justify-content-center">
         {% if conseil.photo %}
-            <img src="{{ conseil.photo }}" alt="{{ conseil.titre }}" class="rounded mx-auto d-block h-50" />
+        <div class="photo-container d-flex justify-content-center">
+            <img src="{{ conseil.photo }}" alt="{{ conseil.titre }}" class="rounded" />
+        </div>
         {% endif %}
         {#  on filtre conseil.description avec un raw pour nettoyer les balises HTML #}
         <div class=" text-center mx-3 mx-md-5">{{ conseil.description|raw }}</div>
 
-        <div class="d-flex justify-content-around">
-            <p>Date de publication : {{ conseil.datePublication ? conseil.datePublication|date('l j Y ') : '' }}</p>
+        <div class="d-flex justify-content-around my-2">
+            <p>Date de publication : {{ conseil.datePublication ? conseil.datePublication|date('d/m/Y ') : '' }}</p>
             <p>Publié par : {{ conseil.user }}</p>
             <p>Nombre de vue : {{ conseil.nombreVue }}</p>
         </div>

@@ -4,32 +4,34 @@
 
 {% block body %}
     <h1>Liste des commentaires</h1>
+    
+<div class="form-SAMM">
     <a class="btn btn-outline-info " href="javascript:history.back()">Retour</a>
+        <table class="table table-responsive">
+            <thead>
+                <tr>
+                    <th>Text</th>
+                    <th class="d-none d-md-table-cell">DatePublication</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for avi in avis %}
+                <tr>
+                    <td>{{ avi.text }}</td>
+                    <td class="d-none d-sm-table-cell">{{ avi.datePublication ? avi.datePublication|date('d/m/Y') : '' }}</td>
+                    <td>
+                        <a class="btn btn-outline-success" href="{{ path('avis_show', {'id': avi.id}) }}">Détail</a>
+                        <a class="btn btn-outline-warning" href="{{ path('avis_edit', {'id': avi.id}) }}">Modifier</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">Aucun commentaire</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Text</th>
-                <th>DatePublication</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for avi in avis %}
-            <tr>
-                <td>{{ avi.text }}</td>
-                <td>{{ avi.datePublication ? avi.datePublication|date('d/m/Y') : '' }}</td>
-                <td>
-                    <a class="btn btn-outline-success" href="{{ path('avis_show', {'id': avi.id}) }}">Détail</a>
-                    <a class="btn btn-outline-warning" href="{{ path('avis_edit', {'id': avi.id}) }}">Modifier</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">Aucun commentaire</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
+</div> 
 {% endblock %}

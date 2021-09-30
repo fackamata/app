@@ -63,6 +63,11 @@ class Annonce implements FilableInterface
      */
     private $photo;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $ville;
+
     public function __construct()
     {
         /* date de publication rentrer en automatique à la date du jour */
@@ -175,6 +180,18 @@ class Annonce implements FilableInterface
     public function setPhoto(?string $photo): self
     {
         $this->photo = $photo;
+
+        return $this;
+    }
+
+    public function getVille(): ?string
+    {
+        return $this->ville;
+    }
+
+    public function setVille(string $ville): self
+    {
+        $this->ville = $ville;
 
         return $this;
     }

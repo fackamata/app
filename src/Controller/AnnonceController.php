@@ -82,7 +82,10 @@ class AnnonceController extends AbstractController
         
         $user = $this->getUser();
         // on récupère les roles de l'utilisateur 
-        $role = $this->getUser()->getRoles();
+        if($user != null){
+
+            $role = $this->getUser()->getRoles();
+        }
 
         /* on incrémente les vues si personne n'est loguer 
         ou si l'utilisateur connecté n'est pas celui qui à posté l'Annonce  

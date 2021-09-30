@@ -11,10 +11,11 @@
                 <tr>
                     <th>Titre</th>
                     <th>Description</th>
-                    <th class="d-none d-md-table-cell">DatePublication</th>
-                    <th class="d-none d-sm-table-cell">NombreVue</th>
-                    <th>User</th>
-                    <th>actions</th>
+                    <th class="d-none d-md-table-cell">Publié le</th>
+                    <th class="d-none d-sm-table-cell">Vues</th>
+                    <th class="d-none d-md-table-cell">Ville</th>
+                    <th>Utilisateur</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -24,6 +25,7 @@
                     <td>{{ annonce.description | slice(0,30)}}...</td>
                     <td class="d-none d-md-table-cell">{{ annonce.datePublication ? annonce.datePublication|date('d/m/Y') : '' }}</td>
                     <td class="d-none d-sm-table-cell">{{ annonce.nombreVue }}</td>
+                    <td>{{ annonce.ville }}</td>
                     <td>{{ annonce.user }}</td>
                     <td>
                         <a class="btn btn-outline-success" href="{{ path('annonce_show', {'id': annonce.id}) }}">Détail</a>

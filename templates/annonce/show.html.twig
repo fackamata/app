@@ -7,19 +7,23 @@
 
     <main class="d-flex flex-column justify-content-center">
         {% if annonce.photo %}
-            <img src="{{ annonce.photo }}" alt="{{ annonce.titre }}" class="rounded mx-auto d-block h-50" />
+            <div class="photo-container d-flex justify-content-center">
+                <img src="{{ annonce.photo }}" alt="{{ annonce.titre }}" class="rounded" />
+            </div>     
+                
         {% endif %}
         {#  on filtre annonce.description avec un raw pour nettoyer les balises HTML #}
         <div class="text-center mx-3 mx-md-5">{{ annonce.description|raw }}</div>
 
-        <div class="d-flex justify-content-around">
-            <p>Date de publication : {{ annonce.datePublication ? annonce.datePublication|date('l j Y ') : '' }}</p>
+        <div class="d-flex justify-content-around my-3">
+            <p>Date de publication : {{ annonce.datePublication ? annonce.datePublication|date('d/m/Y ') : '' }}</p>
             <p>Publié par : {{ annonce.user }}</p>
+            <p>Situé à : {{ annonce.ville }}</p>
             <p>Nombre de vue : {{ annonce.nombreVue }}</p>
         </div>
     
             
-    <div class='d-flex justify-content-around'>
+    <div class='d-flex justify-content-around '>
         <a class="btn btn-outline-info " href="javascript:history.back()">Retour</a>
         {% if username == annonce.user or is_granted('ROLE_ADMIN') %}
             <a class="btn btn-outline-warning" href="{{ path('annonce_edit', {'id': annonce.id}) }}">Modifier</a>

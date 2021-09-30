@@ -133,7 +133,7 @@ class RegistrationController extends AbstractController
     #[Route('/register/conseil/{id}', name:'app_conseil')]
     public function conseil( UserService $userService) : Response
     {
-        $userConseil = $userService->findAnnonceByUser( $this->getUser());
+        $userConseil = $userService->findConseilByUser( $this->getUser());
         return $this->render('conseil/index.html.twig', [
             'conseils' => $userConseil,
         ]);

@@ -11,18 +11,22 @@
 	{% endif %}
 
 	<div class="d-flex flex-wrap ">
+		{# <div class="row" data-masonry="{&quot;percentPosition&quot;: true }" style="position: relative; height: 714px;">
+			<div class="col-sm-6 col-lg-4 mb-4" style="position: absolute; left: 0%; top: 0px;">	 #}
 
 		{% for annonce in annonces %}
 
 			<div class="card m-2" style="width: 18rem;">
 				{% if annonce.photo %}
-					<img src="{{ annonce.photo }}" class="card-img-top" alt="{{ annonce.titre }}" class="img-fluid"/>
+					<a href="{{ path('annonce_show', {'id': annonce.id}) }}">
+						<img src="{{ annonce.photo }}" class="card-img-top" alt="{{ annonce.titre }}" class="img-fluid"/>
+					</a>
 				{% endif %}
 				<div class="card-body">
 					<h5 class="card-title">{{ annonce.titre }}</h5>
 					<div class="card-text">
 						<div class="d-flex justify-content-between">
-							<p>{{ annonce.user }}</p>
+							<p>{{ annonce.ville }}</p>
 							<p>{{ annonce.nombreVue }} vues</p>
 						</div>
 					</div>

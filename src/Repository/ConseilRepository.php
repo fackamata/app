@@ -23,7 +23,7 @@ class ConseilRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('a')
             ->andWhere('a.user = :val') // :val => contre les injections SQL
-            ->setParameter('val',   $value)
+            ->setParameter('val', $value)
             ->getQuery()
             ->getResult()
         ;
