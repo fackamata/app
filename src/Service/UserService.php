@@ -7,6 +7,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Annonce;
 use App\Entity\Avis;
 use App\Entity\Conseil;
+use App\Entity\Message;
 use App\Repository\AnnonceRepository;
 use Symfony\Component\Console\Command\Command;
 
@@ -104,6 +105,51 @@ class UserService extends Command
     {
         $this->user = $user;
         $res = $this->findAvisByUser($user);
+
+        return count($res);
+    }
+    public function findMessageByUser(User $user): array
+    {
+        $em = $this->entityManager;
+        $this->user = $user;
+        $repo = $em->getRepository(Message::class);
+        $result = $repo->findByUser($user);
+        
+        return $result;
+    }
+
+    public function findMessageBySender(User $user): array
+    {
+        $em = $this->entityManager;
+        $this->user = $user;
+        $repo = $em->getRepository(Message::class);
+        $result = $repo->findBySender($user);
+        
+        return $result;
+    }
+
+    public function countMessage(User $user): int
+    {
+        $this->user = $user;
+        $res = $this->findMessageByUser($user);
+
+        return count($res);
+    }
+
+    public function findByUserNotRead(User $user): array
+    {
+        $em = $this->entityManager;
+        $this->user = $user;
+        $repo = $em->getRepository(Message::class);
+        $result = $repo->findByUserNotRead($user);
+        
+        return $result;
+    }
+
+    public function countMsgNonLu(User $user): int
+    {
+        $this->user = $user;
+        $res = $this->findByUserNotRead($user);
 
         return count($res);
     }

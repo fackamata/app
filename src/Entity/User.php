@@ -72,10 +72,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Filable
      */
     private $conseil;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Message::class, mappedBy="destinataire")
+     */
+    private $messagesRecus;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Message::class, mappedBy="sender")
+     */
+    private $messagesEnvoyes;
+
     public function __construct()
     {
         $this->annonces = new ArrayCollection();
         $this->conseil = new ArrayCollection();
+        $this->messagesRecus = new ArrayCollection();
+        $this->messagesEnvoyes = new ArrayCollection();
     }
 
  
@@ -290,5 +302,65 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Filable
     public function getFileDirectory(): string
     {
         return self::FILE_DIR;
+    }
+
+    /**
+     * @return Collection|Message[]
+     */
+    public function getMessagesRecus(): Collection
+    {
+        return $this->messagesRecus;
+    }
+
+    public function addMessagesRecu(Message $messagesRecu): self
+    {
+        if (!$this->messagesRecus->contains($messagesRecu)) {
+            $this->messagesRecus[] = $messagesRecu;
+            $messagesRecu->setDestinataire($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessagesRecu(Message $messagesRecu): self
+    {
+        if ($this->messagesRecus->removeElement($messagesRecu)) {
+            // set the owning side to null (unless already changed)
+            if ($messagesRecu->getDestinataire() === $this) {
+                $messagesRecu->setDestinataire(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Message[]
+     */
+    public function getMessagesEnvoyes(): Collection
+    {
+        return $this->messagesEnvoyes;
+    }
+
+    public function addMessagesEnvoye(Message $messagesEnvoye): self
+    {
+        if (!$this->messagesEnvoyes->contains($messagesEnvoye)) {
+            $this->messagesEnvoyes[] = $messagesEnvoye;
+            $messagesEnvoye->setSender($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessagesEnvoye(Message $messagesEnvoye): self
+    {
+        if ($this->messagesEnvoyes->removeElement($messagesEnvoye)) {
+            // set the owning side to null (unless already changed)
+            if ($messagesEnvoye->getSender() === $this) {
+                $messagesEnvoye->setSender(null);
+            }
+        }
+
+        return $this;
     }
 }

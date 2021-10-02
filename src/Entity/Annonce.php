@@ -68,6 +68,11 @@ class Annonce implements FilableInterface
      */
     private $ville;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Message::class, mappedBy="annonce")
+     */
+    private $messages;
+
     public function __construct()
     {
         /* date de publication rentrer en automatique à la date du jour */
@@ -76,6 +81,7 @@ class Annonce implements FilableInterface
         $this->nombreVue = 0;
         /* on initialise l'active à true*/
         $this->active = true;
+        $this->messages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -94,6 +100,12 @@ class Annonce implements FilableInterface
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->getTitre();
+    }
+    
 
     public function getDescription(): ?string
     {
@@ -192,6 +204,36 @@ class Annonce implements FilableInterface
     public function setVille(string $ville): self
     {
         $this->ville = $ville;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Message[]
+     */
+    public function getMessages(): Collection
+    {
+        return $this->messages;
+    }
+
+    public function addMessage(Message $message): self
+    {
+        if (!$this->messages->contains($message)) {
+            $this->messages[] = $message;
+            $message->setAnnonce($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMessage(Message $message): self
+    {
+        if ($this->messages->removeElement($message)) {
+            // set the owning side to null (unless already changed)
+            if ($message->getAnnonce() === $this) {
+                $message->setAnnonce(null);
+            }
+        }
 
         return $this;
     }

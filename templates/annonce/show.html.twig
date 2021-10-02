@@ -32,6 +32,10 @@
                 <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ annonce.id) }}">
                 <button class="btn btn-outline-danger">Delete</button>
             </form>
+        {% else %}
+            <a class="btn btn-outline-success" 
+            href="{{ path('message_new', {'idAnnonce': annonce.id, 'idAnnonceUser': idAnnonceUser, 'idMessageSender': idUserConnected }) }}">Envoyer message</a>
+       
         {% endif %}
     </div>
     </main>

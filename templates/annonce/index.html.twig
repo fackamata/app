@@ -10,7 +10,7 @@
 		<a class="btn btn-outline-success" href="{{ path('annonce_new') }}">Créer une annonce</a>
 	{% endif %}
 
-	<div class="d-flex flex-wrap ">
+	<div class="d-flex flex-wrap justify-content-around">
 		{# <div class="row" data-masonry="{&quot;percentPosition&quot;: true }" style="position: relative; height: 714px;">
 			<div class="col-sm-6 col-lg-4 mb-4" style="position: absolute; left: 0%; top: 0px;">	 #}
 
@@ -36,7 +36,7 @@
 
 		{% else %}
 			<div>
-				<p>Aucunne annonce</p>
+				<p>Aucune annonce</p>
 			</div>
 		{% endfor %}
 

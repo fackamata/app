@@ -9,7 +9,7 @@
 	{% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN') %}
 		<a class="btn btn-outline-success" href="{{ path('conseil_new') }}">Créer un conseil</a>
 	{% endif %}
-    <div class="d-flex flex-wrap ">
+    <div class="d-flex flex-wrap justify-content-around">
 
 
     {% for conseil in conseils %}

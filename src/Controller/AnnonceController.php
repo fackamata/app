@@ -76,11 +76,50 @@ class AnnonceController extends AbstractController
         ]);
     }
 
+   /*  #[Route('annonce/{id}', name: 'annonce_show', methods: ['GET'])]
+    public function show(Annonce $annonce, CounterService $counterService): Response
+    {
+        
+        $user = $this->getUser();
+        // on récupère les roles de l'utilisateur 
+        if($user != null){
+
+            $role = $this->getUser()->getRoles();
+        }
+
+
+        if($user === null || $user->getUsername() != $annonce->getUser()->getUsername() && in_array("ROLE_ADMIN", $role) != true){
+            $nbView = $counterService->countView($annonce->getNombreVue());
+            $annonce->setNombreVue($nbView);
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($annonce);
+            $entityManager->flush();
+        }
+        
+
+        if ($user != null) {
+            $user = $this->getUser()->getId();
+            // on récupère l'username de la personne loguer
+            $this->username = $this->getUser()->getUsername();
+            
+            // on regarde qui est l'utilisateur pour savoir si on incrémente les vues
+            // if ($this->username != annonce.user)
+        }
+        // dd($user);
+        return $this->render('annonce/show.html.twig', [
+            'annonce' => $annonce,
+            'username' => $this->username
+        ]);
+    } */
+
     #[Route('annonce/{id}', name: 'annonce_show', methods: ['GET'])]
     public function show(Annonce $annonce, CounterService $counterService): Response
     {
         
         $user = $this->getUser();
+        $idAnnonce = $annonce->getId();
+        $idAnnonceUser = $annonce->getUser()->getId();
         // on récupère les roles de l'utilisateur 
         if($user != null){
 
@@ -105,14 +144,18 @@ class AnnonceController extends AbstractController
             $user = $this->getUser()->getId();
             // on récupère l'username de la personne loguer
             $this->username = $this->getUser()->getUsername();
+            $idUserConnected = $this->getUser()->getId();
+            
             
             // on regarde qui est l'utilisateur pour savoir si on incrémente les vues
             // if ($this->username != annonce.user)
         }
-        // dd($user);
         return $this->render('annonce/show.html.twig', [
             'annonce' => $annonce,
-            'username' => $this->username
+            'username' => $this->username,
+            'idUserConnected' => $idUserConnected,
+            'idAnnonceUser' => $idAnnonceUser,
+            'idAnnonce' => $idAnnonce
         ]);
     }
 

@@ -18,12 +18,20 @@
         <div>Prénom : {{user.prenom}}</div>
         <div>E-mail : {{user.mail}}</div>
     </div>
-
+    
    <div class="d-flex justify-content-around my-3">
-        <a href="{{ path('app_edit', {'id': user.id}) }}" class="btn btn-vert-connexion_Samm"> Modifier mes informations</a>
-        <a href="{{ path('app_annonce', {'id': user.id}) }}" class="btn btn-vert-connexion_Samm">{{nbAnnonce}} annonces</a>
-        <a href="{{ path('app_conseil', {'id': user.id}) }}" class="btn btn-vert-connexion_Samm">{{nbConseil}} conseils</a>  
-        <a href="{{ path('app_avis', {'id': user.id}) }}" class="btn btn-vert-connexion_Samm">{{nbAvis}} commentaires</a>  
+        <a href="{{ path('app_edit', {'id': user.id}) }}" class="btn btn-vert-creation_Samm"> Modifier mes informations</a>
+        <a href="{{ path('app_annonce', {'id': user.id}) }}" class="btn btn-vert-creation_Samm">{{nbAnnonce}} annonces</a>
+        <a href="{{ path('app_conseil', {'id': user.id}) }}" class="btn btn-vert-creation_Samm">{{nbConseil}} conseils</a>  
+        <a href="{{ path('app_avis', {'id': user.id}) }}" class="btn btn-vert-creation_Samm">{{nbAvis}} commentaires</a>  
+        <a href="{{ path('app_message', {'id': user.id}) }}" class="btn btn-vert-creation_Samm">
+            {% if msgNonLu > 0 %}
+                {{msgNonLu}} nouveaux messages 
+            {% else %}
+                message
+            {% endif %}
+            
+        </a>  
    </div>
    
 {% endblock %}

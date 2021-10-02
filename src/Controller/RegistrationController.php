@@ -55,7 +55,7 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
             // do anything else you need here, like send an email
 
-            return $this->redirectToRoute('annonce_index');
+            return $this->redirectToRoute('app_login');
         }
 
         return $this->render('registration/register.html.twig', [
@@ -65,7 +65,7 @@ class RegistrationController extends AbstractController
         
     }
 
-    #[Route('/register/{id}', name: 'app_compte')]
+    /* #[Route('/register/{id}', name: 'app_compte')]
     public function compte(User $user, UserService $userService): Response
     {
         $nbAnnonce = $userService->countAnnonce($user);
@@ -76,6 +76,28 @@ class RegistrationController extends AbstractController
             'nbAnnonce' => $nbAnnonce,
             'nbConseil' => $nbConseil,
             'nbAvis' => $nbAvis,
+        ]);
+    } */
+
+    #[Route('/register/{id}', name: 'app_compte')]
+    public function compte(User $user, UserService $userService): Response
+    {
+        $nbAnnonce = $userService->countAnnonce($user);
+        $nbConseil = $userService->countConseil($user);
+        $nbAvis = $userService->countAvis($user);
+        $nbMessage = $userService->countMessage($user);
+        $msgNonLu = $userService->countMsgNonLu($user);
+        $msgdeluserenvoyer = $user->getMessagesEnvoyes();
+        // dump($msgdeluserenvoyer);
+        $msgdeluserrecu = $user->getMessagesRecus();
+        // dd($msgdeluserrecu);
+        return $this->render('registration/compte.html.twig', [
+            'user' => $user,
+            'nbAnnonce' => $nbAnnonce,
+            'nbConseil' => $nbConseil,
+            'nbAvis' => $nbAvis,
+            'nbMessage' => $nbMessage,
+            'msgNonLu' => $msgNonLu,
         ]);
     }
 
@@ -147,12 +169,16 @@ class RegistrationController extends AbstractController
         ]);
     }
 
-    #[Route('/accept-cookie', name:'accept_cookie')]
-    public function acceptCookie(Request $request) : Response
-    {
-        $session = $request->getSession();
-        $session->set('acceptCookie', true);
-
-        return $this->json(['error' => false]);
+    #[Route('/register/message/{id}', name:'app_message')]
+    public function message( UserService $userService) : Response
+    {   
+        // tous les messages envoyé à l'utilisateur
+        $userMessagesRecu= $userService->findMessageByUser( $this->getUser());
+        // tous les messages que l'utilisateur à envoyé
+        $userMessagesEnvoye = $userService->findMessageBySender($this->getUser());
+        return $this->render('message/index.html.twig', [
+            'messages' => $userMessagesRecu,
+            'messagesEnvoye' => $userMessagesEnvoye,
+        ]);
     }
 }
