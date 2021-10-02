@@ -23,27 +23,6 @@ class MessageController extends AbstractController
         ]);
     }
 
-    /* #[Route('/new', name: 'message_new', methods: ['GET', 'POST'])]
-    public function new(Request $request): Response
-    {
-        $message = new Message();
-        $form = $this->createForm(MessageType::class, $message);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($message);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('message_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('message/new.html.twig', [
-            'message' => $message,
-            'form' => $form,
-        ]);
-    } */
-
     #[Route('/new/{idAnnonce}/{idAnnonceUser}/{idMessageSender}', name: 'message_new', methods: ['GET', 'POST'])]
     public function new(Request $request, AnnonceRepository $annonceRepository, UserRepository $userRepository, $idAnnonce,$idMessageSender, $idAnnonceUser): Response
     {
