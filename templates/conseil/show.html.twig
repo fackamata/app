@@ -30,9 +30,12 @@
                     <button class="btn btn-outline-danger">Delete</button>
                 </form>
             {% endif %}
+            {% if user != null %}
+            <a class="btn btn-outline-success" href="{{ path('avis_new', {'id': conseil.id}) }}">faire un commentaire</a>
+            {% endif %}
         </div>
 
-    <div class="form-SAMM d-flex flex-column align-content-center">
+    {# <div class="form-SAMM d-flex flex-column align-content-center">
         {% for avi in avis %}
             <div class="comment p-2">
                 <div class="mb-2">{{avi.text}}</div>
@@ -48,7 +51,7 @@
                 </div>
             </div>
         {% endfor %}
-    </div>
+    </div> #}
 
 </main>
 

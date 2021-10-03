@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Repository\AnnonceRepository;
 use App\Repository\AvisRepository;
 use App\Repository\ConseilRepository;
+use App\Repository\MessageRepository;
 use App\Repository\UserRepository;
 use App\Service\UserService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -53,6 +54,13 @@ class AdminController extends AbstractController
     {
         return $this->render('admin/avis/index.html.twig', [
             'avis' => $avisRepository->findAll(),
+        ]);
+    }
+    #[Route('/admin/message', name: 'admin_message')]
+    public function message(MessageRepository $messageRepository): Response
+    {
+        return $this->render('admin/message/index.html.twig', [
+            'messages' => $messageRepository->findAll(),
         ]);
     }
 }

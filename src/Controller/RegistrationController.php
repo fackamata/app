@@ -169,16 +169,32 @@ class RegistrationController extends AbstractController
         ]);
     }
 
-    #[Route('/register/message/{id}', name:'app_message')]
-    public function message( UserService $userService) : Response
+    #[Route('/register/message/{id}', name:'app_message_recu')]
+    public function messageRecu( UserService $userService) : Response
     {   
+        $user = $this->getUser();
         // tous les messages envoyé à l'utilisateur
         $userMessagesRecu= $userService->findMessageByUser( $this->getUser());
+
+        $envoyer = false;
+        return $this->render('message/recu.html.twig', [
+            'messages' => $userMessagesRecu,
+            'user' => $user,
+            'envoyer' => $envoyer
+        ]);
+    }
+    
+    #[Route('/register/message/envoye/{id}', name:'app_message_envoye')]
+    public function messageEnvoye( UserService $userService) : Response
+    {   
+        $user = $this->getUser();
         // tous les messages que l'utilisateur à envoyé
         $userMessagesEnvoye = $userService->findMessageBySender($this->getUser());
-        return $this->render('message/index.html.twig', [
-            'messages' => $userMessagesRecu,
-            'messagesEnvoye' => $userMessagesEnvoye,
+        return $this->render('message/envoye.html.twig', [
+            'messages' => $userMessagesEnvoye,
+            'user' => $user,
+            'envoyer' => true
+
         ]);
     }
 }

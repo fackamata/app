@@ -18,14 +18,15 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 class AnnonceController extends AbstractController
 {
     private $username = "";
+    private $user = null;
 
     #[Route('/', name: 'annonce_index', methods: ['GET'])]
     public function index(AnnonceRepository $annonceRepository): Response
     {
-        $user = $this->getUser();
+        $this->user = $this->getUser();
 
-        if ($user != null) {
-            $user = $this->getUser()->getId();
+        if ($this->user  != null) {
+            $this->user  = $this->getUser()->getId();
             // on récupère l'username de la personne loguer
             $this->username = $this->getUser()->getUsername();
         }
@@ -41,7 +42,7 @@ class AnnonceController extends AbstractController
     {
         $annonce = new Annonce();
         /* on récupère l'entité user */
-        $user = $this->getUser();
+        $this->user  = $this->getUser();
 
         /* on récupère les différents type d'annonce possible */
         /* $type = $this->getType(); */
@@ -52,7 +53,7 @@ class AnnonceController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             /* on set l'user de l'annonce avec l'user récupèrer plus haut */
-            $annonce->setUser($user);
+            $annonce->setUser($this->user );
 
             //getData retourne l'entitée annonce
             /** @var Annonce $annonce */
@@ -76,52 +77,17 @@ class AnnonceController extends AbstractController
         ]);
     }
 
-   /*  #[Route('annonce/{id}', name: 'annonce_show', methods: ['GET'])]
-    public function show(Annonce $annonce, CounterService $counterService): Response
-    {
-        
-        $user = $this->getUser();
-        // on récupère les roles de l'utilisateur 
-        if($user != null){
-
-            $role = $this->getUser()->getRoles();
-        }
-
-
-        if($user === null || $user->getUsername() != $annonce->getUser()->getUsername() && in_array("ROLE_ADMIN", $role) != true){
-            $nbView = $counterService->countView($annonce->getNombreVue());
-            $annonce->setNombreVue($nbView);
-
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($annonce);
-            $entityManager->flush();
-        }
-        
-
-        if ($user != null) {
-            $user = $this->getUser()->getId();
-            // on récupère l'username de la personne loguer
-            $this->username = $this->getUser()->getUsername();
-            
-            // on regarde qui est l'utilisateur pour savoir si on incrémente les vues
-            // if ($this->username != annonce.user)
-        }
-        // dd($user);
-        return $this->render('annonce/show.html.twig', [
-            'annonce' => $annonce,
-            'username' => $this->username
-        ]);
-    } */
 
     #[Route('annonce/{id}', name: 'annonce_show', methods: ['GET'])]
     public function show(Annonce $annonce, CounterService $counterService): Response
     {
-        
-        $user = $this->getUser();
+        $idUserConnected = 0;
+        $this->user  = $this->getUser();
+
         $idAnnonce = $annonce->getId();
         $idAnnonceUser = $annonce->getUser()->getId();
         // on récupère les roles de l'utilisateur 
-        if($user != null){
+        if($this->user  != null){
 
             $role = $this->getUser()->getRoles();
         }
@@ -130,7 +96,7 @@ class AnnonceController extends AbstractController
         ou si l'utilisateur connecté n'est pas celui qui à posté l'Annonce  
         et si l'utilisateur n'est pas admin */
 
-        if($user === null || $user->getUsername() != $annonce->getUser()->getUsername() && in_array("ROLE_ADMIN", $role) != true){
+        if($this->user  === null || $this->user ->getUsername() != $annonce->getUser()->getUsername() && in_array("ROLE_ADMIN", $role) != true){
             $nbView = $counterService->countView($annonce->getNombreVue());
             $annonce->setNombreVue($nbView);
 
@@ -140,8 +106,8 @@ class AnnonceController extends AbstractController
         }
         
 
-        if ($user != null) {
-            $user = $this->getUser()->getId();
+        if ($this->user  != null) {
+            $this->user = $this->getUser()->getId();
             // on récupère l'username de la personne loguer
             $this->username = $this->getUser()->getUsername();
             $idUserConnected = $this->getUser()->getId();
@@ -155,7 +121,8 @@ class AnnonceController extends AbstractController
             'username' => $this->username,
             'idUserConnected' => $idUserConnected,
             'idAnnonceUser' => $idAnnonceUser,
-            'idAnnonce' => $idAnnonce
+            'idAnnonce' => $idAnnonce,
+            'user' => $this->user
         ]);
     }
 
@@ -188,7 +155,7 @@ class AnnonceController extends AbstractController
         ]);
     }
 
-    #[Route('annonce/{id}', name: 'annonce_delete', methods: ['POST'])]
+    #[Route('annonce/{id}/delete', name: 'annonce_delete', methods: ['POST'])]
     public function delete(Request $request, Annonce $annonce, FileService $fileService): Response
     {
         if ($this->isCsrfTokenValid('delete' . $annonce->getId(), $request->request->get('_token'))) {

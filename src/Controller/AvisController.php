@@ -6,13 +6,12 @@ use App\Entity\Avis;
 use App\Entity\Conseil;
 use App\Form\AvisType;
 use App\Repository\AvisRepository;
-use PhpParser\Node\Stmt\Const_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/avis')]
+/* #[Route('/avis')] */
 class AvisController extends AbstractController
 {
     #[Route('/avis', name: 'avis_index', methods: ['GET'])]
@@ -30,7 +29,6 @@ class AvisController extends AbstractController
         $avi = new Avis();
         /* on récupère l'entité user */
         $user = $this->getUser();
-
         $form = $this->createForm(AvisType::class, $avi);
         $form->handleRequest($request);
 
@@ -78,7 +76,7 @@ class AvisController extends AbstractController
         ]);
     }
 
-    #[Route('/avis/{id}', name: 'avis_delete', methods: ['POST', 'GET'])]
+    #[Route('/avis/{id}/delete', name: 'avis_delete', methods: ['POST', 'GET'])]
     public function delete(Request $request, Avis $avi): Response
     {
         if ($this->isCsrfTokenValid('delete'.$avi->getId(), $request->request->get('_token'))) {

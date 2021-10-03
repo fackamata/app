@@ -24,7 +24,7 @@
         <a href="{{ path('app_annonce', {'id': user.id}) }}" class="btn btn-vert-creation_Samm">{{nbAnnonce}} annonces</a>
         <a href="{{ path('app_conseil', {'id': user.id}) }}" class="btn btn-vert-creation_Samm">{{nbConseil}} conseils</a>  
         <a href="{{ path('app_avis', {'id': user.id}) }}" class="btn btn-vert-creation_Samm">{{nbAvis}} commentaires</a>  
-        <a href="{{ path('app_message', {'id': user.id}) }}" class="btn btn-vert-creation_Samm">
+        <a href="{{ path('app_message_recu', {'id': user.id}) }}" class="btn btn-vert-creation_Samm">
             {% if msgNonLu > 0 %}
                 {{msgNonLu}} nouveaux messages 
             {% else %}

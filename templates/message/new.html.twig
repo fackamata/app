@@ -1,11 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Message{% endblock %}
+{% block title %}Nouveau Message{% endblock %}
 
 {% block body %}
-    <h1>Create new Message</h1>
+    <h1>Envoyer un message</h1>
 
-    {{ include('message/_form.html.twig') }}
+    <div class="form-SAMM">
+        <a class="btn btn-outline-info me-2" href="javascript:history.back()">Retour</a>
 
-    <a href="{{ path('message_index') }}">back to list</a>
+        {{form(form)}}
+
+    </div>
+
 {% endblock %}

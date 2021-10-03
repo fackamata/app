@@ -4,7 +4,7 @@
 
 {% block body %}
     <h1>Les conseils</h1>
-
+    
     <a class="btn btn-outline-info " href="javascript:history.back()">Retour</a>
 	{% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN') %}
 		<a class="btn btn-outline-success" href="{{ path('conseil_new') }}">Créer un conseil</a>

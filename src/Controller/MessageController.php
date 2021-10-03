@@ -102,6 +102,7 @@ class MessageController extends AbstractController
     #[Route('/{id}', name: 'message_show', methods: ['GET'])]
     public function show(Message $message): Response
     {
+        $repondre = false;
         $user = $this->getUser();
         $destinataire = $message->getDestinataire();
         //  dd($message->getSender());
@@ -111,6 +112,7 @@ class MessageController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($message);
             $entityManager->flush();
+            $repondre = true;
         }
       
         return $this->render('message/show.html.twig', [
@@ -118,6 +120,7 @@ class MessageController extends AbstractController
             'sender' =>$message->getSender(),
             'destinataire' => $message->getDestinataire(),
             'annonce' => $message->getAnnonce(),
+            'repondre' => $repondre
         ]);
     }
 
@@ -139,15 +142,16 @@ class MessageController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'message_delete', methods: ['POST'])]
+    #[Route('/{id}/delete', name: 'message_delete', methods: ['POST'])]
     public function delete(Request $request, Message $message): Response
     {
+        $user = $this->getUser()->getId();
         if ($this->isCsrfTokenValid('delete'.$message->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($message);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('message_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_message_envoye', ['id' => $user], Response::HTTP_SEE_OTHER);
     }
 }

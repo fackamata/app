@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 class ConseilController extends AbstractController
 {
     private $username = "";
+    private $user = null;
 
     #[Route('/', name: 'index', methods: ['GET'])]
     public function index(ConseilRepository $conseilRepository): Response
@@ -33,13 +34,13 @@ class ConseilController extends AbstractController
     {
         $conseil = new Conseil();
         /* on récupère l'entité user */
-        $user = $this->getUser();
+        $this->user = $this->getUser();
         $form = $this->createForm(ConseilType::class, $conseil);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             /* on set l'user de l'annonce avec l'user récupèrer plus haut */
-            $conseil->setUser($user);
+            $conseil->setUser($this->user );
 
             //getData retourne l'entitée Conseil
             /** @var Conseil $conseil */
@@ -66,14 +67,14 @@ class ConseilController extends AbstractController
     #[Route('/show/{id}', name: 'show', methods: ['GET'])]
     public function show(Conseil $conseil ,CounterService $counterService): Response
     {
-        $user = $this->getUser();
+        $this->user  = $this->getUser();
         $avi = $conseil->getAvis();
-        if($user != null){
+        if($this->user  != null){
 
             $role = $this->getUser()->getRoles();
         }
 
-        if($user === null || $user->getUsername() != $conseil->getUser()->getUsername() 
+        if($this->user  === null || $this->user ->getUsername() != $conseil->getUser()->getUsername() 
         && in_array("ROLE_ADMIN", $role) != true){
             
             $nbView = $counterService->countView($conseil->getNombreVue());
@@ -84,8 +85,8 @@ class ConseilController extends AbstractController
             $entityManager->flush();
         }
 
-        if ($user != null) {
-            $user = $this->getUser()->getId();
+        if ($this->user  != null) {
+            $this->user  = $this->getUser()->getId();
             // on récupère l'username de la personne loguer
             $this->username = $this->getUser()->getUsername();
         }
@@ -93,7 +94,8 @@ class ConseilController extends AbstractController
         return $this->render('conseil/show.html.twig', [
             'conseil' => $conseil,
             'avis' => $avi,
-            'username' => $this->username
+            'username' => $this->username,
+            'user' => $this->user 
         ]);
     }
 
