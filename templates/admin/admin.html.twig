@@ -123,7 +123,11 @@
 
         <script>
             $(document).ready( function () {
-                $('#myTable').DataTable();
+                $('#myTable').DataTable({
+                language: {
+                    url: 'https://cdn.datatables.net/plug-ins/1.11.3/i18n/fr_fr.json'
+                }
+            });
             } );
         </script>
         <script src="https://cdn.datatables.net/1.11.2/js/jquery.dataTables.min.js"></script>
