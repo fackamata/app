@@ -6,23 +6,23 @@
     <h1>Liste des commentaires</h1>
     
 <div class="form-SAMM">
-    <a class="btn btn-outline-info " href="javascript:history.back()">Retour</a>
+    <a class="btn btn-outline-info mb-2" href="javascript:history.back()">Retour</a>
         <table class="table table-responsive">
             <thead>
                 <tr>
-                    <th>Text</th>
-                    <th class="d-none d-md-table-cell">DatePublication</th>
-                    <th>actions</th>
+                    <th>Commentaire</th>
+                    <th class="d-none d-md-table-cell">Publié le :</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
             {% for avi in avis %}
                 <tr>
-                    <td>{{ avi.text }}</td>
+                    <td>{{ avi.text | slice(0,30)}}...</td>
                     <td class="d-none d-sm-table-cell">{{ avi.datePublication ? avi.datePublication|date('d/m/Y') : '' }}</td>
                     <td>
                         <a class="btn btn-outline-success" href="{{ path('avis_show', {'id': avi.id}) }}">Détail</a>
-                        <a class="btn btn-outline-warning" href="{{ path('avis_edit', {'id': avi.id}) }}">Modifier</a>
+                        {# <a class="btn btn-outline-warning" href="{{ path('avis_edit', {'id': avi.id}) }}">Modifier</a> #}
                     </td>
                 </tr>
             {% else %}

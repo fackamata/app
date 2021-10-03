@@ -56,6 +56,15 @@ class UserService extends Command
 
         return count($result);
     }
+    
+    public function countAllMessage(): int
+    {
+        $em = $this->entityManager;
+        $repo = $em->getRepository(Message::class);
+        $result = $repo->findAll();
+
+        return count($result);
+    }
 
     public function findAnnonceByUser(User $user): array
     {

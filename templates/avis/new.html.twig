@@ -1,17 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Nouveau commentaire{% endblock %}
+{% block title %}Commentaire{% endblock %}
 
 {% block body %}
-    <h1>Créer un nouveau commentaire</h1>
+    <h1>Faire un commentaire</h1>
 
+    {# {{ include('avis/_form.html.twig') }} #}
+    <section class="form-SAMM">
+        <a class="btn btn-outline-info " href="javascript:history.back()">Retour</a>
     
-
-    <a class="btn btn-outline-info " href="javascript:history.back()">Retour</a>
-
-    <div class="form-SAMM">
         {{form(form)}}
-    </div>
+    </section>
 
+    {# <a href="{{ path('avis_index') }}">back to list</a> #}
 {% endblock %}
-

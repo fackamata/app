@@ -21,11 +21,13 @@ class AdminController extends AbstractController
         $nbConseil = $userService->countAllConseil();
         $nbAvis = $userService->countAllAvis();
         $nbUser = $userService->countAllUser();
+        $nbMessage = $userService->countAllMessage();
         return $this->render('admin/admin.html.twig', [
             'annonce' => $nbAnnonce,
             'conseil' => $nbConseil,
             'avis' => $nbAvis,
             'user' => $nbUser,
+            'message' => $nbMessage,
         ]);
     }
     #[Route('/admin/user', name: 'admin_user')]

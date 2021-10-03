@@ -27,7 +27,7 @@
         
                 <form method="post" action="{{ path('conseil_delete', {'id': conseil.id}) }}" onsubmit="return confirm('Etes-vous sûre de vouloir supprimer cette conseil ?');">
                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ conseil.id) }}">
-                    <button class="btn btn-outline-danger">Delete</button>
+                    <button class="btn btn-outline-danger">Supprimer</button>
                 </form>
             {% endif %}
             {% if user != null %}
@@ -35,13 +35,15 @@
             {% endif %}
         </div>
 
-    {# <div class="form-SAMM d-flex flex-column align-content-center">
+    <div class="form-SAMM d-flex flex-column align-content-center">
         {% for avi in avis %}
             <div class="comment p-2">
-                <div class="mb-2">{{avi.text}}</div>
+                <div class="text-center">
+                    <p class="mb-2">{{avi.text}}</p>
+                </div>
                 <div class="d-flex justify-content-between">
                     <div>publié par : {{avi.user}}</div>
-                    <div>note : {{avi.note}}</div>
+                    {# <div>note : {{avi.note}}</div> #}
                     {% if username == avi.user or is_granted('ROLE_ADMIN') %}
                     <form method="post" action="{{ path('avis_delete', {'id': avi.id}) }}" onsubmit="return confirm('Etes-vous sûre de vouloir supprimer ce commentaire ?');">
                         <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ avi.id) }}">
@@ -51,7 +53,7 @@
                 </div>
             </div>
         {% endfor %}
-    </div> #}
+    </div>
 
 </main>
 

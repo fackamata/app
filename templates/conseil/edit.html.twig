@@ -10,7 +10,7 @@
             <a class="btn btn-outline-info me-2" href="javascript:history.back()">Retour</a>
             <form method="post" action="{{ path('conseil_delete', {'id': conseil.id}) }}" onsubmit="return confirm('Etes-vous sûre de vouloir supprimer cette conseil ?');">
                 <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ conseil.id) }}">
-                <button class="btn btn-outline-danger">Delete</button>
+                <button class="btn btn-outline-danger">Supprimer</button>
             </form>
         </div>  
         {{form(form)}}

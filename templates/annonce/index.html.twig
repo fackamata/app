@@ -16,7 +16,7 @@
 
 		{% for annonce in annonces %}
 
-			<div class="card m-2" style="width: 18rem;">
+			<div class="card m-2" style="width: 300px;">
 				{% if annonce.photo %}
 					<a href="{{ path('annonce_show', {'id': annonce.id}) }}">
 						<img src="{{ annonce.photo }}" class="card-img-top" alt="{{ annonce.titre }}" class="img-fluid"/>

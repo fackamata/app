@@ -4,38 +4,35 @@ namespace App\Controller;
 
 use App\Entity\Avis;
 use App\Entity\Conseil;
-use App\Form\Avi;
 use App\Form\AvisType;
 use App\Repository\AvisRepository;
-use PhpParser\Node\Stmt\Const_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/avis')]
+/* #[Route('/avis')] */
 class AvisController extends AbstractController
 {
-    #[Route('/', name: 'avis_index', methods: ['GET'])]
+    #[Route('/avis', name: 'avis_index', methods: ['GET'])]
     public function index(AvisRepository $avisRepository): Response
     {
+
         return $this->render('avis/index.html.twig', [
             'avis' => $avisRepository->findAll(),
         ]);
     }
 
-    #[Route('/new/{id}', name: 'avis_new', methods: ['GET', 'POST'])]  // on récupère l'id du conseil
-    public function new(Request $request, $id, Conseil $conseil, ): Response
+    #[Route('/avis/new/{id}', name: 'avis_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, $id, Conseil $conseil, Avis $avi): Response
     {
         $avi = new Avis();
         /* on récupère l'entité user */
         $user = $this->getUser();
-
         $form = $this->createForm(AvisType::class, $avi);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             /* on set l'user de l'annonce avec l'user récupèrer plus haut */
             $avi->setUser($user);
             $avi->setConseil($conseil);
@@ -53,7 +50,7 @@ class AvisController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'avis_show', methods: ['GET'])]
+    #[Route('/avis/show/{id}', name: 'avis_show', methods: ['GET'])]
     public function show(Avis $avi): Response
     {
         return $this->render('avis/show.html.twig', [
@@ -61,7 +58,7 @@ class AvisController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'avis_edit', methods: ['GET', 'POST'])]
+    #[Route('/avis/{id}/edit', name: 'avis_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Avis $avi): Response
     {
         $form = $this->createForm(AvisType::class, $avi);
@@ -79,7 +76,7 @@ class AvisController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'avis_delete', methods: ['POST'])]
+    #[Route('/avis/{id}/delete', name: 'avis_delete', methods: ['POST', 'GET'])]
     public function delete(Request $request, Avis $avi): Response
     {
         if ($this->isCsrfTokenValid('delete'.$avi->getId(), $request->request->get('_token'))) {

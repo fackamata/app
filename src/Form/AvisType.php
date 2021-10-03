@@ -15,7 +15,7 @@ class AvisType extends AbstractType
     {
         $builder
             ->add('text')
-            ->add('note')
+            // ->add('note')
             ->add('enregistrer', SubmitType::class, [
                 'attr' => ['class' => 'btn-vert-connexion_Samm ']
             ])
