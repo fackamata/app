@@ -5,7 +5,7 @@
 
 {% block body %}
 	<h1>Les annonces</h1>
-	<a class="btn btn-outline-info " href="javascript:history.back()">Retour</a>
+	<a class="btn btn-outline-info ms-5" href="javascript:history.back()">Retour</a>
 	{% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN') %}
 		<a class="btn btn-outline-success" href="{{ path('annonce_new') }}">Créer une annonce</a>
 	{% endif %}
