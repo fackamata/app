@@ -158,3 +158,56 @@ utilisation double, donc on créer un fonction public dans le dossier Service
 fonction findByUser : pour trouver les annonces, avis, conseil en fonction de l'utilisateur connecté
 
 fonction count : pour retourner le nombre d'annonces, avis, conseil de chaque utilisateur connecté
+
+# déploiement
+
+## heroku
+
+on se log sur heroku :
+```
+heroku login
+```
+
+on créer le répertoire partagetonterrain avec la région europe :
+```
+heroku create --region eu partagetonterrain
+```
+
+ce qui créer l'application
+
+https://partagetonterrain.herokuapp.com/
+
+on modifie la config d'heroku :
+```
+heroku config:set APP_ENV=prod
+```
+```
+heroku config:set APP_SECRET=$(php -r 'echo bin2hex(random_bytes(16));')
+```
+
+### création du Procfile :
+```
+touch Procfile
+echo "web: heroku-php-apache2 public/" > Procfile
+```
+
+### ajout pour MySql :
+
+```
+heroku addons:add cleardb:ignite
+```
+```
+heroku config:get CLEARDB_DATABASE_URL
+```
+
+Pour voir les config heroku :
+```
+heroku config
+```
+
+### ajout apache
+```
+composer require symfony/apache-pack
+```
+
+
