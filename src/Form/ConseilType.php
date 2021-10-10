@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class ConseilType extends AbstractType
 {
@@ -19,11 +20,20 @@ class ConseilType extends AbstractType
             ->add('description', TextareaType::class)
             // ->add('datePublication')
             // ->add('nombreVue')
-            ->add('file', FileType::class,[ 
+            ->add('file',FileType::class, [
                 'mapped' => false,
+                'label' => 'Image',
                 'required' => false,
-                'label' => 'Photo',
-            ])
+                'constraints' => [
+                    new File([
+                        'maxSize' => '1500k',
+                        'mimeTypes' => [
+                            'image/*',
+                        ],
+                        'mimeTypesMessage' => 'Votre fichier n\'est pas une image',
+                    ])
+                ],
+                ])
             ->add('enregistrer', SubmitType::class, [
                 'attr' => ['class' => 'btn-vert-connexion_Samm ']
             ])

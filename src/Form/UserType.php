@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
@@ -22,11 +23,20 @@ class UserType extends AbstractType
             ->add('nom')
             ->add('prenom')
             ->add('mail')
-            ->add('file', FileType::class,[ 
+            ->add('file',FileType::class, [
                 'mapped' => false,
+                'label' => 'Photo de profil :',
                 'required' => false,
-                'label' => 'Avatar',
-            ])
+                'constraints' => [
+                    new File([
+                        'maxSize' => '1500k',
+                        'mimeTypes' => [
+                            'image/*',
+                        ],
+                        'mimeTypesMessage' => 'Votre fichier n\'est pas une image',
+                    ])
+                ],
+                ])
             ->add('enregistrer', SubmitType::class, [
                 'attr' => ['class' => 'btn-vert-connexion_Samm ']
             ])

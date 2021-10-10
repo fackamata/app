@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -40,11 +41,20 @@ class RegistrationFormType extends AbstractType
                 'label' => 'Votre nom : ',
                 'attr' => ['placeholder' => 'ex : jean.dupond@gmail.com'],
             ])
-            ->add('file', FileType::class,[ 
+            ->add('file',FileType::class, [
                 'mapped' => false,
+                'label' => 'Photo de profil',
                 'required' => false,
-                'label' => 'Une photo de profil : ',
-            ])
+                'constraints' => [
+                    new File([
+                        'maxSize' => '1500k',
+                        'mimeTypes' => [
+                            'image/*',
+                        ],
+                        'mimeTypesMessage' => 'Votre fichier n\'est pas une image',
+                    ])
+                ],
+                ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
