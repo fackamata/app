@@ -188,8 +188,10 @@ heroku config:set APP_SECRET=$(php -r 'echo bin2hex(random_bytes(16));')
 ### création du Procfile :
 ```
 touch Procfile
+echo "release: php bin/console cache:clear" > Procfile
 echo "web: heroku-php-apache2 public/" > Procfile
 ```
+La première commande pour que le cache soit netoyer à chaque nouveau déploiement
 
 ### ajout pour MySql :
 
