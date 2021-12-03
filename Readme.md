@@ -215,3 +215,32 @@ composer require symfony/apache-pack
 créer le fichier .htaccess dans /public
 
 
+# page d'erreur
+
+installer twig-pack
+```
+composer require symfony/twig-pack
+```
+
+Dans Template créer les dossier bundles/TwigBundle/Exception
+
+
+Pour voir les erreurs, il faut passer en mode prod dans .env, et toujours supprimer le cache en prod
+dans var/cache/prod
+
+Sinon pour tester en mode dev dans l'url on tape :
+
+```
+127.0.0.1/8000/index.php/_error/404
+```
+
+### code et texte dans twig
+
+Pour récupérer les codes ou messages d'erreur dans twig :
+
+```
+{{ status_code }}
+{{ status_text }}
+```
+
+on peut mettre un dump vide pour voir toutes les infos disponible
