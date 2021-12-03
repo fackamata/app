@@ -212,4 +212,6 @@ heroku config
 composer require symfony/apache-pack
 ```
 
+créer le fichier .htaccess dans /public
+
 

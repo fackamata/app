@@ -47,7 +47,9 @@ class RegistrationController extends AbstractController
 
             /** @var UploadedFile $file */
             $file = $form->get('file')->getData();
-
+            if ($file != null) {
+                $filename = $fileService->upload($file, $user, 'photo');
+            }
             $fileService->upload($file, $user, 'photo');
 
             $entityManager = $this->getDoctrine()->getManager();
