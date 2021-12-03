@@ -10,11 +10,10 @@
             <thead>
                 <tr>
                     <th>Titre</th>
-                    <th>Description</th>
                     <th class="d-none d-md-table-cell">Publié le</th>
                     <th class="d-none d-sm-table-cell">Vues</th>
                     <th class="d-none d-md-table-cell">Ville</th>
-                    <th>Utilisateur</th>
+                    <th>Publié par</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -22,7 +21,6 @@
             {% for annonce in annonces %}
                 <tr>
                     <td>{{ annonce.titre }}</td>
-                    <td>{{ annonce.description | slice(0,30)}}...</td>
                     <td class="d-none d-md-table-cell">{{ annonce.datePublication ? annonce.datePublication|date('d/m/Y') : '' }}</td>
                     <td class="d-none d-sm-table-cell">{{ annonce.nombreVue }}</td>
                     <td>{{ annonce.ville }}</td>

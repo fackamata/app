@@ -1,0 +1,9 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Page d'erreur{% endblock %}
+
+{% block body %}
+<h1>Erreur {{ status_code }}</h1>
+
+<p>Message de l'erreur : {{ status_text }}</p>
+{% endblock %}

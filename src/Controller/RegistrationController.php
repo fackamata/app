@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-
+use Symfony\Component\Security\Core\Security;
 
 class RegistrationController extends AbstractController
 {
@@ -50,7 +50,7 @@ class RegistrationController extends AbstractController
             if ($file != null) {
                 $filename = $fileService->upload($file, $user, 'photo');
             }
-            $fileService->upload($file, $user, 'photo');
+            // $fileService->upload($file, $user, 'photo');
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
@@ -82,25 +82,26 @@ class RegistrationController extends AbstractController
     } */
 
     #[Route('/register/{id}', name: 'app_compte')]
-    public function compte(User $user, UserService $userService): Response
+    public function compte(User $user, $id, UserService $userService, Security $security, Request $request): Response
     {
-        $nbAnnonce = $userService->countAnnonce($user);
-        $nbConseil = $userService->countConseil($user);
-        $nbAvis = $userService->countAvis($user);
-        $nbMessage = $userService->countMessage($user);
-        $msgNonLu = $userService->countMsgNonLu($user);
-        $msgdeluserenvoyer = $user->getMessagesEnvoyes();
-        // dump($msgdeluserenvoyer);
-        $msgdeluserrecu = $user->getMessagesRecus();
-        // dd($msgdeluserrecu);
-        return $this->render('registration/compte.html.twig', [
-            'user' => $user,
-            'nbAnnonce' => $nbAnnonce,
-            'nbConseil' => $nbConseil,
-            'nbAvis' => $nbAvis,
-            'nbMessage' => $nbMessage,
-            'msgNonLu' => $msgNonLu,
-        ]);
+        if ($security->getUser() != null ){
+            if($id == $security->getUser()->getId()){
+            //     // return
+            //     return $this->render('403.html.twig');
+            // }else{
+                return $this->render('registration/compte.html.twig', [
+                    'user' => $user,
+                    'nbAnnonce' => $userService->countAnnonce($user),
+                    'nbConseil' => $userService->countConseil($user),
+                    'nbAvis' => $userService->countAvis($user),
+                    'nbMessage' => $userService->countMessage($user),
+                    'msgNonLu' => $userService->countMsgNonLu($user),
+                ]);
+            }
+            throw $this->createAccessDeniedException('Vous n\'avez pas l\'accès à cette page');
+        }
+        return $this->redirectToRoute('app_login', [], Response::HTTP_SEE_OTHER);
+       
     }
 
     #[Route('/register/{id}/edit', name: 'app_edit', methods: ['GET', 'POST'])]

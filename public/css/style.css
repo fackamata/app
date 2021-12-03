@@ -137,6 +137,12 @@ h2 {
   color: var(--notreMarronClair);
 }
 
+.message{
+  height: 50vh;
+}
+
+.tox-tinymce { height: 400px!important; }
+
 @media screen and (max-width: 900px) {
   .form-SAMM {
     width: 95vw;

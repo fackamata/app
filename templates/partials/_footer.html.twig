@@ -1,6 +1,6 @@
 <footer class="text-center text-lg-start bg-light text-muted">
 
-	<!-- Section: Social style/media -->
+	{# <!-- Section: Social style/media -->
 	<section class="d-flex justify-content-center justify-content-lg-around p-4 border-bottom"><!-- Left -->
 		<div class="me-5 d-none d-lg-block">
 			<span>Retrouvez nous sur nos résaux sociaux :</span>
@@ -15,7 +15,7 @@
 			<a href="http://www.pinterest.fr" class="me-4 text-reset">
 			<img class="LogoResaux_Samm" src="{{asset("img/logo-pinterest.png")}}" alt="logo pinterest"></a>
 		</div><!-- Right -->
-	</section><!-- Section: Social style/media -->
+	</section><!-- Section: Social style/media --> #}
 	
 	<!-- Section: Links  -->
 	<section class="">
@@ -25,36 +25,20 @@
 
 				<!-- Grid column -->
 				<div
-					class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+					class="col col-md-4 mx-auto mb-4">
 					<!-- Links -->
-					<h6 class="text-uppercase fw-bold mb-4">
+					{# <h6 class="text-uppercase fw-bold mb-4">
 						Plan du site
-					</h6>
-					<p>
-						<a href="{{path("annonce_index")}}" class="text-reset">Accueil</a>
-					</p>
+					</h6> #}
 					<p>
 						<a href="{{path("annonce_index")}}" class="text-reset">Annonces</a>
 					</p>
 					<p>
 						<a href="{{path("conseil_index")}}" class="text-reset">Conseils</a>
 					</p>
-					{# <p>					
-						<a href="{{path("apropos")}}" class="text-reset">À propos</a>												
-					</p>
-					<p>
-						<a href="{{path("contact")}}" class="text-reset">Contact</a>
-					</p> #}
 					
-				</div>
-				<!-- Grid column -->
-
-				<div
-					class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-					<!-- Links -->
-					<h6 >
-						
-					</h6>
+			
+	
 					
 					<p>
 						<a href="{{path("cgu")}}" class="text-reset">CGU</a>
@@ -70,7 +54,7 @@
 
 
 				<!-- Grid column -->
-				<div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+				<div class="col-12 col-md-4 mx-auto mb-md-0 mb-4">
 					<!-- Links -->
 					<h6 class="text-uppercase fw-bold mb-4">
 						Contact
@@ -90,7 +74,7 @@
 			</div><!-- Grid row -->
 		</div>
 	</section><!-- Section: Links  --><!-- Copyright -->
-	<div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">© 2021 Copyright:
+	{# <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">© 2021 Copyright:
 		<a class="text-reset fw-bold" href="">SAMM Developpement</a>
-	</div><!-- Copyright -->
+	</div><!-- Copyright --> #}
 </footer>

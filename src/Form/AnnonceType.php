@@ -16,7 +16,13 @@ class AnnonceType extends AbstractType
     {
         $builder
             ->add('titre')
-            ->add('description')
+            ->add('description', null, [
+                'required' => false,
+                'label' => 'Description',
+                'attr' => [
+                    'class' => 'tinymce',
+                ],
+            ])
             ->add('type')
             ->add('ville')
             ->add('file',FileType::class, [
