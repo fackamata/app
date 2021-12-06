@@ -17,9 +17,13 @@ class ConseilType extends AbstractType
     {
         $builder
             ->add('titre')
-            ->add('description', TextareaType::class)
-            // ->add('datePublication')
-            // ->add('nombreVue')
+            ->add('description', null, [
+                'required' => false,
+                'label' => 'Description',
+                'attr' => [
+                    'class' => 'tinymce',
+                ],
+            ])
             ->add('file',FileType::class, [
                 'mapped' => false,
                 'label' => 'Image',

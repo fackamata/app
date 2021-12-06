@@ -92,7 +92,7 @@ public function __toString()
     }
 ```
 
-## récupération des types
+## récupération des types / __toString()
 
 pour pouvoir récupérer le nom des différent type, on ajoute a l'entité type :
 
@@ -138,6 +138,14 @@ form_themes: ['bootstrap_5_layout.html.twig']
 Ajout de cette ligne dans /config/packages/twig.yaml.
 
 Permet d'avoir des formulaire bootstrap dans l'ensemble de l'application
+
+## affichage des descriptions
+
+dans Twig, on peut couper un texte par un filtre, dans l'exemple, description n'aura que 30 charactères suivi de ...
+
+```
+{{ conseil.description| slice(0,30)}}...
+```
 
 ## Autre 
 

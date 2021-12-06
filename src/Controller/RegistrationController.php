@@ -2,26 +2,17 @@
 
 namespace App\Controller;
 
-use App\Entity\Annonce;
-use App\Entity\Avis;
-use App\Entity\Conseil;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
-use App\Form\UserType;
-use App\Repository\AnnonceRepository;
-use App\Repository\AvisRepository;
-use App\Repository\ConseilRepository;
-use App\Repository\UserRepository;
 use App\Service\FileService;
 use App\Service\UserService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-
+use Symfony\Component\Security\Core\User\UserInterface ;
 
 class RegistrationController extends AbstractController
 {
@@ -82,24 +73,28 @@ class RegistrationController extends AbstractController
     } */
 
     #[Route('/register/{id}', name: 'app_compte')]
-    public function compte(User $user, UserService $userService): Response
+    public function compte(User $user, $id, UserInterface $userConnected, UserService $userService): Response
     {
-        $nbAnnonce = $userService->countAnnonce($user);
-        $nbConseil = $userService->countConseil($user);
-        $nbAvis = $userService->countAvis($user);
-        $nbMessage = $userService->countMessage($user);
-        $msgNonLu = $userService->countMsgNonLu($user);
-        $msgdeluserenvoyer = $user->getMessagesEnvoyes();
-        // dump($msgdeluserenvoyer);
-        $msgdeluserrecu = $user->getMessagesRecus();
-        // dd($msgdeluserrecu);
+        if($userConnected->getId() != $id){
+            return $this->redirectToRoute('annonce_index');
+        }
+        // dd($userConnected->getId() == $id);
+        // $nbAnnonce = $userService->countAnnonce($user);
+        // $nbConseil = $userService->countConseil($user);
+        // $nbAvis = $userService->countAvis($user);
+        // $nbMessage = $userService->countMessage($user);
+        // $msgNonLu = $userService->countMsgNonLu($user);
+        // $msgdeluserenvoyer = $user->getMessagesEnvoyes();
+        // // dump($msgdeluserenvoyer);
+        // $msgdeluserrecu = $user->getMessagesRecus();
+        // // dd($msgdeluserrecu);
         return $this->render('registration/compte.html.twig', [
             'user' => $user,
-            'nbAnnonce' => $nbAnnonce,
-            'nbConseil' => $nbConseil,
-            'nbAvis' => $nbAvis,
-            'nbMessage' => $nbMessage,
-            'msgNonLu' => $msgNonLu,
+            'nbAnnonce' => $userService->countAnnonce($user),
+            'nbConseil' => $userService->countConseil($user),
+            'nbAvis' => $userService->countAvis($user),
+            'nbMessage' => $userService->countMessage($user),
+            'msgNonLu' => $userService->countMsgNonLu($user),
         ]);
     }
 

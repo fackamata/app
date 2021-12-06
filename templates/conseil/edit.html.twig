@@ -25,3 +25,18 @@
             {{ include('conseil/_delete_form.html.twig') }}
         </div> #}
 {% endblock %}
+
+{% block javascripts %}
+	<script src="https://cdn.tiny.cloud/1/mmtelnjo7hq8l63uso5nqk221f0r1rumvtukus48ibaqs46v/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <script>
+        $(document).ready( function () {
+                tinymce.init({
+            selector: 'textarea.tinymce',
+            plugins: 'advlist autolink lists link',
+            toolbar_mode: 'default',
+            });
+
+        } );  
+    </script>
+{% endblock %}
