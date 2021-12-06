@@ -8,7 +8,7 @@
     <main class="d-flex flex-column justify-content-center">
         {% if annonce.photo %}
             <div class="photo-container d-flex justify-content-center">
-                <img src="{{ annonce.photo }}" alt="{{ annonce.titre }}" class="rounded" />
+                <img src="{{ annonce.photo | imagine_filter('full') }}" alt="{{ annonce.titre }}" onclick="location.href=this.src;" class="rounded image_to_display" />
             </div>     
                 
         {% endif %}
@@ -40,6 +40,5 @@
        
     </div>
     </main>
-
     
 {% endblock %}

@@ -25,3 +25,7 @@ idea.txt
 /templates/avis_copy
 /src/Entity/Note.php
 /src/Controller/AvisController_copy.php
+
+###> liip/imagine-bundle ###
+/public/media/cache/
+###< liip/imagine-bundle ###

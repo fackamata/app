@@ -16,10 +16,11 @@
 
 		{% for annonce in annonces %}
 
-			<div class="card m-2" style="width: 300px;">
+			<div class="card m-2" >
+			{# <div class="card m-2" style="width: 300px;"> #}
 				{% if annonce.photo %}
 					<a href="{{ path('annonce_show', {'id': annonce.id}) }}">
-						<img src="{{ annonce.photo }}" class=" card-img-top" alt="{{ annonce.titre }}" class="img-fluid"/>
+						<img src="{{ annonce.photo | imagine_filter('miniature') }}" class="img-fluid card-img-top" alt="{{ annonce.titre }}"/>
 					</a>
 				{% endif %}
 				<div class="card-body">

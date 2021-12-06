@@ -8,7 +8,7 @@
     <main class="d-flex flex-column justify-content-center">
         {% if conseil.photo %}
         <div class="photo-container d-flex justify-content-center">
-            <img src="{{ conseil.photo }}" alt="{{ conseil.titre }}" class="rounded" />
+            <img src="{{ conseil.photo | imagine_filter('miniature')  }}" alt="{{ conseil.titre }}" class="rounded" />
         </div>
         {% endif %}
         {#  on filtre conseil.description avec un raw pour nettoyer les balises HTML #}

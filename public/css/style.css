@@ -137,11 +137,31 @@ h2 {
   color: var(--notreMarronClair);
 }
 
-.active{
-  color:var(--notrebrown);
+.card{
+  width: 300px;
+}
+.card > a > img{
+  width: 300px;
+  height: 200px;
+  object-fit: cover;
 }
 
 .tox-tinymce { height: 400px!important; }
+
+/*    pop-up modal to display full size image   */
+#show_image_popup{
+  position: absolute; /*  so that not take place   */
+  top: 50%;
+  left: 50%;
+  z-index: 1000; /*  adobe all elements   */
+  transform: translate(-50%, -50%); /*  make center   */
+
+  display: none; /*  to hide first time   */
+}
+#show_image_popup img{
+  max-width: 90%;
+  height: auto;
+}
 
 @media screen and (max-width: 900px) {
   .form-SAMM {

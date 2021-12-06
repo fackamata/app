@@ -18,7 +18,7 @@
             <div class="card m-2" style="width: 300px;">
                 {% if conseil.photo %}
                     <a href="{{ path('conseil_show', {'id': conseil.id}) }}">
-                        <img src="{{ conseil.photo }}" class="card-img-top" alt="{{ conseil.titre }}" class="img-fluid" />
+                        <img src="{{ conseil.photo | imagine_filter('miniature') }}" class="card-img-top img-fluid" alt="{{ conseil.titre }}" />
                     </a>
                 {% endif %}
                 <div class="card-body">
