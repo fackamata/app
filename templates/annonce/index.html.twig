@@ -10,26 +10,26 @@
 		<a class="btn btn-outline-success" href="{{ path('annonce_new') }}">Créer une annonce</a>
 	{% endif %}
 
-	{# <div class="d-flex flex-wrap justify-content-around"> #}
-	<div class="container">
-		<div class="row">
+	<div class="d-flex flex-wrap justify-content-around">
+		{# <div class="row" data-masonry="{&quot;percentPosition&quot;: true }" style="position: relative; height: 714px;">
+			<div class="col-sm-6 col-lg-4 mb-4" style="position: absolute; left: 0%; top: 0px;">	 #}
 
-			{% for annonce in annonces %}
+		{% for annonce in annonces %}
 
-				<div class="card col col-sm-6 col-md-4 col-lg-3 m-2" style="width: 300px;">
-					{% if annonce.photo %}
-						<a href="{{ path('annonce_show', {'id': annonce.id}) }}">
-							<img src="{{ annonce.photo }}" class="card-img-top" alt="{{ annonce.titre }}" class="img-fluid"/>
-						</a>
-					{% endif %}
-					<div class="card-body">
-						<h5 class="card-title">{{ annonce.titre }}</h5>
-						<div class="card-text">
-							<div class="d-flex justify-content-between">
-								<p>{{ annonce.ville }}</p>
-								<p>{{ annonce.nombreVue }}
-									vues</p>
-							</div>
+			<div class="card m-2" >
+			{# <div class="card m-2" style="width: 300px;"> #}
+				{% if annonce.photo %}
+					<a href="{{ path('annonce_show', {'id': annonce.id}) }}">
+						<img src="{{ annonce.photo | imagine_filter('miniature') }}" class="img-fluid card-img-top" alt="{{ annonce.titre }}"/>
+					</a>
+				{% endif %}
+				<div class="card-body">
+					<h5 class="card-title">{{ annonce.titre }}</h5>
+					<div class="card-text">
+						<div class="d-flex justify-content-between">
+							<p>{{ annonce.ville }}</p>
+							<p>{{ annonce.nombreVue }} vues</p>
+
 						</div>
 						<a class="btn btn-vert-creation_Samm " href="{{ path('annonce_show', {'id': annonce.id}) }}">Détail</a>
 					</div>
