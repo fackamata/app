@@ -44,9 +44,15 @@
 
     <!-- The Modal -->
     <div id="myModal">
-        <span class="close">&times;</span>
-        <img class="modal-content" id="img01">
-        <div id="caption"></div>
+        <div>
+            <span class="close">&times;</span>
+            <img class="modal-content" id="img01">
+            <div id="caption"></div>
+        </div>
     </div>
     
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{asset("js/modal.js")}}"></script>
 {% endblock %}

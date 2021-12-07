@@ -165,7 +165,7 @@ h2 {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
+  padding-top: 100px;
   left: 0;
   top: 0;
   width: 100%; /* Full width */
@@ -177,10 +177,12 @@ h2 {
 
 /* Modal Content (image) */
 .modal-content {
-  margin: auto;
+  margin:  auto;
   display: block;
-  /* width: 90vw; */
+  width: auto;
+  height: auto;
   max-width: 90vw;
+  max-height: 90vh;
 }
 
 /* Caption of Modal Image */
@@ -188,11 +190,10 @@ h2 {
   margin: auto;
   display: block;
   width: 90vw;
-  max-width: 700px;
   text-align: center;
   color: #ccc;
   padding: 10px 0;
-  height: 150px;
+  height: 40px;
 }
 
 /* Add Animation */
@@ -230,10 +231,9 @@ h2 {
   text-decoration: none;
   cursor: pointer;
 }
-<<<<<<< HEAD
-=======
 
->>>>>>> 84a0dbda6db708d7450a85283f348e7a03d1bfeb
+
+
 @media screen and (max-width: 900px) {
   .form-SAMM {
     width: 95vw;
@@ -243,5 +243,9 @@ h2 {
   #logoHeader_Samm {
     width: 50px;
     height: 35px;
+  }
+
+  #avatar{
+    max-width: 90vw;
   }
 }
