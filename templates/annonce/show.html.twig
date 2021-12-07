@@ -8,7 +8,7 @@
     <main class="d-flex flex-column justify-content-center">
         {% if annonce.photo %}
             <div class="photo-container d-flex justify-content-center">
-                <img src="{{ annonce.photo }}" alt="{{ annonce.titre }}" class="rounded" />
+                <img src="{{ annonce.photo | imagine_filter('miniature') }}" alt="{{ annonce.titre }}" id="imgAnnonce" data-url="{{annonce.photo}}" class="rounded image_to_display" />
             </div>     
                 
         {% endif %}
@@ -42,5 +42,11 @@
     </div>
     </main>
 
+    <!-- The Modal -->
+    <div id="myModal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="img01">
+        <div id="caption"></div>
+    </div>
     
 {% endblock %}

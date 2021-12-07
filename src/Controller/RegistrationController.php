@@ -2,26 +2,17 @@
 
 namespace App\Controller;
 
-use App\Entity\Annonce;
-use App\Entity\Avis;
-use App\Entity\Conseil;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
-use App\Form\UserType;
-use App\Repository\AnnonceRepository;
-use App\Repository\AvisRepository;
-use App\Repository\ConseilRepository;
-use App\Repository\UserRepository;
 use App\Service\FileService;
 use App\Service\UserService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Security\Core\User\UserInterface ;
 
 class RegistrationController extends AbstractController
 {
@@ -82,26 +73,29 @@ class RegistrationController extends AbstractController
     } */
 
     #[Route('/register/{id}', name: 'app_compte')]
-    public function compte(User $user, $id, UserService $userService, Security $security, Request $request): Response
+    public function compte(User $user, $id, UserInterface $userConnected, UserService $userService): Response
     {
-        if ($security->getUser() != null ){
-            if($id == $security->getUser()->getId()){
-            //     // return
-            //     return $this->render('403.html.twig');
-            // }else{
-                return $this->render('registration/compte.html.twig', [
-                    'user' => $user,
-                    'nbAnnonce' => $userService->countAnnonce($user),
-                    'nbConseil' => $userService->countConseil($user),
-                    'nbAvis' => $userService->countAvis($user),
-                    'nbMessage' => $userService->countMessage($user),
-                    'msgNonLu' => $userService->countMsgNonLu($user),
-                ]);
-            }
-            throw $this->createAccessDeniedException('Vous n\'avez pas l\'accès à cette page');
+        if($userConnected->getId() != $id){
+            return $this->redirectToRoute('annonce_index');
         }
-        return $this->redirectToRoute('app_login', [], Response::HTTP_SEE_OTHER);
-       
+        // dd($userConnected->getId() == $id);
+        // $nbAnnonce = $userService->countAnnonce($user);
+        // $nbConseil = $userService->countConseil($user);
+        // $nbAvis = $userService->countAvis($user);
+        // $nbMessage = $userService->countMessage($user);
+        // $msgNonLu = $userService->countMsgNonLu($user);
+        // $msgdeluserenvoyer = $user->getMessagesEnvoyes();
+        // // dump($msgdeluserenvoyer);
+        // $msgdeluserrecu = $user->getMessagesRecus();
+        // // dd($msgdeluserrecu);
+        return $this->render('registration/compte.html.twig', [
+            'user' => $user,
+            'nbAnnonce' => $userService->countAnnonce($user),
+            'nbConseil' => $userService->countConseil($user),
+            'nbAvis' => $userService->countAvis($user),
+            'nbMessage' => $userService->countMessage($user),
+            'msgNonLu' => $userService->countMsgNonLu($user),
+        ]);
     }
 
     #[Route('/register/{id}/edit', name: 'app_edit', methods: ['GET', 'POST'])]

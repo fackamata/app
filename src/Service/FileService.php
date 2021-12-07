@@ -37,12 +37,18 @@ class FileService
     public function remove(FilableInterface $entity, string $propertyName): void
     {
         $getter = 'get'.ucfirst($propertyName);
+        // dd($entity->$getter());
 
         if ($entity->$getter()) {
             $oldFileName = $this->publicDir.$entity->$getter();
+            $oldMiniature = $this->publicDir. '/media/cache/miniature' . $entity->$getter();
 
             if (file_exists($oldFileName)) {
                 unlink($oldFileName);
+            }
+        
+            if (file_exists($oldMiniature)) {
+                unlink($oldMiniature);  // pour supprimer la miniature 
             }
         }
     }
