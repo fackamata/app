@@ -137,6 +137,7 @@ h2 {
   color: var(--notreMarronClair);
 }
 
+
 .card{
   width: 300px;
 }
@@ -144,9 +145,14 @@ h2 {
   width: 300px;
   height: 200px;
   object-fit: cover;
+
+.message{
+  height: 50vh;
+
 }
 
 .tox-tinymce { height: 400px!important; }
+
 
 .image_to_display {
   border-radius: 5px;
@@ -226,6 +232,7 @@ h2 {
   text-decoration: none;
   cursor: pointer;
 }
+
 @media screen and (max-width: 900px) {
   .form-SAMM {
     width: 95vw;

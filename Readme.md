@@ -291,3 +291,40 @@ Pour récupérer les codes ou messages d'erreur dans twig :
 ```
 
 on peut mettre un dump vide pour voir toutes les infos disponible
+=======
+## page d'erreur personaliser
+
+```
+composer require symfony/twig-pack
+```
+
+il faut passer en mode prod pour voir les pages d'erreur, dans le fichier .env :
+
+```
+APP_ENV=prod
+```
+
+quand on passe en mode prod, toujours vider le cache dans var/cache/prod en supprimant ce dossier
+
+dans le fichier templates on créer le dossier bundles,dans celui-ci un dossier TwigBundle et dans
+celui-ci un dossier Exception qui contiendra nos pages d'erreur
+
+pour tester en mode dev, dans l'url :
+```
+127.0.0.1/8000/index.php/_error/404
+```
+
+### code erreur dans Twig
+
+Pour récupérer le code erreur dans twig :
+```
+<h2>Erreur : {{ status_code }}</h2>
+```
+
+Pour récupérer le message d'erreur dans twig :
+```
+<h2>Erreur : {{ status_text }}</h2>
+```
+
+on peut mettre un dump vide pour voir toutes les données auquelles ont a accès.
+

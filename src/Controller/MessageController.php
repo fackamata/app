@@ -64,10 +64,7 @@ class MessageController extends AbstractController
         $userDest = $userRepository->findById($idMessageSender); 
         // on récupère l'utilisateur à qui le message est destiné
         $messageAnnonceId = $annonceRepository->findById($idAnnonce); 
-        // dump($userSender);
-        // dump($userDest[0]);
-        // dd($messageAnnonceId[0]);
-        // dd($userSender);
+
         $message = new Message();
         $form = $this->createForm(MessageType::class, $message);
         $form->handleRequest($request);

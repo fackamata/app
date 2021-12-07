@@ -10,10 +10,10 @@
             <thead>
                 <tr>
                     <th>Titre</th>
-                    <!-- <th class="d-none d-sm-table-cell">Description</th> -->
+
                     <th class="d-none d-md-table-cell">Publié le</th>
                     <th class="d-none d-sm-table-cell">Vues</th>
-                    <th class="d-none d-sm-table-cell">Utilisateur</th>
+                    <th class="d-none d-sm-table-cell">Publié par</th>
                     <th>actions</th>
                 </tr>
             </thead>
@@ -21,7 +21,6 @@
             {% for conseil in conseils %}
                 <tr>
                     <td>{{ conseil.titre }}</td>
-                    <td class="d-none d-sm-table-cell">{{ conseil.description| slice(0,30)}}...</td>
                     <td class="d-none d-md-table-cell">{{ conseil.datePublication ? conseil.datePublication|date('d/m/Y') : '' }}</td>
                     <td class="d-none d-sm-table-cell">{{ conseil.nombreVue }}</td>
                     <td class="d-none d-sm-table-cell">{{ conseil.user }}</td>

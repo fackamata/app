@@ -4,6 +4,7 @@ namespace App\Service;
 
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 use App\Entity\Annonce;
 use App\Entity\Avis;
 use App\Entity\Conseil;
@@ -16,13 +17,31 @@ class UserService extends Command
 
     private $user;
     private $entityManager;
+    private $requestStack;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager, RequestStack $requestStack)
     {
         $this->entityManager = $entityManager;
+        $this->requestStack = $requestStack;
 
         parent::__construct();
     }
+
+    // public function someMethod()
+    // {
+    //     // $session = $this->requestStack->getSession()->getBag();
+    //     // dd($session);
+    //     // stores an attribute in the session for later reuse
+    //     $session->set('attribute-name', 'attribute-value');
+
+    //     // gets an attribute by name
+    //     $foo = $session->get('foo');
+
+    //     // the second argument is the value returned when the attribute doesn't exist
+    //     $filters = $session->get('filters', []);
+
+    //     // ...
+    // }
 
     public function countAllAnnonce(): int
     {

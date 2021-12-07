@@ -45,7 +45,8 @@ class AnnonceController extends AbstractController
         $this->user  = $this->getUser();
 
         /* on récupère les différents type d'annonce possible */
-        /* $type = $this->getType(); */
+        // dd($this->getUser());
+        // $type = $this->getType();
 
         $form = $this->createForm(AnnonceType::class, $annonce);
         $form->handleRequest($request);
@@ -61,8 +62,9 @@ class AnnonceController extends AbstractController
 
             /** @var UploadedFile $file */
             $file = $form->get('file')->getData();
-
-            $fileService->upload($file, $annonce, 'photo');
+            if ($file != null) {
+                $fileService->upload($file, $annonce, 'photo');
+            }           
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($annonce);

@@ -29,20 +29,21 @@
 						<div class="d-flex justify-content-between">
 							<p>{{ annonce.ville }}</p>
 							<p>{{ annonce.nombreVue }} vues</p>
+
 						</div>
+						<a class="btn btn-vert-creation_Samm " href="{{ path('annonce_show', {'id': annonce.id}) }}">Détail</a>
 					</div>
-					<a class="btn btn-vert-creation_Samm " href="{{ path('annonce_show', {'id': annonce.id}) }}">Détail</a>
 				</div>
-			</div>
 
-		{% else %}
-			<div>
-				<p>Aucune annonce</p>
-			</div>
-		{% endfor %}
+			{% else %}
+				<div>
+					<p>Aucune annonce</p>
+				</div>
+			{% endfor %}
 
 
+		</div>
 	</div>
-	
+
 
 {% endblock %}

@@ -25,26 +25,26 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'user_new', methods: ['GET', 'POST'])]
-    public function new(Request $request): Response
-    {
-        $user = new User();
-        $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest($request);
+    // #[Route('/new', name: 'user_new', methods: ['GET', 'POST'])]
+    // public function new(Request $request): Response
+    // {
+    //     $user = new User();
+    //     $form = $this->createForm(UserType::class, $user);
+    //     $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
+    //     if ($form->isSubmitted() && $form->isValid()) {
+    //         $entityManager = $this->getDoctrine()->getManager();
+    //         $entityManager->persist($user);
+    //         $entityManager->flush();
 
-            return $this->redirectToRoute('admin_user_index', [], Response::HTTP_SEE_OTHER);
-        }
+    //         return $this->redirectToRoute('admin_user_index', [], Response::HTTP_SEE_OTHER);
+    //     }
 
-        return $this->renderForm('admin/user/new.html.twig', [
-            'user' => $user,
-            'form' => $form,
-        ]);
-    }
+    //     return $this->renderForm('admin/user/new.html.twig', [
+    //         'user' => $user,
+    //         'form' => $form,
+    //     ]);
+    // }
 
     #[Route('/{id}', name: 'user_show', methods: ['GET'])]
     public function show(User $user): Response
@@ -63,12 +63,12 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             // encode the plain password
-           /*  $user->setPassword(
+            $user->setPassword(
                 $passwordEncoder->encodePassword(
                     $user,
                     $form->get('plainPassword')->getData()
                 )
-            ); */
+            );
 
 
              //getData retourne l'entitée User
@@ -101,6 +101,6 @@ class UserController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('admin/user_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('admin_user_index', [], Response::HTTP_SEE_OTHER);
     }
 }

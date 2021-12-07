@@ -1,9 +1,10 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Erreur{% endblock %}
+{% block title %}Page non trouvée{% endblock %}
 
 {% block body %}
-<h1>Erreur 404</h1>
-<p>Page non trouvée</p>
+<h1>Page non trouvée</h1>
+<h2>Erreur : {{ status_code }}</h2>
+<p>La page rechercher n'a pas été trouvée</p>
 
 {% endblock %}

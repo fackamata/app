@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\User\UserInterface ;
 
+
 class RegistrationController extends AbstractController
 {
     #[Route('/register', name: 'app_register')]
@@ -41,7 +42,7 @@ class RegistrationController extends AbstractController
             if ($file != null) {
                 $filename = $fileService->upload($file, $user, 'photo');
             }
-            $fileService->upload($file, $user, 'photo');
+            // $fileService->upload($file, $user, 'photo');
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
@@ -96,6 +97,7 @@ class RegistrationController extends AbstractController
             'nbMessage' => $userService->countMessage($user),
             'msgNonLu' => $userService->countMsgNonLu($user),
         ]);
+
     }
 
     #[Route('/register/{id}/edit', name: 'app_edit', methods: ['GET', 'POST'])]

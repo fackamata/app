@@ -48,13 +48,13 @@ class Annonce implements FilableInterface
     private $nombreVue;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Type::class, inversedBy="annonce")
+     * @ORM\ManyToOne(targetEntity=Type::class, inversedBy="annonces")
      * @ORM\JoinColumn(nullable=false)
      */
     private $type;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="annonce")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="annonces")
      */
     private $user;
 
