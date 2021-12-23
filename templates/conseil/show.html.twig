@@ -29,7 +29,8 @@
             {% if username == conseil.user or is_granted('ROLE_ADMIN') %}
                 <a class="btn btn-outline-warning" href="{{ path('conseil_edit', {'id': conseil.id}) }}">Modifier</a>
         
-                <form method="post" action="{{ path('conseil_delete', {'id': conseil.id}) }}" onsubmit="return confirm('Etes-vous sûre de vouloir supprimer cette conseil ?');">
+                <form method="post" action="{{ path('conseil_delete', {'id': conseil.id}) }}" 
+                onsubmit="return confirm('Etes-vous sûre de vouloir supprimer cette conseil ?');">
                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ conseil.id) }}">
                     <button class="btn btn-outline-danger">Supprimer</button>
                 </form>

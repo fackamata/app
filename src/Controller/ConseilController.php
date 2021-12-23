@@ -18,9 +18,6 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 #[Route('/conseil', name: 'conseil_')]
 class ConseilController extends AbstractController
 {
-    private $username = "";
-    private $user = null;
-
     #[Route('/', name: 'index', methods: ['GET'])]
     public function index(ConseilRepository $conseilRepository): Response
     {
@@ -68,15 +65,16 @@ class ConseilController extends AbstractController
     #[Route('/show/{id}', name: 'show', methods: ['GET'])]
     public function show(Conseil $conseil ,CounterService $counterService): Response
     {
-        $this->user  = $this->getUser();
-        $avi = $conseil->getAvis();
-        if($this->user  != null){
-
-            $role = $this->getUser()->getRoles();
+        $user  = $this->getUser();
+        $username = "";
+        
+        if($user  != null){            
+            $role = $user->getRoles();
+            $username = $user->getUsername();
         }
-
-        if($this->user  === null || $this->user ->getUsername() != $conseil->getUser()->getUsername() 
-        && in_array("ROLE_ADMIN", $role) != true){
+        
+        if( null  == $user || $user ->getUsername() != $conseil->getUser()->getUsername() 
+            && in_array("ROLE_ADMIN", $role) != true){
             
             $nbView = $counterService->countView($conseil->getNombreVue());
             $conseil->setNombreVue($nbView);
@@ -86,17 +84,11 @@ class ConseilController extends AbstractController
             $entityManager->flush();
         }
 
-        if ($this->user  != null) {
-            $this->user  = $this->getUser()->getId();
-            // on récupère l'username de la personne loguer
-            $this->username = $this->getUser()->getUsername();
-        }
-
         return $this->render('conseil/show.html.twig', [
             'conseil' => $conseil,
-            'avis' => $avi,
-            'username' => $this->username,
-            'user' => $this->user 
+            'avis' => $conseil->getAvis(),
+            'username' => $username,
+            'user' => $user 
         ]);
     }
 
