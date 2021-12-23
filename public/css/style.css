@@ -1,13 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Ruda&display=swap");
 :root {
-  --notrevert: #0bbb1b; /* logo */
-  /* --notrevert: #6ab007; */
-  /* --notrebrown: #4d290f; logo */
-  --notreMarronClair: #4d290f; /* logo */
-  /* --notrebrown: #483b33; */
-  /* --notreMarronClair: #9e8447;  */
-  /* --notreMarronClair: #af5412; logo */
-  --notrebrown: #af5412; /* logo */
+  --notrevert: #0bbb1b;
+  --notreMarronClair: #4d290f;
+  --notrebrown: #af5412; 
   --notreLightBackground: #f7f4ee;
 }
 * {
@@ -278,35 +273,6 @@ nav .btn-toggle span{
 }
 
 
-
-/*
-
-#burger-container{
-  display: none;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  border-radius: 3px;
-  border: solid 1px black;
-  height: 35px;
-  padding: 5px;
-}
-
-.burger{
-  display: block;
-  width: 33px;
-  height: 4px;
-  margin-bottom: 5px;
-  position: relative;
-  background: black;
-  border-radius: 3px;
-  z-index: 1;
-}
-
-#navbar-collapse{
-  display: block;
-} */
-
 /*                                            error page                                       */
 .error{
   /* height: 60vh; */
@@ -338,16 +304,6 @@ footer{
 .card-title{
   color: var(--notrebrown);
 }
-/* @media screen and (max-width: 575px) {
-  #burger-container{
-    display: block;
-  }
-
-  #navbar-collapse{
-    display: none;
-  }
-
-} */
 
 @media screen and (max-width: 900px) {
   .form-SAMM {
@@ -358,30 +314,6 @@ footer{
   #logoHeader_Samm {
     width: 50px;
     height: 35px;
-  }
-
-
-  /*                                            navbar                                       */
-
-  nav .btn-toggle{
-    display: block;
-  }
-
-
-  nav ul{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-top: 30px;
-    display:none;
-  }
-
-  nav ul li{
-    margin-bottom: 10px;
-  }
-
-  .show-links{
-    display: block;
   }
 
 }
