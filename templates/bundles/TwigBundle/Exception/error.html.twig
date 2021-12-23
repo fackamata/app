@@ -3,9 +3,10 @@
 {% block title %}Erreur{% endblock %}
 
 {% block body %}
-<h1>Erreur {{{ status_code }}}</h1>
-<p>Message : {{ status_text }}</p>
-<pre>
-    {{ dump() }}
-</pre>
+
+<main class="error">
+    <h1 class="error_code">Erreur : {{{ status_code }}}</h1>
+    <p>Message :</p>
+    <p>{{ status_text }}</p>
+</main>
 {% endblock %}

@@ -22,6 +22,8 @@
 					<a href="{{ path('annonce_show', {'id': annonce.id}) }}">
 						<img src="{{ annonce.photo | imagine_filter('miniature') }}" class="img-fluid card-img-top" alt="{{ annonce.titre }}"/>
 					</a>
+				{% else %}
+            		<img src="{{asset("img/no-image-found.png")}}" class="img-fluid" alt="pas de photo">
 				{% endif %}
 				<div class="card-body">
 					<h5 class="card-title">{{ annonce.titre }}</h5>
@@ -36,7 +38,7 @@
 			</div>
 
 			{% else %}
-				<div>
+				<div class="m-5 p-5">
 					<p>Aucune annonce</p>
 				</div>
 		{% endfor %}

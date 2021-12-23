@@ -2,10 +2,14 @@
 
 {% block title %}Liste des commentaires{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.2/css/jquery.dataTables.min.css">
+{% endblock %}
+
 {% block body %}
     <h1>Liste des commentaires</h1>
     
-<div class="form-SAMM">
+<div class="p-2">
     <a class="btn btn-outline-info mb-2" href="javascript:history.back()">Retour</a>
         <table class="table table-responsive">
             <thead>
@@ -34,4 +38,20 @@
         </table>
 
 </div> 
+{% endblock %}
+
+
+{% block javascripts %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.11.2/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        $(document).ready( function () {
+            $('table').DataTable({
+            language: {
+                url: 'https://cdn.datatables.net/plug-ins/1.11.3/i18n/fr_fr.json'
+            }
+        });
+        } );
+    </script>
 {% endblock %}

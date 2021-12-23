@@ -64,7 +64,7 @@ class AnnonceController extends AbstractController
             $file = $form->get('file')->getData();
             if ($file != null) {
                 $fileService->upload($file, $annonce, 'photo');
-            }           
+            }        
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($annonce);

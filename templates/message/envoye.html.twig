@@ -2,9 +2,13 @@
 
 {% block title %}Messages{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.2/css/jquery.dataTables.min.css">
+{% endblock %}
+
 {% block body %}
     <h1>Liste des messages</h1>
-    <div class="form-SAMM">
+    <div class="p-2">
         <div class="d-flex justify-content-between m-3">
             
             <a class="btn btn-outline-info " href="javascript:history.back()">Retour</a>
@@ -12,7 +16,7 @@
 
         </div>  
         <div class="table-responsive">
-            <table class="table table-hove">
+            <table class="table table-hover" id="tableEnvoye">
                 <thead>
                     <tr>
                         {# <th>Content</th> #}
@@ -51,4 +55,19 @@
         </div>
         
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.11.2/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        $(document).ready( function () {
+            $('#tableEnvoye').DataTable({
+            language: {
+                url: 'https://cdn.datatables.net/plug-ins/1.11.3/i18n/fr_fr.json'
+            }
+        });
+        } );
+    </script>
 {% endblock %}

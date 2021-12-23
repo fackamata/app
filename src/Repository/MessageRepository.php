@@ -19,31 +19,28 @@ class MessageRepository extends ServiceEntityRepository
         parent::__construct($registry, Message::class);
     }
 
-     /**
+    /**
     * @return Message[] Returns an array of Message objects
     */
     public function findByUser($value): array
     {
         return $this->createQueryBuilder('a')
-            ->andWhere('a.destinataire = :val') // :val => contre les injections SQL
+            ->andWhere('a.destinataire = :val')
             ->setParameter('val',   $value)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
     
-
     /**
     * @return Message[] Returns an array of Message objects
     */
     public function findBySender($value): array
     {
         return $this->createQueryBuilder('a')
-            ->andWhere('a.sender = :val') // :val => contre les injections SQL
+            ->andWhere('a.sender = :val') 
             ->setParameter('val',   $value)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
 
     /**
@@ -52,12 +49,11 @@ class MessageRepository extends ServiceEntityRepository
     public function findByUserNotRead($value): array
     {
         return $this->createQueryBuilder('a')
-            ->andWhere('a.destinataire = :val') // :val => contre les injections SQL
+            ->andWhere('a.destinataire = :val') 
             ->andWhere('a.lu = false')
             ->setParameter('val',   $value)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
 
     // /**

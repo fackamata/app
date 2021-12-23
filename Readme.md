@@ -23,21 +23,21 @@ bin/console doctrine:schema:update --force
 ## Autentification et User
 
 ### création de l'user avec :  
-```properties
-symfony console make:user
+```bash
+symfony console doctrine:migrations:migrate
 ```
 permet la création d'une entité user avec une propriété unique, ici sur username
 On retrouve l'entité User dans /src/Entity/
 
 
 ### création des entité avec : 
-```properties
+```bash
 symfony console make:entity
 ```
 On retrouve les entitées crées dans /src/Entity/
 
 ### création de l'authentification :
-```properties
+```bash
 symfony console make:auth
 ```
 Création de la page login dans /templates/security/login.html.twig
@@ -47,20 +47,20 @@ Création des fonction de login et logout dans /Controller/AuthController.php
 ## Formulaire
 
 ### création des formulaire avec : 
-```properties
+```bash
 symfony console make:form
 ```
 Créer des formulaires par rapport au entitées
 
 ### création du formulaire de registration avec : 
-```properties
+```bash
 symfony console make:registration-form
 ```
 Créer un formulaire d'autentification, qui peut gérer l'envoie de mail pour valider l'autentification
 mais également le login dès validation et la redirection dès login
 
 on ajoute ensuite les champs que l'on veut pour le formulaire d'enregistrement dans /src/entity/RegistrationFormType.php
-```properties
+```bash
 symfony console make:form
 ```
 ## Enregistrement des images
@@ -118,7 +118,7 @@ public function __construct()
 ```
 
 ### création des controller avec : 
-```properties
+```bash
 symfony console make:controller
 ```
 dans le controller on crée les différentes fonction qui on chacune des routes définies et qui renvoie vers la vue donnée.
@@ -179,7 +179,7 @@ fonction count : pour retourner le nombre d'annonces, avis, conseil de chaque ut
 Utilisation du bundle LiipImagineBundle pour optimiser les images.
 
 Pour l'installer :
-```properties
+```bash
 composer require liip/imagine-bundle
 ```
 
@@ -202,7 +202,6 @@ liip_imagine:
 et pour utiliser notre nouveau filtre 'miniature', dans un fichier twig :
 ```twig
 <img src="{{ annonce.photo | imagine_filter('miniature') }}" alt="{{ annonce.titre }}" />
-
 ```
 
 
@@ -212,12 +211,12 @@ et pour utiliser notre nouveau filtre 'miniature', dans un fichier twig :
 ## heroku
 
 on se log sur heroku :
-```properties
+```bash
 heroku login
 ```
 
 on créer le répertoire partagetonterrain avec la région europe :
-```properties
+```bash
 heroku create --region eu partagetonterrain
 ```
 
@@ -226,15 +225,15 @@ ce qui créer l'application
 https://partagetonterrain.herokuapp.com/
 
 on modifie la config d'heroku :
-```properties
+```bash
 heroku config:set APP_ENV=prod
 ```
-```properties
+```bash
 heroku config:set APP_SECRET=$(php -r 'echo bin2hex(random_bytes(16));')
 ```
 
 ### création du Procfile :
-```properties
+```bash
 touch Procfile
 echo "release: php bin/console cache:clear" > Procfile
 echo "web: heroku-php-apache2 public/" > Procfile
@@ -243,20 +242,20 @@ La première commande pour que le cache soit netoyer à chaque nouveau déploiem
 
 ### ajout pour MySql :
 
-```properties
+```bash
 heroku addons:add cleardb:ignite
 ```
-```properties
+```bash
 heroku config:get CLEARDB_DATABASE_URL
 ```
 
 Pour voir les config heroku :
-```properties
+```bash
 heroku config
 ```
 
 ### ajout apache
-```properties
+```bash
 composer require symfony/apache-pack
 ```
 
@@ -265,7 +264,7 @@ créer le fichier .htaccess dans /public
 # page d'erreur
 
 installer twig-pack
-```properties
+```bash
 composer require symfony/twig-pack
 ```
 
@@ -294,7 +293,7 @@ on peut mettre un dump vide pour voir toutes les infos disponible
 ## page d'erreur personaliser
 
 installer twig-pack
-```properties
+```bash
 composer require symfony/twig-pack
 ```
 

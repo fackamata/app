@@ -4,10 +4,10 @@
 
 {% block body %}
     <h1>Liste des messages</h1>
-    <div class="form-SAMM">
+    <div class="p-2">
         
         <div class="table-responsive">
-            <table class="table table-hove">
+            <table class="table table-hover">
                 <thead>
                     <tr>
                         {# <th>Content</th> #}
@@ -32,8 +32,6 @@
                         <td class="d-none d-sm-table-cell">{{ message.annonce }}</td>
                         <td>
                             <a class="btn btn-outline-info" href="{{ path('message_show', {'id': message.id}) }}">lire</a>
-                            {# <a href="{{ path('message_edit', {'id': message.id}) }}">edit</a> #}
-                            {# <a href="{{ path('message_new') }}">Répondre</a> #}
                         </td>
                     </tr>
                 {% else %}

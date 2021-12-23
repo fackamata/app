@@ -5,10 +5,10 @@ liip_imagine:
     filter_sets:
         miniature:      # nom de notre filtre
             quality: 75 # compresse l'image à 75%
-            filters:    # quel filtre on applique
+            filters:    # quel filtre build-in on applique
                 thumbnail:
-                    size: [600, 300]
-                    mode: outbound
+                    size: [600, 300] # on définit une taille 
+                    mode: outbound  # on coupe les bord si le ratio n'est pas respecté
         # full:      
         #     quality: 85 
         #     filters:

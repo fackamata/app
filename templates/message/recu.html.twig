@@ -2,12 +2,13 @@
 
 {% block title %}Messages{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.2/css/jquery.dataTables.min.css">
+{% endblock %}
+
 {% block body %}
     <h1>Liste des messages</h1>
-  
-
-
-  <div class="form-SAMM">
+    <div class="p-2">
         <div class="d-flex justify-content-between m-3">
             
             <a class="btn btn-outline-info " href="javascript:history.back()">Retour</a>
@@ -15,7 +16,7 @@
 
         </div>  
         <div class="table-responsive">
-            <table class="table table-hove">
+            <table class="table table-hover" id="tableRecu">
                 <thead>
                     <tr>
                         {# <th>Content</th> #}
@@ -28,20 +29,19 @@
                 </thead>
                 <tbody>
                 {% for message in messages %}
-                {% if message.lu == false %}
-                    <tr class="bg-secondary">
-                {% else %}
-                    <tr class=" bg-light">
-                {% endif %}
-                        {# <td>{{ message.content | slice(0,30)}}...</td> #}
-                        <td class="d-none d-md-table-cell">{{ message.date ? message.date|date('d/m H:i') : '' }}</td>
-                        <td class="d-none d-lg-table-cell">{{ message.lu ? 'Yes' : 'No' }}</td>
-                        <td>{{ message.sender }}</td>
-                        <td class="d-none d-sm-table-cell">{{ message.annonce }}</td>
-                        <td class="d-flex">
-                            <a class="btn btn-outline-info" href="{{ path('message_show', {'id': message.id}) }}">lire</a>
-                        </td>
-                    </tr>
+                    {% if message.lu == false %}
+                        <tr class="bg-secondary">
+                    {% else %}
+                        <tr class=" bg-light">
+                    {% endif %}
+                    <td class="d-none d-md-table-cell">{{ message.date ? message.date|date('d/m H:i') : '' }}</td>
+                    <td class="d-none d-lg-table-cell">{{ message.lu ? 'Yes' : 'No' }}</td>
+                    <td>{{ message.sender }}</td>
+                    <td class="d-none d-sm-table-cell">{{ message.annonce }}</td>
+                    <td class="d-flex">
+                        <a class="btn btn-vert-creation_Samm" href="{{ path('message_show', {'id': message.id}) }}">Lire</a>
+                    </td>
+                </tr>
                 {% else %}
                     <tr>
                         <td colspan="5">aucun message</td>
@@ -49,7 +49,22 @@
                 {% endfor %}
                 </tbody>
             </table>
-        </div>
+        </div>  
         
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.11.2/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        $(document).ready( function () {
+            $('#tableRecu').DataTable({
+            language: {
+                url: 'https://cdn.datatables.net/plug-ins/1.11.3/i18n/fr_fr.json'
+            }
+        });
+        } );
+    </script>
 {% endblock %}

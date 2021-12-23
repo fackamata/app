@@ -3,8 +3,9 @@
 {% block title %}Erreur{% endblock %}
 
 {% block body %}
-<h1>Page non trouvée</h1>
-<h2>Erreur : {{ status_code }}</h2>
-<p>La page rechercher n'a pas été trouvée</p>
+<main class="error">
+    <h1 class="error_code">404</h1>
+    <p>La page rechercher n'existe pas </p>
+</main>
 
 {% endblock %}

@@ -9,8 +9,11 @@
         {% if annonce.photo %}
             <div class="photo-container d-flex justify-content-center">
                 <img src="{{ annonce.photo | imagine_filter('miniature') }}" alt="{{ annonce.titre }}" id="imgAnnonce" data-url="{{annonce.photo}}" class="rounded image_to_display" />
-            </div>     
-                
+            </div> 
+        {% else %}
+            <div class="photo-container d-flex justify-content-center">
+                <img src="{{asset("img/no-image-found.png")}}" class="img-fluid" alt="pas de photo">    
+            </div>  
         {% endif %}
         {#  on filtre annonce.description avec un raw pour nettoyer les balises HTML #}
         <div class="text-center mx-3 mx-md-5">{{ annonce.description|raw }}</div>

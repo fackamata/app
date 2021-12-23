@@ -1,12 +1,30 @@
 @import url("https://fonts.googleapis.com/css2?family=Ruda&display=swap");
 :root {
-  --notrevert: #69AF07;
-  --notrebrown: #483B33;
-  --notreMarronClair: #9F8447;
-  --notreLightBackground: #F6F3EC;
+  --notrevert: #0bbb1b; /* logo */
+  /* --notrevert: #6ab007; */
+  /* --notrebrown: #4d290f; logo */
+  --notreMarronClair: #4d290f; /* logo */
+  /* --notrebrown: #483b33; */
+  /* --notreMarronClair: #9e8447;  */
+  /* --notreMarronClair: #af5412; logo */
+  --notrebrown: #af5412; /* logo */
+  --notreLightBackground: #f7f4ee;
+}
+* {
+  padding: 0;
+  margin: 0;
+
 }
 
-ul a {
+html{
+  height: 100%;
+}
+
+main{
+  min-height: 60vh;
+}
+
+ul a{
   color: var(--notreMarronClair) !important;
 }
 
@@ -29,10 +47,6 @@ nav {
   text-align: center;
 }
 
-h1:hover {
-  -webkit-transform: scale(1.1);
-          transform: scale(1.1);
-}
 
 h1 {
   font-family: 'Ruda', sans-serif;
@@ -58,6 +72,9 @@ h1 {
 footer {
   padding-top: 1rem;
   margin-top: 4vh;
+  color: var(--notrebrown)
+  /* position: absolute!important; */
+  /* bottom: 0px; */
 }
 
 a {
@@ -103,7 +120,7 @@ a {
 .btn-vert-creation_Samm {
   background-color: white !important;
   border: solid var(--notrevert);
-  color: var(--notrebrown);
+  color: var(--notreMarronClair);
   text-decoration: none;
 }
 
@@ -196,24 +213,6 @@ h2 {
   height: 40px;
 }
 
-/* Add Animation */
-.modal-content, #caption {  
-  -webkit-animation-name: zoom;
-  -webkit-animation-duration: 0.6s;
-  animation-name: zoom;
-  animation-duration: 0.6s;
-}
-
-@-webkit-keyframes zoom {
-  from {-webkit-transform:scale(0)} 
-  to {-webkit-transform:scale(1)}
-}
-
-@keyframes zoom {
-  from {transform:scale(0)} 
-  to {transform:scale(1)}
-}
-
 /* The Close Button */
 .close {
   position: absolute;
@@ -233,6 +232,122 @@ h2 {
 }
 
 
+/*                                            navbar                                       */
+
+nav ul{
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  max-width: 800px;
+  align-items: center;
+}
+
+nav ul a{
+  margin: 0 20px;
+}
+
+nav{
+  padding: 5px;
+  display: flex;
+  width: 100%;
+}
+
+nav .btn-toggle{
+  display: none;
+  border: none;
+  background-color: transparent;
+  padding: 5px;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+nav .btn-toggle-admin{
+  display: none;
+}
+
+nav .btn-toggle span{
+  display: block;
+  width: 33px;
+  height: 4px;
+  margin-bottom: 5px;
+  position: relative;
+  border-radius: 3px;
+  z-index: 1;
+  background: var(--notrebrown);
+}
+
+
+
+/*
+
+#burger-container{
+  display: none;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border-radius: 3px;
+  border: solid 1px black;
+  height: 35px;
+  padding: 5px;
+}
+
+.burger{
+  display: block;
+  width: 33px;
+  height: 4px;
+  margin-bottom: 5px;
+  position: relative;
+  background: black;
+  border-radius: 3px;
+  z-index: 1;
+}
+
+#navbar-collapse{
+  display: block;
+} */
+
+/*                                            error page                                       */
+.error{
+  /* height: 60vh; */
+  padding: 20vh 0 ;
+}
+
+.error > .error_code{
+  font-size: 10vh;
+}
+
+.error > p{
+  color: var(--notreMarronClair);
+  font-size: 25px;
+  width: 90vw;
+  margin: 0 auto;
+  text-align: center;  
+}
+
+footer{
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
+.card{
+  color:var(--notreMarronClair);
+}
+
+.card-title{
+  color: var(--notrebrown);
+}
+/* @media screen and (max-width: 575px) {
+  #burger-container{
+    display: block;
+  }
+
+  #navbar-collapse{
+    display: none;
+  }
+
+} */
 
 @media screen and (max-width: 900px) {
   .form-SAMM {
@@ -245,7 +360,28 @@ h2 {
     height: 35px;
   }
 
-  #avatar{
-    max-width: 90vw;
+
+  /*                                            navbar                                       */
+
+  nav .btn-toggle{
+    display: block;
   }
+
+
+  nav ul{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 30px;
+    display:none;
+  }
+
+  nav ul li{
+    margin-bottom: 10px;
+  }
+
+  .show-links{
+    display: block;
+  }
+
 }

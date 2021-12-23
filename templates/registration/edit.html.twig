@@ -37,10 +37,12 @@
                     {{form_row(form.file)}}
                 </div>
             </div>
-            
+            <div class="col-md-6">
+                {{form_row(form.agreeTerms)}}
+            </div>
             
             {{ form_end(form)}} 
         </div>
     </div>
-    <a class= "btn btn-info my-2" href="{{ path('app_compte', {'id': user.id}) }}">Mon compte</a>
+    
 {% endblock %}

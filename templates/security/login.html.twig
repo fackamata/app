@@ -15,7 +15,10 @@
     </div>
     {% endif %}
     <div class='form-SAMM'>  
-        <h1 class="h3 mb-3 font-weight-normal">Connectez-vous</h1>
+        <h1 class="h3 font-weight-normal">Connectez-vous</h1>
+        <div class=" d-flex justify-content-center">
+            <img src="{{asset("img/vegetable-fruit.png")}}" class="w-25" alt="panier de légume">
+        </div>
         <label for="inputUsername">Votre pseudo : </label>
         <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" autocomplete="username" required autofocus>
         <label for="inputPassword">Votre mot de passe : </label>

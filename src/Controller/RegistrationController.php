@@ -58,51 +58,25 @@ class RegistrationController extends AbstractController
         
     }
 
-    /* #[Route('/register/{id}', name: 'app_compte')]
-    public function compte(User $user, UserService $userService): Response
-    {
-        $nbAnnonce = $userService->countAnnonce($user);
-        $nbConseil = $userService->countConseil($user);
-        $nbAvis = $userService->countAvis($user);
-        return $this->render('registration/compte.html.twig', [
-            'user' => $user,
-            'nbAnnonce' => $nbAnnonce,
-            'nbConseil' => $nbConseil,
-            'nbAvis' => $nbAvis,
-        ]);
-    } */
-
     #[Route('/register/{id}', name: 'app_compte')]
-    public function compte(User $user, $id, UserInterface $userConnected, UserService $userService): Response
+    public function compte( $id, UserInterface $userConnected, UserService $userService): Response
     {
         if($userConnected->getId() != $id){
             return $this->redirectToRoute('annonce_index');
         }
-        // dd($userConnected->getId() == $id);
-        // $nbAnnonce = $userService->countAnnonce($user);
-        // $nbConseil = $userService->countConseil($user);
-        // $nbAvis = $userService->countAvis($user);
-        // $nbMessage = $userService->countMessage($user);
-        // $msgNonLu = $userService->countMsgNonLu($user);
-        // $msgdeluserenvoyer = $user->getMessagesEnvoyes();
-        // // dump($msgdeluserenvoyer);
-        // $msgdeluserrecu = $user->getMessagesRecus();
-        // // dd($msgdeluserrecu);
         return $this->render('registration/compte.html.twig', [
-            'user' => $user,
-            'nbAnnonce' => $userService->countAnnonce($user),
-            'nbConseil' => $userService->countConseil($user),
-            'nbAvis' => $userService->countAvis($user),
-            'nbMessage' => $userService->countMessage($user),
-            'msgNonLu' => $userService->countMsgNonLu($user),
+            'user' => $userConnected,
+            'nbAnnonce' => $userService->countAnnonce($userConnected),
+            'nbConseil' => $userService->countConseil($userConnected),
+            'nbAvis' => $userService->countAvis($userConnected),
+            'msgNonLu' => $userService->countMsgNonLu($userConnected),
         ]);
     }
 
     #[Route('/register/{id}/edit', name: 'app_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, UserPasswordEncoderInterface $passwordEncoder, User $user, FileService $fileService): Response
+    public function edit(Request $request, UserPasswordEncoderInterface $passwordEncoder, UserInterface $user, FileService $fileService): Response
     {
         $form = $this->createForm(RegistrationFormType::class, $user);
-        $previousImage = $user->getPhoto();
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -114,7 +88,6 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
-
 
              //getData retourne l'entitée User
             /** @var User $user */
@@ -128,9 +101,6 @@ class RegistrationController extends AbstractController
                
             }
             $this->getDoctrine()->getManager()->flush();
-            $newImage = $user->getPhoto();
-           
-
             return $this->redirectToRoute('app_compte', ['id'=> $user->getId()], Response::HTTP_SEE_OTHER);
         }
 
@@ -143,55 +113,42 @@ class RegistrationController extends AbstractController
     #[Route('/register/annonce/{id}', name:'app_annonce')]
     public function annonce( UserService $userService) : Response
     {
-        $userAnnonce = $userService->findAnnonceByUser( $this->getUser());
-
         return $this->render('annonce/index.html.twig', [
-            'annonces' => $userAnnonce,
+            'annonces' => $userService->findAnnonceByUser( $this->getUser())
         ]);
     }
+
     #[Route('/register/conseil/{id}', name:'app_conseil')]
     public function conseil( UserService $userService) : Response
     {
-        $userConseil = $userService->findConseilByUser( $this->getUser());
         return $this->render('conseil/index.html.twig', [
-            'conseils' => $userConseil,
+            'conseils' => $userService->findConseilByUser( $this->getUser())
         ]);
     }
+
     #[Route('/register/avis/{id}', name:'app_avis')]
     public function avis( UserService $userService) : Response
     {
-        $userAvis= $userService->findAvisByUser( $this->getUser());
         return $this->render('avis/index.html.twig', [
-            'avis' => $userAvis,
+            'avis' => $userService->findAvisByUser( $this->getUser())
         ]);
     }
 
     #[Route('/register/message/{id}', name:'app_message_recu')]
     public function messageRecu( UserService $userService) : Response
     {   
-        $user = $this->getUser();
-        // tous les messages envoyé à l'utilisateur
-        $userMessagesRecu= $userService->findMessageByUser( $this->getUser());
-
-        $envoyer = false;
         return $this->render('message/recu.html.twig', [
-            'messages' => $userMessagesRecu,
-            'user' => $user,
-            'envoyer' => $envoyer
+            'messages' => $userService->findMessageByUser( $this->getUser()),
+            'user' => $this->getUser()
         ]);
     }
     
     #[Route('/register/message/envoye/{id}', name:'app_message_envoye')]
     public function messageEnvoye( UserService $userService) : Response
     {   
-        $user = $this->getUser();
-        // tous les messages que l'utilisateur à envoyé
-        $userMessagesEnvoye = $userService->findMessageBySender($this->getUser());
         return $this->render('message/envoye.html.twig', [
-            'messages' => $userMessagesEnvoye,
-            'user' => $user,
-            'envoyer' => true
-
+            'messages' => $userService->findMessageBySender($this->getUser()),
+            'user' => $this->getUser()
         ]);
     }
 }

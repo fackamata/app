@@ -20,6 +20,8 @@
                     <a href="{{ path('conseil_show', {'id': conseil.id}) }}">
                         <img src="{{ conseil.photo | imagine_filter('miniature') }}" class="card-img-top img-fluid" alt="{{ conseil.titre }}" />
                     </a>
+                {% else %}
+            		<img src="{{asset("img/no-image-found.png")}}" class="img-fluid" alt="pas de photo">
                 {% endif %}
                 <div class="card-body">
                 <h5 class="card-title">{{ conseil.titre }}</h5>
@@ -34,7 +36,7 @@
             </div>
             
             {% else %}
-                <div>
+                <div class="m-5 p-5">
                     <p>Aucun conseil</p>
                 </div>
             {% endfor %}  

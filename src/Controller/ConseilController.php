@@ -48,8 +48,9 @@ class ConseilController extends AbstractController
 
             /** @var UploadedFile $file */
             $file = $form->get('file')->getData();
-
-            $fileService->upload($file, $conseil, 'photo');
+            if ($file != null) {
+                $fileService->upload($file, $conseil, 'photo');
+            }
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($conseil);

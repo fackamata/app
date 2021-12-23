@@ -7,9 +7,13 @@
 
     <main class="d-flex flex-column justify-content-center">
         {% if conseil.photo %}
-        <div class="photo-container d-flex justify-content-center">
-            <img src="{{ conseil.photo | imagine_filter('miniature')  }}" alt="{{ conseil.titre }}" data-url="{{conseil.photo}}"class="rounded image_to_display" />
-        </div>
+            <div class="photo-container d-flex justify-content-center">
+                <img src="{{ conseil.photo | imagine_filter('miniature')  }}" alt="{{ conseil.titre }}" data-url="{{conseil.photo}}"class="rounded image_to_display" />
+            </div>
+        {% else %}
+            <div class="photo-container d-flex justify-content-center">
+                <img src="{{asset("img/no-image-found.png")}}" class="img-fluid" alt="pas de photo">    
+            </div> 
         {% endif %}
         {#  on filtre conseil.description avec un raw pour nettoyer les balises HTML #}
         <div class=" text-center mx-3 mx-md-5">{{ conseil.description|raw }}</div>
