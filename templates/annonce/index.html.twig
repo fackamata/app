@@ -11,13 +11,9 @@
 	{% endif %}
 
 	<div class="d-flex flex-wrap justify-content-around">
-		{# <div class="row" data-masonry="{&quot;percentPosition&quot;: true }" style="position: relative; height: 714px;">
-			<div class="col-sm-6 col-lg-4 mb-4" style="position: absolute; left: 0%; top: 0px;">	 #}
-
 		{% for annonce in annonces %}
 
 			<div class="card m-2" >
-			{# <div class="card m-2" style="width: 300px;"> #}
 				{% if annonce.photo %}
 					<a href="{{ path('annonce_show', {'id': annonce.id}) }}">
 						<img src="{{ annonce.photo | imagine_filter('miniature') }}" class="img-fluid card-img-top" alt="{{ annonce.titre }}"/>
@@ -42,10 +38,6 @@
 					<p>Aucune annonce</p>
 				</div>
 		{% endfor %}
-
-
-		</div>
 	</div>
-
 
 {% endblock %}

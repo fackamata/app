@@ -37,7 +37,7 @@
             </form>
         {% endif %}
         
-        {% if user != null and user != idAnnonceUser %} 
+        {% if userId != null and userId != idAnnonceUser %} 
             <a class="btn btn-outline-success" 
             href="{{ path('message_new', {'idAnnonce': annonce.id, 'idAnnonceUser': idAnnonceUser, 'idMessageSender': idUserConnected }) }}">Envoyer message</a>
        {% endif %}

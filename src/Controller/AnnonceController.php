@@ -17,23 +17,12 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 #[Route('/')]
 class AnnonceController extends AbstractController
 {
-    private $username = "";
-    private $user = null;
 
     #[Route('/', name: 'annonce_index', methods: ['GET'])]
     public function index(AnnonceRepository $annonceRepository): Response
     {
-        $this->user = $this->getUser();
-
-        if ($this->user  != null) {
-            $this->user  = $this->getUser()->getId();
-            // on récupère l'username de la personne loguer
-            $this->username = $this->getUser()->getUsername();
-        }
-
         return $this->render('annonce/index.html.twig', [
             'annonces' => $annonceRepository->findAll(),
-            'username' => $this->username
         ]);
     }
 
@@ -41,23 +30,13 @@ class AnnonceController extends AbstractController
     public function new(Request $request, FileService $fileService): Response
     {
         $annonce = new Annonce();
-        /* on récupère l'entité user */
-        $this->user  = $this->getUser();
-
-        /* on récupère les différents type d'annonce possible */
-        // dd($this->getUser());
-        // $type = $this->getType();
 
         $form = $this->createForm(AnnonceType::class, $annonce);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            /* on set l'user de l'annonce avec l'user récupèrer plus haut */
-            $annonce->setUser($this->user );
-
-            //getData retourne l'entitée annonce
-            /** @var Annonce $annonce */
+            $annonce->setUser($this->getUser());
             $annonce = $form->getData();
 
             /** @var UploadedFile $file */
@@ -74,7 +53,6 @@ class AnnonceController extends AbstractController
         }
 
         return $this->renderForm('annonce/new.html.twig', [
-            'annonce' => $annonce,
             'form' => $form,
         ]);
     }
@@ -84,21 +62,20 @@ class AnnonceController extends AbstractController
     public function show(Annonce $annonce, CounterService $counterService): Response
     {
         $idUserConnected = 0;
-        $this->user  = $this->getUser();
+        $user  = $this->getUser();
+        $username = "";
 
         $idAnnonce = $annonce->getId();
         $idAnnonceUser = $annonce->getUser()->getId();
-        // on récupère les roles de l'utilisateur 
-        if($this->user  != null){
-
-            $role = $this->getUser()->getRoles();
+        
+        if($user  != null){
+            $role = $user->getRoles();
+            $username = $user->getUsername();
+            $idUserConnected = $this->getUser()->getId();            
         }
 
-        /* on incrémente les vues si personne n'est loguer 
-        ou si l'utilisateur connecté n'est pas celui qui à posté l'Annonce  
-        et si l'utilisateur n'est pas admin */
-
-        if($this->user  === null || $this->user ->getUsername() != $annonce->getUser()->getUsername() && in_array("ROLE_ADMIN", $role) != true){
+        if($user  === null || $user ->getUsername() != $annonce->getUser()->getUsername() 
+        && in_array("ROLE_ADMIN", $role) != true){
             $nbView = $counterService->countView($annonce->getNombreVue());
             $annonce->setNombreVue($nbView);
 
@@ -107,24 +84,13 @@ class AnnonceController extends AbstractController
             $entityManager->flush();
         }
         
-
-        if ($this->user  != null) {
-            $this->user = $this->getUser()->getId();
-            // on récupère l'username de la personne loguer
-            $this->username = $this->getUser()->getUsername();
-            $idUserConnected = $this->getUser()->getId();
-            
-            
-            // on regarde qui est l'utilisateur pour savoir si on incrémente les vues
-            // if ($this->username != annonce.user)
-        }
         return $this->render('annonce/show.html.twig', [
             'annonce' => $annonce,
-            'username' => $this->username,
+            'username' => $username,
             'idUserConnected' => $idUserConnected,
             'idAnnonceUser' => $idAnnonceUser,
             'idAnnonce' => $idAnnonce,
-            'user' => $this->user
+            'userId' => $idUserConnected
         ]);
     }
 

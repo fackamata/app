@@ -24,20 +24,14 @@ class FileService
         $filename  = $this->getSafeFileName($file);
         $setter    = 'set'.ucfirst($propertyName);
 
-        //remove old file
-        $this->remove($entity, $propertyName);
-
-        //move new file
-        $file->move($this->publicDir.$fileDir, $filename);
-
-        //save filename in entity
-        $entity->$setter($fileDir.'/'.$filename);
+        $this->remove($entity, $propertyName);  //remove old file
+        $file->move($this->publicDir.$fileDir, $filename);  //move new file
+        $entity->$setter($fileDir.'/'.$filename);   //save filename in entity
     }
 
     public function remove(FilableInterface $entity, string $propertyName): void
     {
         $getter = 'get'.ucfirst($propertyName);
-        // dd($entity->$getter());
 
         if ($entity->$getter()) {
             $oldFileName = $this->publicDir.$entity->$getter();
@@ -48,7 +42,7 @@ class FileService
             }
         
             if (file_exists($oldMiniature)) {
-                unlink($oldMiniature);  // pour supprimer la miniature 
+                unlink($oldMiniature);  
             }
         }
     }
@@ -56,9 +50,8 @@ class FileService
     public function getSafeFileName(UploadedFile $file): string
     {
         $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-        // $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
-        // $fileName = $safeFilename.'-'.uniqid().'.'.$file->guessExtension();
-        $fileName = $originalFilename.'-'.uniqid().'.'.$file->guessExtension();
+        $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+        $fileName = $safeFilename.'-'.uniqid().'.'.$file->guessExtension();
 
         return $fileName;
     }

@@ -31,16 +31,12 @@ class ConseilController extends AbstractController
     {
         $conseil = new Conseil();
         /* on récupère l'entité user */
-        $this->user = $this->getUser();
+        $user = $this->getUser();
         $form = $this->createForm(ConseilType::class, $conseil);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /* on set l'user de l'annonce avec l'user récupèrer plus haut */
-            $conseil->setUser($this->user );
-
-            //getData retourne l'entitée Conseil
-            /** @var Conseil $conseil */
+            $conseil->setUser($user );
             $conseil = $form->getData();
 
             /** @var UploadedFile $file */
