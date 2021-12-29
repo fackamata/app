@@ -38,11 +38,6 @@ class Annonce implements FilableInterface
     private $datePublication;
 
     /**
-     * @ORM\Column(type="boolean")
-     */
-    private $active;
-
-    /**
      * @ORM\Column(type="integer")
      */
     private $nombreVue;
@@ -127,18 +122,6 @@ class Annonce implements FilableInterface
     public function setDatePublication(\DateTimeInterface $datePublication): self
     {
         $this->datePublication = $datePublication;
-
-        return $this;
-    }
-
-    public function getActive(): ?bool
-    {
-        return $this->active;
-    }
-
-    public function setActive(bool $active): self
-    {
-        $this->active = $active;
 
         return $this;
     }

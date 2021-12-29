@@ -10,7 +10,7 @@
     <div class="form-SAMM">  
         <a class="btn btn-outline-info " href="javascript:history.back()">Retour</a>
         <div class='d-flex align-items-center message'>
-            <h4 class="my-2">{{ message.contenu }}</h4>
+            <h4 class="my-2">{{ message.contenu|raw  }}</h4>
         </div>
         <div class="d-flex justify-content-around">
             {% if repondre %}

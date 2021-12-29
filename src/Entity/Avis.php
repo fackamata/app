@@ -27,11 +27,6 @@ class Avis
      */
     private $datePublication;
 
-    // /**
-    //  * @ORM\ManyToOne(targetEntity=Note::class, inversedBy="avis")
-    //  */
-    // private $note;
-
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="avis")
      */
@@ -46,7 +41,6 @@ class Avis
     {
         $this->datePublication = new \DateTime();
     }
-
   
     public function getId(): ?int
     {
@@ -76,18 +70,6 @@ class Avis
 
         return $this;
     }
-
-    // public function getNote(): ?Note
-    // {
-    //     return $this->note;
-    // }
-
-    // public function setNote(?Note $note): self
-    // {
-    //     $this->note = $note;
-
-    //     return $this;
-    // }
 
     public function getUser(): ?User
     {

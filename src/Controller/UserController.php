@@ -17,35 +17,6 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 #[Route('/admin/user', name: 'admin_')]
 class UserController extends AbstractController
 {
-    #[Route('/', name: 'user_index', methods: ['GET'])]
-    public function index(UserRepository $userRepository): Response
-    {
-        return $this->render('admin/user/index.html.twig', [
-            'users' => $userRepository->findAll(),
-        ]);
-    }
-
-    // #[Route('/new', name: 'user_new', methods: ['GET', 'POST'])]
-    // public function new(Request $request): Response
-    // {
-    //     $user = new User();
-    //     $form = $this->createForm(UserType::class, $user);
-    //     $form->handleRequest($request);
-
-    //     if ($form->isSubmitted() && $form->isValid()) {
-    //         $entityManager = $this->getDoctrine()->getManager();
-    //         $entityManager->persist($user);
-    //         $entityManager->flush();
-
-    //         return $this->redirectToRoute('admin_user_index', [], Response::HTTP_SEE_OTHER);
-    //     }
-
-    //     return $this->renderForm('admin/user/new.html.twig', [
-    //         'user' => $user,
-    //         'form' => $form,
-    //     ]);
-    // }
-
     #[Route('/{id}', name: 'user_show', methods: ['GET'])]
     public function show(User $user): Response
     {
@@ -69,7 +40,6 @@ class UserController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
-
 
              //getData retourne l'entitée User
             /** @var User $user */

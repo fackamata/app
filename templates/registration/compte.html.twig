@@ -8,14 +8,14 @@
     
     <div class="text-center mb-md-5">
         {% if user.photo %}
-            <img src="{{user.photo | imagine_filter('miniature') }}" class="my-3" alt="{{ user.nom }}">
+            <img src="{{user.photo | imagine_filter('miniature') }}" class="my-3" alt="{{ user.nom|raw  }}">
         {% else %}
             <img src="{{asset("img/avatar-neutre.png")}}" class="my-3" alt="pas de photo">
         {% endif %}
-        <p>Pseudo : {{user.username}}</p>
-        <p>Nom : {{user.nom}}</p>
-        <p>Prénom : {{user.prenom}}</p>
-        <p>E-mail : {{user.mail}}</p>
+        <p>Pseudo : {{user.username|raw }}</p>
+        <p>Nom : {{user.nom|raw }}</p>
+        <p>Prénom : {{user.prenom|raw }}</p>
+        <p>E-mail : {{user.mail|raw }}</p>
     </div>
     
     <div class="d-flex flex-column flex-md-row justify-content-around my-3">

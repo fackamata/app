@@ -8,7 +8,7 @@
     <main class="d-flex flex-column justify-content-center">
         {% if conseil.photo %}
             <div class="photo-container d-flex justify-content-center">
-                <img src="{{ conseil.photo | imagine_filter('miniature')  }}" alt="{{ conseil.titre }}" data-url="{{conseil.photo}}"class="rounded image_to_display" />
+                <img src="{{ conseil.photo | imagine_filter('miniature')  }}" alt="{{ conseil.titre |raw }}" data-url="{{conseil.photo}}"class="rounded image_to_display" />
             </div>
         {% else %}
             <div class="photo-container d-flex justify-content-center">
@@ -20,7 +20,7 @@
 
         <div class="d-flex justify-content-around my-2">
             <p>Date de publication : {{ conseil.datePublication ? conseil.datePublication|date('d/m/Y ') : '' }}</p>
-            <p>Publié par : {{ conseil.user }}</p>
+            <p>Publié par : {{ conseil.user|raw  }}</p>
             <p>Nombre de vue : {{ conseil.nombreVue }}</p>
         </div>
 

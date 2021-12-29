@@ -88,14 +88,6 @@ class MessageController extends AbstractController
         ]);
     }
 
-    /* #[Route('/{id}', name: 'message_show', methods: ['GET'])]
-    public function show(Message $message): Response
-    {
-        return $this->render('message/show.html.twig', [
-            'message' => $message,
-        ]);
-    } */
-
     #[Route('/{id}', name: 'message_show', methods: ['GET'])]
     public function show(Message $message): Response
     {

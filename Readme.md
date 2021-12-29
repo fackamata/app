@@ -204,6 +204,69 @@ et pour utiliser notre nouveau filtre 'miniature', dans un fichier twig :
 <img src="{{ annonce.photo | imagine_filter('miniature') }}" alt="{{ annonce.titre }}" />
 ```
 
+# test
+
+## test sur les entitées - test unitaire
+a la création de chaque entité, on crée sont test avec la commande :
+```bash
+symfony console make:unit-test
+```
+elle nous crée un nouveau fichier dans le dossier test ou on va créer des tests relatif à l'entité.
+
+pour lancer les test :
+```bash
+php bin/phpunit --testdox
+```
+l'option testdox donne un affichage plus lisible
+
+## database de test
+pour que doctrine créer une database dans l'environnement de test
+```bash
+APP_ENV=test symfony console doctrine:database:create
+```
+```bash
+APP_ENV=test symfony console doctrine:migrations:migrate
+```
+```bash
+APP_ENV=test symfony console doctrine:fixtures:load
+```
+
+## liip test bundle
+pour tester avec nos fixture on install le bundle:
+```bash
+composer require --dev liip/test-fixtures-bundle:^1.0.0
+```
+on peut maintenant utiliser le FixturesTrait dans nos test.
+
+## couverture de code
+il faut s'assurer que code coverage est bien installé :
+```bash
+composer require phpunit/php-code-coverage --dev
+```
+Pour voir notre couverture de code actuelle des tests, on lance la commande :
+```bash
+XDEBUG_MODE=coverage ./vendor/bin/phpunit --coverage-html var/log/test
+```
+```bash
+XDEBUG_MODE=coverage APP_ENV=test symfony php bin/phpunit --coverage-html var/log/test
+```
+on peut ouvrir le index.html dans un navigateur pour voir notre %age de couverture
+
+
+# sécurité
+
+installer rate-limiter pour utiliser le rate-limiter
+```bash
+composer require symfony/rate-limiter
+```
+
+dans config/packages/security.yaml, configurer le login_trottling
+```yaml
+# by default, the feature allows 5 login attempts per minute
+login_throttling: null
+```
+
+
 
 
 # déploiement

@@ -3,12 +3,12 @@
 {% block title %}Annonce{% endblock %}
 
 {% block body %}
-    <h1>{{ annonce.titre }}</h1>
+    <h1>{{ annonce.titre|raw  }}</h1>
 
     <main class="d-flex flex-column justify-content-center">
         {% if annonce.photo %}
             <div class="photo-container d-flex justify-content-center">
-                <img src="{{ annonce.photo | imagine_filter('miniature') }}" alt="{{ annonce.titre }}" id="imgAnnonce" data-url="{{annonce.photo}}" class="rounded image_to_display" />
+                <img src="{{ annonce.photo | imagine_filter('miniature') }}" alt="{{ annonce.titre|raw  }}" id="imgAnnonce" data-url="{{annonce.photo}}" class="rounded image_to_display" />
             </div> 
         {% else %}
             <div class="photo-container d-flex justify-content-center">
@@ -21,7 +21,7 @@
         <div class="d-flex flex-column flex-md-row align-items-center justify-content-around my-3">
             <p>Date de publication : {{ annonce.datePublication ? annonce.datePublication|date('d/m/Y ') : '' }}</p>
             <p>Publié par : {{ annonce.user }}</p>
-            <p>Situé à : {{ annonce.ville }}</p>
+            <p>Situé à : {{ annonce.ville|raw  }}</p>
             <p>Nombre de vue : {{ annonce.nombreVue }}</p>
         </div>
     

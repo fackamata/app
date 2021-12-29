@@ -10,9 +10,8 @@
     {% endif %}
 
     {% if app.user %}
-    <div class="mb-3">
-        Vous êtes déjà connecté en tant que {{ app.user.username }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
-    </div>
+    <p class="mb-3">Vous êtes déjà connecté en tant que {{ app.user.username }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
+    </p>
     {% endif %}
     <div class='form-SAMM'>  
         <h1 class="h3 font-weight-normal">Connectez-vous</h1>
