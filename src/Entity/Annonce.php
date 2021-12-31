@@ -37,10 +37,10 @@ class Annonce implements FilableInterface
      */
     private $datePublication;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $active;
+    // /**
+    //  * @ORM\Column(type="boolean")
+    //  */
+    // private $active;
 
     /**
      * @ORM\Column(type="integer")
@@ -79,8 +79,8 @@ class Annonce implements FilableInterface
         $this->datePublication = new \DateTime();
         /* on initialise le nombre de vue à  0*/
         $this->nombreVue = 0;
-        /* on initialise l'active à true*/
-        $this->active = true;
+        // /* on initialise l'active à true*/
+        // $this->active = true;
         $this->messages = new ArrayCollection();
     }
 
@@ -131,17 +131,17 @@ class Annonce implements FilableInterface
         return $this;
     }
 
-    public function getActive(): ?bool
-    {
-        return $this->active;
-    }
+    // public function getActive(): ?bool
+    // {
+    //     return $this->active;
+    // }
 
-    public function setActive(bool $active): self
-    {
-        $this->active = $active;
+    // public function setActive(bool $active): self
+    // {
+    //     $this->active = $active;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getNombreVue(): ?int
     {

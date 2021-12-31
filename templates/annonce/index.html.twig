@@ -16,7 +16,7 @@
 			<div class="card m-2" >
 				{% if annonce.photo %}
 					<a href="{{ path('annonce_show', {'id': annonce.id}) }}">
-						<img src="{{ annonce.photo | imagine_filter('miniature') }}" class="img-fluid card-img-top" alt="{{ annonce.titre }}"/>
+						<img src="{{ annonce.photo }}" class="img-fluid card-img-top" alt="{{ annonce.titre }}"/>
 					</a>
 				{% else %}
             		<img src="{{asset("img/no-image-found.png")}}" class="img-fluid" alt="pas de photo">
