@@ -27,22 +27,22 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        // $faker = Factory::create('fr_FR');
         $faker = Faker\Factory::create('fr_FR');
 
-        //      USER
         for($u=0; $u < 20 ; $u++){
             $user = new User();
             $user->setUsername($faker->unique()->userName())
                     ->setNom($faker->lastName())
                     ->setPrenom($faker->firstName())
                     ->setMail($faker->email())
-                    ->setPhoto("https://picsum.photos/seed/".rand(0,5000) . "800/400")
+                    ->setPhoto('/img/avatar-neutre.png')
                     ->setPassword($this->encoder->encodePassword($user, '123456'));
             $manager->persist($user);
 
             $this->addReference('user_'.$u, $user);
         }
+        $manager->flush();
+        
             $user = new user();
             $user->setUsername('admin')
                 ->setPassword($this->encoder->encodePassword($user, '123456'))
@@ -50,7 +50,7 @@ class AppFixtures extends Fixture
                 ->setNom($faker->name())
                 ->setPrenom($faker->firstName())
                 ->setMail($faker->email())
-                ->setPhoto("https://picsum.photos/seed/".rand(0,5000) . "800/400")
+                ->setPhoto('/img/avatar-neutre.png')
                 ;
             $manager->persist($user);
             $this->addReference('user_admin', $user);
@@ -60,7 +60,7 @@ class AppFixtures extends Fixture
                 ->setNom('nom')
                 ->setPrenom('prenom')
                 ->setMail($faker->email())
-                ->setPhoto("https://picsum.photos/seed/".rand(0,5000) . "800/400")
+                ->setPhoto('/img/avatar-neutre.png')
                 ;
             $manager->persist($user);
             $this->addReference('user_user', $user);
@@ -91,7 +91,7 @@ class AppFixtures extends Fixture
                     ->setDatePublication($faker->dateTime())
                     ->setNombreVue(rand(0,72))
                     ->setUser($user)
-                    ->setPhoto("https://picsum.photos/seed/".rand(0,5000) . "800/400");
+                    ->setPhoto('/img/avatar-neutre.png');
             $manager->persist($conseil);
 
             $this->addReference('conseil_'.$c, $conseil);
@@ -131,7 +131,7 @@ class AppFixtures extends Fixture
                 ->setVille($faker->city())
                 ->setType($type)
                 ->setUser($user)
-                ->setPhoto("https://picsum.photos/seed/".rand(0,5000) . "800/400");
+                ->setPhoto('/img/avatar-neutre.png');
         $manager->persist($annonce);
         $this->addReference('annonce_test', $annonce);
 
@@ -147,7 +147,7 @@ class AppFixtures extends Fixture
                     ->setVille($faker->city())
                     ->setType($type)
                     ->setUser($user)
-                    ->setPhoto("https://picsum.photos/seed/".rand(0,5000) . "800/400");
+                    ->setPhoto('/img/avatar-neutre.png');
             $manager->persist($annonce);
 
             $this->addReference('annonce_'.$a, $annonce);
@@ -170,8 +170,8 @@ class AppFixtures extends Fixture
                     ->setSender($sender)
                     ->setAnnonce($annonce);
             $manager->persist($message);
-            $this->addReference('message_'.$m, $message);
 
+            $this->addReference('message_'.$m, $message);
         }
         $manager->flush();
         //      MESSAGE   END
