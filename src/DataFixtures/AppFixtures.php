@@ -91,7 +91,7 @@ class AppFixtures extends Fixture
                     ->setDatePublication($faker->dateTime())
                     ->setNombreVue(rand(0,72))
                     ->setUser($user)
-                    ->setPhoto('/img/avatar-neutre.png');
+                    ->setPhoto('/img/image_empty.jpg');
             $manager->persist($conseil);
 
             $this->addReference('conseil_'.$c, $conseil);
@@ -131,7 +131,7 @@ class AppFixtures extends Fixture
                 ->setVille($faker->city())
                 ->setType($type)
                 ->setUser($user)
-                ->setPhoto('/img/avatar-neutre.png');
+                ->setPhoto('/img/image_empty.jpg');
         $manager->persist($annonce);
         $this->addReference('annonce_test', $annonce);
 
@@ -147,7 +147,7 @@ class AppFixtures extends Fixture
                     ->setVille($faker->city())
                     ->setType($type)
                     ->setUser($user)
-                    ->setPhoto('/img/avatar-neutre.png');
+                    ->setPhoto('/img/image_empty.jpg');
             $manager->persist($annonce);
 
             $this->addReference('annonce_'.$a, $annonce);
