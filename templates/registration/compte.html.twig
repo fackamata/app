@@ -8,7 +8,7 @@
     
     <div class="text-center mb-md-5">
         {% if user.photo %}
-            <img src="{{user.photo | imagine_filter('miniature') }}" class="my-3" alt="{{ user.nom }}">
+            <img src="{{user.photo  }}" class="my-3" alt="{{ user.nom }}">
         {% else %}
             <img src="{{asset("img/avatar-neutre.png")}}" class="my-3" alt="pas de photo">
         {% endif %}
