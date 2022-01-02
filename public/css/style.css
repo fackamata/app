@@ -8,6 +8,10 @@
 * {
   padding: 0;
   margin: 0;
+  /* background-color: var(--notreLightBackground)!important; */
+}
+body{
+  background-color: var(--notreLightBackground)!important;
 
 }
 
@@ -158,6 +162,11 @@ h2 {
   height: 200px;
   object-fit: cover;
 }
+
+.card-body, .card-title, .card-text, .card-text > div, .card-text > div > p{
+  background-color: white!important;
+}
+
 .message{
   height: 50vh;
 }

@@ -1,40 +1,44 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Connectez vous !{% endblock %}
+{% block title %}Connectez vous !
+{% endblock %}
 
 {% block body %}
 
-<form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+	<form method="post">
+		{% if error %}
+			<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+		{% endif %}
 
-    {% if app.user %}
-    <div class="mb-3">
-        Vous êtes déjà connecté en tant que {{ app.user.username }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
-    </div>
-    {% endif %}
-    <div class='form-SAMM'>  
-        <h1 class="h3 font-weight-normal">Connectez-vous</h1>
-        <div class=" d-flex justify-content-center">
-            <img src="{{asset("img/vegetable-fruit.png")}}" class="w-25" alt="panier de légume">
-        </div>
-        <label for="inputUsername">Votre pseudo : </label>
-        <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" autocomplete="username" required autofocus>
-        <label for="inputPassword">Votre mot de passe : </label>
-        <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+		{% if app.user %}
+			<div class="mb-3">
+				Vous êtes déjà connecté en tant que
+				{{ app.user.username }},
+				<a href="{{ path('app_logout') }}">Déconnexion</a>
+			</div>
+		{% endif %}
+		<div class='form-SAMM mb-5'>
+			<h1 class="h3 font-weight-normal">Connectez-vous</h1>
+			<div class=" d-flex justify-content-center">
+				<img src="{{asset("img/vegetable-fruit.png")}}" class="w-25" alt="panier de légume">
+			</div>
+			<label for="inputUsername">Votre pseudo :
+			</label>
+			<input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" autocomplete="username" required autofocus>
+			<label for="inputPassword">Votre mot de passe :
+			</label>
+			<input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
 
-        <input type="hidden" name="_csrf_token"
-            value="{{ csrf_token('authenticate') }}">
+			<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-        <div class="d-flex justify-content-center my-3">
-            <button class="btn btn-vert-connexion_Samm me-3" type="submit">
-                Connexion
-            </button>
-            <a class="btn btn-vert-connexion_Samm" href="{{path("app_register")}}">
-                Créer un compte
-            </a>
-        </div>
-    </div>
-</form>
+			<div class="d-flex justify-content-center my-3">
+				<button class="btn btn-vert-connexion_Samm me-3" type="submit">
+					Connexion
+				</button>
+				<a class="btn btn-vert-connexion_Samm" href="{{path("app_register")}}">
+					Créer un compte
+				</a>
+			</div>
+		</div>
+	</form>
 {% endblock %}
