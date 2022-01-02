@@ -8,7 +8,7 @@
 * {
   padding: 0;
   margin: 0;
-
+  background-color: var(--notreLightBackground)!important;
 }
 
 html{
@@ -155,6 +155,10 @@ h2 {
 
 .card{
   width: 300px;
+}
+
+.card-body, .card-title, .card-text, .card-text > div, .card-text > div > p{
+  background-color: white!important;
 }
 
 .card > a > img{
