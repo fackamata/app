@@ -131,7 +131,7 @@ class AppFixtures extends Fixture
                 ->setType($type)
                 ->setActive(0)
                 ->setUser($user)
-                ->setPhoto('/img/image_empty.jpg');
+                ->setPhoto('/img/fake'.rand(1,12).'.jpg');
         $manager->persist($annonce);
         $this->addReference('annonce_test', $annonce);
 
@@ -147,7 +147,7 @@ class AppFixtures extends Fixture
                     ->setVille($faker->city())
                     ->setType($type)
                     ->setUser($user)
-                    ->setPhoto('/img/image_empty.jpg');
+                    ->setPhoto('/img/fake/'.rand(1,12).'.jpg');
             $manager->persist($annonce);
             $this->addReference('annonce_'.$a, $annonce);
         }

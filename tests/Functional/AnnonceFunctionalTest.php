@@ -6,12 +6,12 @@ use App\DataFixtures\AppFixtures;
 use App\Entity\Annonce;
 use App\Form\AnnonceType;
 use App\Repository\UserRepository;
-use Liip\TestFixturesBundle\Test\FixturesTrait;
+// // use Liip\TestFixturesBundle\Test\FixturesTrait;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class AnnonceFunctionalTest extends WebTestCase
 {
-    use FixturesTrait;
+    // use FixturesTrait;
 
     public function testShouldDisplayAnnonceIndex(): void
     {

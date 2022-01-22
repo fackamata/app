@@ -14,3 +14,4 @@ class CguFunctionalTest extends WebTestCase
         $this->assertResponseIsSuccessful();
     }
 }
+

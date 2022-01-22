@@ -3,12 +3,12 @@
 namespace App\Tests\Functional;
 
 use App\DataFixtures\AppFixtures;
-use Liip\TestFixturesBundle\Test\FixturesTrait;
+// use Liip\TestFixturesBundle\Test\FixturesTrait;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class AvisFunctionalTest extends WebTestCase
 {
-    use FixturesTrait;
+    // use FixturesTrait;
 
     public function testShouldDisplayAvisIndex(): void
     {

@@ -60,4 +60,5 @@ class AvisUnitTest extends TestCase
         $avis = new Avis;
         $this->assertNotEmpty($avis->getDatePublication());
     }
+    
 }

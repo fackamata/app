@@ -79,4 +79,5 @@ class ConseilUnitTest extends TestCase
         $conseil->removeAvi($avis);
         $this->assertEmpty($conseil->getAvis());
     }
+    
 }

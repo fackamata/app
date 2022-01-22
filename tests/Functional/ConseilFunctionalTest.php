@@ -3,12 +3,12 @@
 namespace App\Tests\Functional;
 
 use App\DataFixtures\AppFixtures;
-use Liip\TestFixturesBundle\Test\FixturesTrait;
+// use Liip\TestFixturesBundle\Test\FixturesTrait;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class ConseilFunctionalTest extends WebTestCase
 {
-    use FixturesTrait;
+    // use FixturesTrait;
 
     public function testShouldDisplayConseilIndex(): void
     {

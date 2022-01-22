@@ -44,4 +44,5 @@ class TypeUnitTest extends TestCase
         $type->removeAnnonce($annonce);
         $this->assertEmpty($type->getAnnonces());
     }
+    
 }

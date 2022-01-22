@@ -71,4 +71,5 @@ class MessageUnitTest extends TestCase
         $message = new Message;
         $this->assertNotEmpty($message->getDate());
     }
+    
 }

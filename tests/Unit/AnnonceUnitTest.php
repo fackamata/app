@@ -36,6 +36,7 @@ class AnnonceUnitTest extends TestCase
         $this->assertTrue($annonce->getPhoto() === '/lien');
         $this->assertTrue($annonce->getVille() === 'thonon');
     }
+    
 
     public function testIsFalse()
     {

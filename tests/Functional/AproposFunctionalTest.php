@@ -14,3 +14,4 @@ class AproposFunctionalTest extends WebTestCase
         $this->assertResponseIsSuccessful();
     }
 }
+

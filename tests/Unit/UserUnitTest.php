@@ -131,4 +131,5 @@ class UserUnitTest extends TestCase
         $user->removeMessagesEnvoye($message);
         $this->assertEmpty($user->getMessagesEnvoyes());
     }
+    
 }
