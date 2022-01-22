@@ -19,7 +19,6 @@
 ###< phpunit/phpunit ###
 
 /public/upload
-idea.txt
 /templates/avis_copy
 /src/Entity/Note.php
 /src/Controller/AvisController_copy.php
