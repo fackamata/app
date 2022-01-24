@@ -31,12 +31,12 @@ class AppFixtures extends Fixture
 
         for($u=0; $u < 20 ; $u++){
             $user = new User();
-            $user->setUsername($faker->unique()->userName())
+            $user->setUsername('username-'.$u)
                     ->setNom($faker->lastName())
                     ->setPrenom($faker->firstName())
                     ->setMail($faker->email())
                     ->setPhoto('/img/avatar-neutre.png')
-                    ->setPassword($this->encoder->encodePassword($user, '123456'));
+                    ->setPassword($this->encoder->encodePassword($user, 'password'));
             $manager->persist($user);
 
             $this->addReference('user_'.$u, $user);
@@ -45,7 +45,7 @@ class AppFixtures extends Fixture
         
             $user = new user();
             $user->setUsername('admin')
-                ->setPassword($this->encoder->encodePassword($user, '123456'))
+                ->setPassword($this->encoder->encodePassword($user, 'adminPass'))
                 ->setRoles(['ROLE_ADMIN'])
                 ->setNom($faker->name())
                 ->setPrenom($faker->firstName())
@@ -53,17 +53,6 @@ class AppFixtures extends Fixture
                 ->setPhoto('/img/avatar-neutre.png');
             $manager->persist($user);
             $this->addReference('user_admin', $user);
-
-            $user->setUsername('test')
-                ->setPassword($this->encoder->encodePassword($user, '123456'))
-                ->setNom('nom')
-                ->setPrenom('prenom')
-                ->setMail($faker->email())
-                ->setPhoto('/img/avatar-neutre.png')
-                ;
-            $manager->persist($user);
-            $this->addReference('user_user', $user);
-
 
         $manager->flush();
         //      USER    END
@@ -86,11 +75,11 @@ class AppFixtures extends Fixture
             $user = $this->getReference('user_'. rand(0,19));
             $conseil = new Conseil();
             $conseil->setTitre($faker->words(3, true))
-                    ->setDescription($faker->paragraph(6))
+                    ->setDescription($faker->realText($faker->numberBetween(400, 4000)))
                     ->setDatePublication($faker->dateTime())
                     ->setNombreVue(rand(0,72))
                     ->setUser($user)
-                    ->setPhoto('/img/image_empty.jpg');
+                    ->setPhoto('/img/fake/fakeImg-'.rand(1,12).'.jpg');
             $manager->persist($conseil);
 
             $this->addReference('conseil_'.$c, $conseil);
@@ -101,11 +90,11 @@ class AppFixtures extends Fixture
         //      CONSEIL   END
 
         //      AVIS
-        for($a=0; $a < 20 ; $a++){
+        for($a=0; $a < 40 ; $a++){
             $user = $this->getReference('user_'. rand(0,19));
             $conseil = $this->getReference('conseil_'. rand(0,19));
             $avis = new Avis();
-            $avis->setText($faker->realText($faker->numberBetween(10, 40)))
+            $avis->setText($faker->realText($faker->numberBetween(100, 400)))
                     ->setDatePublication($faker->dateTime())
                     ->setConseil($conseil)
                     ->setUser($user);
@@ -124,14 +113,14 @@ class AppFixtures extends Fixture
         $user = $this->getReference('user_'. rand(0,19));
         $annonce = new Annonce();
         $annonce->setTitre('titre')
-                ->setDescription($faker->paragraph(10))
+                ->setDescription($faker->realText($faker->numberBetween(400, 5000)))
                 ->setDatePublication($faker->dateTime())
                 ->setNombreVue(rand(0,72))
                 ->setVille($faker->city())
                 ->setType($type)
                 ->setActive(0)
                 ->setUser($user)
-                ->setPhoto('/img/fake'.rand(1,12).'.jpg');
+                ->setPhoto('/img/fake/fakeImg-'.rand(1,12).'.jpg');
         $manager->persist($annonce);
         $this->addReference('annonce_test', $annonce);
 
@@ -141,13 +130,13 @@ class AppFixtures extends Fixture
             $user = $this->getReference('user_'. rand(0,19));
             $annonce = new Annonce();
             $annonce->setTitre($faker->words(3, true))
-                    ->setDescription($faker->paragraph(10))
+                    ->setDescription($faker->realText($faker->numberBetween(400, 5000)))
                     ->setDatePublication($faker->dateTime())
                     ->setNombreVue(rand(0,72))
                     ->setVille($faker->city())
                     ->setType($type)
                     ->setUser($user)
-                    ->setPhoto('/img/fake/'.rand(1,12).'.jpg');
+                    ->setPhoto('/img/fake/fakeImg-'.rand(1,12).'.jpg');
             $manager->persist($annonce);
             $this->addReference('annonce_'.$a, $annonce);
         }
