@@ -5,16 +5,16 @@
 
 This project use Symfony 5.x
 
-### Clone the repository
+Clone repository
 
 Install dependencies:
 ```bash
 composer install
 ```
 
-### create a database
+### create database
 
-Modify .env accordingly to your database login, password & database name
+Modify .env accordingly to database details
 
 create database :
 ```bash
@@ -33,7 +33,7 @@ symfony console doctrine:fixtures:load
 ```
 
 
-### Run the server
+### Run server
 ```bash
 symfony serve
 ```
